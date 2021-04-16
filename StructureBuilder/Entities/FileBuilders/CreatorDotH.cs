@@ -190,13 +190,13 @@ namespace Entities.FileBuilders
 
             foreach (Parameter aParam in myStructure.ListParamaters)
             {
-                // Crear Getters
+                // Create Getters
                 packsDone = CreateGetters(myStructure, aParam, streamText, packsDone, fullPackSize);
 
-                // Crear Setters
+                // Create Setters
                 packsDone = CreateSetters(myStructure, aParam, streamText, packsDone, fullPackSize);
 
-                // Crear Comparadores
+                // Create Comparators
                 packsDone = CreateComparers(myStructure, aParam, streamText, packsDone, fullPackSize);
             }
             return packsDone;
