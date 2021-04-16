@@ -85,7 +85,7 @@ namespace Entities.FileBuilders
 
             // Builder with params.
             streamText.Append($"{myStructure.FinalStructureName}* {myStructure.AliasName}_new("); // auxStrName* strShort_new(parametersLine);
-                                                                                                  //addParametersToBuilder(parameterList, paramA, pw);
+            AddParametersToConstructor(myStructure, streamText);
 
             // Show one
             streamText.Append($"void {myStructure.AliasName}_show({myStructure.FinalStructureName}* {myStructure.StructureName});\n"); // void usr_show(sUser* user)
@@ -117,7 +117,8 @@ namespace Entities.FileBuilders
                 {
                     streamText.Append($"{aParam.TypeParameter}* {aParam.NameParameter}");
                 }
-                if (myStructure.ListParamaters.IndexOf(aParam) != myStructure.ListParamaters.Count - 1) //TODO revisar esto
+                //TODO CHECK THIS
+                if (myStructure.ListParamaters.IndexOf(aParam) != myStructure.ListParamaters.Count - 1) 
                 {
                     streamText.Append($", ");
                 }
@@ -185,7 +186,6 @@ namespace Entities.FileBuilders
         /// <returns>The amount of steps done.</returns>
         private static short CreateGettersAndSetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
         {
-            int paramLen = myStructure.ListParamaters.Count;
             streamText.Append($"// ## {myStructure.FinalStructureName}: COMPARERS, GETTERS & SETTERS\n");
 
             foreach (Parameter aParam in myStructure.ListParamaters)
@@ -245,14 +245,14 @@ namespace Entities.FileBuilders
 
                 Console.WriteLine($"auxStrName: {myStructure.FinalStructureName}");
                 //Console.WriteLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
-                Console.WriteLine($"\nFull Pack Size: {fullPackSize}\nActions completed: {packsDone}\n");
+                Console.WriteLine($"\nAmount of steps: {fullPackSize}\nActions completed: {packsDone}\n");
 
                 dataMaker = CreateStructure(myStructure, dataMaker);
 
                 dataMaker.Append("#endif \n");
                 dataMaker.Append("\n// # CREDITS TO:\n");
-                dataMaker.Append("// ## Author in C: Santiago Herrera.\n");
-                dataMaker.Append("// ## Adaptation in Java: FacuFalcone - CaidevOficial.\n");
+                dataMaker.Append("// ## Idea in C: Santiago Herrera.\n");
+                dataMaker.Append("// ## Advanced Improvement And develop in C#: FacuFalcone - CaidevOficial.\n");
                 packsDone++;
                 ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
