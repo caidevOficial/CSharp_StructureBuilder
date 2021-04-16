@@ -41,12 +41,13 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AuxiliarClass\ConsolePrinter.cs" />
     <Compile Include="Entities\Parameter.cs" />
     <Compile Include="Entities\Structure.cs" />
+    <Compile Include="FileBuilders\CreatorDotC.cs" />
+    <Compile Include="FileBuilders\CreatorDotH.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="AuxiliarClass\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -34,32 +34,62 @@ namespace Entities.Entities
 
         #region Builders
 
-        public Parameter()
-        {
+        /// <summary>
+        /// Builds the entity without parameters.
+        /// </summary>
+        public Parameter() {}
 
-        }
-
+        /// <summary>
+        /// Builds the entity with the id.
+        /// </summary>
+        /// <param name="idParameter">ID/PK of the entity.</param>
         public Parameter(short idParameter) : this()
         {
             IdParameter = idParameter;
         }
 
-        public Parameter(short idParameter, int lengthParameter) : this(idParameter)
-        {
-            this.LengthParameter = lengthParameter;
-        }
-
-        public Parameter(short idParameter, int lengthParameter, string nameParameter) : this(idParameter, lengthParameter)
+        /// <summary>
+        /// Builds the entity with the name and the id.
+        /// </summary>
+        /// <param name="idParameter">ID/PK of the entity.</param>
+        /// /// <param name="nameParameter">Name of the parameter.</param>
+        public Parameter(short idParameter, string nameParameter) : this(idParameter)
         {
             this.NameParameter = nameParameter;
         }
 
-        public Parameter(short idParameter, int lengthParameter, string typeParameter, string nameParameter) : this(idParameter, lengthParameter, nameParameter)
+        /// <summary>
+        /// Builds the entity with the name, id and type.
+        /// </summary>
+        /// <param name="idParameter">ID/PK of the entity.</param>
+        /// <param name="nameParameter">Name of the parameter.</param>
+        /// <param name="typeParameter">Type of the parameter.</param>
+        public Parameter(short idParameter, string nameParameter, string typeParameter) : this(idParameter, nameParameter)
         {
             this.TypeParameter = typeParameter;
         }
 
-        public Parameter(short idParameter, int lengthParameter, string typeParameter, string nameParameter, string aliasNameParameter) : this(idParameter, lengthParameter, typeParameter, nameParameter)
+        /// <summary>
+        /// Builds the entity with the id, name type and the length.
+        /// </summary>
+        /// <param name="idParameter">ID/PK of the entity.</param>
+        /// <param name="nameParameter">Name of the parameter.</param>
+        /// <param name="typeParameter">Type of the parameter.</param>
+        /// <param name="lengthParameter">Length of the parameter.</param>
+        public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter) : this(idParameter, nameParameter, typeParameter)
+        {
+            this.LengthParameter = lengthParameter; 
+        }
+
+        /// <summary>
+        /// Builds the entity with the id, name type, the length and the alias.
+        /// </summary>
+        /// <param name="idParameter">ID/PK of the entity.</param>
+        /// <param name="nameParameter">Name of the parameter.</param>
+        /// <param name="typeParameter">Type of the parameter.</param>
+        /// <param name="lengthParameter">Length of the parameter.</param>
+        /// <param name="aliasNameParameter">Alias - Short name of the parameter.</param>
+        public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter, string aliasNameParameter) : this(idParameter, nameParameter, typeParameter, lengthParameter)
         {
             this.AliasNameParameter = aliasNameParameter;
         }
@@ -68,6 +98,10 @@ namespace Entities.Entities
 
         #region Properties
 
+        /// <summary>
+        /// Get: Gets the type of the parameter.
+        /// Set: Sets the type of the parameter.
+        /// </summary>
         public string TypeParameter
         {
             get => typeParameter;
@@ -79,6 +113,11 @@ namespace Entities.Entities
                 }
             }
         }
+
+        /// <summary>
+        /// Get: Gets the name of the parameter.
+        /// Set: Sets the name of the parameter.
+        /// </summary>
         public string NameParameter
         {
             get => nameParameter;
@@ -90,6 +129,11 @@ namespace Entities.Entities
                 }
             }
         }
+
+        /// <summary>
+        /// Get: Gets the alias of the parameter.
+        /// Set: Sets the alias of the parameter.
+        /// </summary>
         public string AliasNameParameter
         {
             get => aliasNameParameter;
@@ -101,6 +145,11 @@ namespace Entities.Entities
                 }
             }
         }
+
+        /// <summary>
+        /// Get: Gets the length of the parameter.
+        /// Set: Sets the length of the parameter.
+        /// </summary>
         public int LengthParameter
         {
             get => lengthParameter;
@@ -112,6 +161,11 @@ namespace Entities.Entities
                 }
             }
         }
+
+        /// <summary>
+        /// Get: Gets the id of the parameter.
+        /// Set: Sets the id of the parameter.
+        /// </summary>
         public short IdParameter
         {
             get => idParameter;
@@ -128,11 +182,23 @@ namespace Entities.Entities
 
         #region Operators
 
+        /// <summary>
+        /// Checks if both parameters are equals.
+        /// </summary>
+        /// <param name="p1">First parameter to check.</param>
+        /// <param name="p2">Second parameter to check.</param>
+        /// <returns>True if both are equals, otherwise returns false.</returns>
         public static bool operator ==(Parameter p1, Parameter p2)
         {
             return p1.IdParameter == p2.IdParameter;
         }
 
+        /// <summary>
+        /// Checks if both parameters aren't equals.
+        /// </summary>
+        /// <param name="p1">First parameter to check.</param>
+        /// <param name="p2">Second parameter to check.</param>
+        /// <returns>True if both aren't equals, otherwise returns false.</returns>
         public static bool operator !=(Parameter p1, Parameter p2)
         {
             return !(p1 == p2);

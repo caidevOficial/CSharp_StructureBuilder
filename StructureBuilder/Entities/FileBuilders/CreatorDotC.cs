@@ -22,23 +22,16 @@
  * SOFTWARE.
  */
 
-using Entities.AuxiliarClass;
-using Entities.FileBuilders;
-using Entities.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace StructureBuilder
+namespace Entities.FileBuilders
 {
-    class Program
+    public sealed class CreatorDotC
     {
-        static void Main(string[] args)
-        {
-            Structure myStructure = new Structure();
-            StringBuilder streamText = new StringBuilder();
-        }
+
     }
 }

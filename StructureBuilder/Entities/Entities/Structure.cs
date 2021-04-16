@@ -28,39 +28,126 @@ namespace Entities.Entities
 {
     public sealed class Structure
     {
+        private string structureName;
+        private string finalStructureName;
+        private string aliasShortName;
         private List<Parameter> listOfParamaters;
 
-        #region Builder
+        #region Builders
 
+        /// <summary>
+        /// Initializes the list of parameters.
+        /// </summary>
         public Structure()
         {
-            ListOfParamaters = new List<Parameter>();
+            listOfParamaters = new List<Parameter>();
         }
 
-        public List<Parameter> ListOfParamaters
+        /// <summary>
+        /// Builds the entity with the name.
+        /// </summary>
+        /// <param name="structureName">Name of the entity.</param>
+        public Structure(string structureName) : this()
         {
-            get => listOfParamaters;
-            set => listOfParamaters = value;
+            StructureName = structureName;
+        }
+
+        /// <summary>
+        /// Builds the entity with the name and the alias.
+        /// </summary>
+        /// <param name="structureName">Name of the entity.</param>
+        /// <param name="aliasShortName">Short Name (Alias) of the entity.</param>
+        public Structure(string structureName, string aliasShortName) : this(structureName)
+        {
+            AliasName = aliasShortName;
+        }
+
+        /// <summary>
+        /// Builds the entity with all its parameters.
+        /// </summary>
+        /// <param name="structureName">Name of the entity.</param>
+        /// <param name="aliasShortName">Short Name (Alias) of the entity.</param>
+        /// <param name="finalStructureName">Final name of the entity, it will have an 's' at the beginning of the name.</param>
+        public Structure(string structureName, string aliasShortName, string finalStructureName) : this(structureName, aliasShortName)
+        {
+            FinalStructureName = finalStructureName;
         }
 
         #endregion
 
         #region Properties
 
+        /// <summary>
+        /// Get: Gets the list of parameters of the entity.
+        /// </summary>
         public List<Parameter> ListParamaters
         {
             get => listOfParamaters;
+        }
+
+        /// <summary>
+        /// Get: Gets the name of the entity.
+        /// Set: Sets the name of the entity.
+        /// </summary>
+        public string StructureName
+        {
+            get => structureName;
+            set
+            {
+                if (!(value is null))
+                {
+                    structureName = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get: Gets the final name of the entity.
+        /// Set: Sets the final name of the entity.
+        /// </summary>
+        public string FinalStructureName
+        {
+            get => finalStructureName;
+            set
+            {
+                if (!(value is null))
+                {
+                    finalStructureName = value;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Get: Gets the alias of the entity.
+        /// Set: Sets the alias of the entity.
+        /// </summary>
+        public string AliasName
+        {
+            get => aliasShortName;
+            set
+            {
+                if (!(value is null) && value.Length < 6)
+                {
+                    aliasShortName = value;
+                }
+            }
         }
 
         #endregion
 
         #region Operators
 
+        /// <summary>
+        /// Compares if the parameter is inside the list of parameters of the entity.
+        /// </summary>
+        /// <param name="s1">Structure to check its list of parameters.</param>
+        /// <param name="p1">Parameter to verify if is inside the list of the structure.</param>
+        /// <returns>True if the parameter is in the list, otherwise returns false.</returns>
         public static bool operator ==(Structure s1, Parameter p1)
         {
             if (!(s1 is null || p1 is null))
             {
-                foreach (Parameter aParameter in s1.ListOfParamaters)
+                foreach (Parameter aParameter in s1.ListParamaters)
                 {
                     if (p1 == aParameter)
                     {
@@ -72,11 +159,23 @@ namespace Entities.Entities
             return false;
         }
 
+        /// <summary>
+        /// Compares if the parameter isn't inside the list of parameters of the entity.
+        /// </summary>
+        /// <param name="s1">Structure to check its list of parameters.</param>
+        /// <param name="p1">Parameter to verify if isn't inside the list of the structure.</param>
+        /// <returns>True if the parameter isn't in the list, otherwise returns false.</returns>
         public static bool operator !=(Structure s1, Parameter p1)
         {
             return !(s1 == p1);
         }
 
+        /// <summary>
+        /// Tries to add a parameter inside the list of the structure.
+        /// </summary>
+        /// <param name="s1">Structure to check its list of parameters.</param>
+        /// <param name="p1">Parameter to try to add in the list of the structure.</param>
+        /// <returns></returns>
         public static Structure operator +(Structure s1, Parameter p1)
         {
             if (!(s1 is null) && !(p1 is null))
@@ -94,6 +193,10 @@ namespace Entities.Entities
 
         #region Methods
 
+        /// <summary>
+        /// Adds a parameter in the list of parameters of the structure.
+        /// </summary>
+        /// <param name="p1">Parameter to add in the list.</param>
         public void AddParameter(Parameter p1)
         {
             this.listOfParamaters.Add(p1);
