@@ -23,13 +23,10 @@
  */
 
 using Entities.AuxiliarClass;
-using Entities.FileBuilders;
 using Entities.Entities;
+using Entities.FileBuilders;
 using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 
 namespace StructureBuilder
 {
@@ -39,6 +36,31 @@ namespace StructureBuilder
         {
             Structure myStructure = new Structure();
             StringBuilder streamText = new StringBuilder();
+            Parameter myParameter = new Parameter();
+            string structureName = string.Empty;
+            string structureAlias = string.Empty;
+            string appVersion = "Structure Builder [v1.2.0.1]";
+            short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
+            short auxParNum = 6; // Basic functions by parameter com + get + set
+            short packsDone = 0;
+
+            Console.WriteLine(appVersion);
+            structureName = DataCollector.StructureNameCollector();
+            structureAlias = DataCollector.StructureAliasCollector(structureName);
+            myStructure.StructureName = structureName;
+            myStructure.AliasName = structureAlias;
+            myStructure.FinalStructureName = "s" + structureAlias;
+
+            DataCollector.AddParameterToStructure(myStructure);
+
+            auxParNum *= (short)myStructure.ListParamaters.Count;
+            fullPackSize += auxParNum;
+            ConsolePrinter.ShowProgress(fullPackSize, packsDone);
+
+            packsDone = CreatorDotH.FileMaker(myStructure, packsDone, fullPackSize);
+
+
+            Console.ReadKey();
         }
     }
 }

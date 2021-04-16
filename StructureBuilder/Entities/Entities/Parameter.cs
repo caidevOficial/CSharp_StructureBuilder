@@ -37,7 +37,7 @@ namespace Entities.Entities
         /// <summary>
         /// Builds the entity without parameters.
         /// </summary>
-        public Parameter() {}
+        public Parameter() { }
 
         /// <summary>
         /// Builds the entity with the id.
@@ -78,7 +78,7 @@ namespace Entities.Entities
         /// <param name="lengthParameter">Length of the parameter.</param>
         public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter) : this(idParameter, nameParameter, typeParameter)
         {
-            this.LengthParameter = lengthParameter; 
+            this.LengthParameter = lengthParameter;
         }
 
         /// <summary>

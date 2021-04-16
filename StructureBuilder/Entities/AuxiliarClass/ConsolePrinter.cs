@@ -36,40 +36,49 @@ namespace Entities.AuxiliarClass
         /// </summary>
         /// <param name="length">Max length of the line.</param>
         /// <param name="charact">Character or symbol to print</param>
-        private static void PrintSymbols(int length, char charact)
+        /// <param name="foregroundColor">Color Of the symbols</param>
+        private static void PrintSymbols(int length, char charact, ConsoleColor foregroundColor)
         {
+            Console.ForegroundColor = foregroundColor;
             for (int index = 0; index < length; index++)
             {
                 Console.Write(charact);
             }
             Console.WriteLine();
+            Console.ForegroundColor = ConsoleColor.White;
         }
 
         /// <summary>
         /// Prints the title and decorations of the program.
         /// </summary>
         /// <param name="title">Title to print.</param>
-        private static void PrintHeader(string title)
+        /// <param name="titleForegroundColor">Color of the Text</param>
+        /// <param name="symbolForegroundColor">Color Of the symbols</param>
+        public static void PrintHeader(string title, ConsoleColor titleForegroundColor, ConsoleColor symbolForegroundColor)
         {
             int length = title.Length;
-            int lengthLine = (length * 3);
+            int lengthLine = (length);
 
-            PrintSymbols(lengthLine, '=');
-            PrintSymbols(lengthLine, ' ');
+            PrintSymbols(lengthLine, '=', symbolForegroundColor);
+            //PrintSymbols(lengthLine, ' ', symbolForegroundColor);
+            Console.ForegroundColor = titleForegroundColor;
             Console.WriteLine(title);
-            PrintSymbols(lengthLine, ' ');
-            PrintSymbols(lengthLine, '=');
+            //PrintSymbols(lengthLine, ' ', symbolForegroundColor);
+            PrintSymbols(lengthLine, '=', symbolForegroundColor);
         }
 
         /// <summary>
         /// Prints the subHeader of the program.
         /// </summary>
         /// <param name="subHeader">Subheader to print.</param>
-        private static void PrintSubHeader(string subHeader)
+        /// <param name="titleForegroundColor">Color of the Text</param>
+        /// <param name="symbolForegroundColor">Color Of the symbols</param>
+        public static void PrintSubHeader(string subHeader, ConsoleColor titleForegroundColor, ConsoleColor symbolForegroundColor)
         {
             int subLength = subHeader.Length;
+            Console.ForegroundColor = titleForegroundColor;
             Console.WriteLine($"\n{subHeader}\n");
-            PrintSymbols(subLength, '-');
+            PrintSymbols(subLength, '-', symbolForegroundColor);
         }
 
         #endregion
@@ -96,8 +105,8 @@ namespace Entities.AuxiliarClass
         /// <param name="top">Actual number of steps done.</param>
         public static void ShowProgress(short baseNumber, short top)
         {
-            PrintHeader("Struct DotH DotC Builder");
-            PrintSubHeader("Step 3: Building Struct Files");
+            PrintHeader("Structure Builder", ConsoleColor.Yellow, ConsoleColor.Green);
+            PrintSubHeader("Step 3: Building Struct Files", ConsoleColor.Yellow, ConsoleColor.Green);
             Console.Write($"\nProgress: [{PercentageCalc(baseNumber, top)}]%\n");
         }
 

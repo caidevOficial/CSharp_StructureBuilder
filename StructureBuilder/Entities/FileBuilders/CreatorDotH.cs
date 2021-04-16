@@ -50,7 +50,7 @@ namespace Entities.FileBuilders
             {
                 if (aParameter.LengthParameter == 1)
                 {
-                    streamText.Append($"    {aParameter.LengthParameter} {aParameter.NameParameter};\n");
+                    streamText.Append($"    {aParameter.TypeParameter} {aParameter.NameParameter};\n");
                 }
                 else
                 {
@@ -118,7 +118,7 @@ namespace Entities.FileBuilders
                     streamText.Append($"{aParam.TypeParameter}* {aParam.NameParameter}");
                 }
                 //TODO CHECK THIS
-                if (myStructure.ListParamaters.IndexOf(aParam) != myStructure.ListParamaters.Count - 1) 
+                if (myStructure.ListParamaters.IndexOf(aParam) != myStructure.ListParamaters.Count - 1)
                 {
                     streamText.Append($", ");
                 }
@@ -144,7 +144,7 @@ namespace Entities.FileBuilders
         /// <returns>The amount of steps done.</returns>
         private static short CreateGetters(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
         {
-            streamText.Append($"int {paramA.AliasNameParameter}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter});\n");
+            streamText.Append($"int {myStructure.AliasName}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter});\n");
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
@@ -168,7 +168,7 @@ namespace Entities.FileBuilders
             }
             else
             {
-                streamText.Append($"int {myStructure.AliasName}_set{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter} {paramA.NameParameter});\n");
+                streamText.Append($"int {myStructure.AliasName}_set{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter});\n");
             }
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
@@ -259,7 +259,7 @@ namespace Entities.FileBuilders
                 packsDone = CreateBasicStructFunctions(myStructure, dataMaker, packsDone, fullPackSize);
                 packsDone = CreateGettersAndSetters(myStructure, dataMaker, packsDone, fullPackSize);
 
-                if (!File.Exists(curFile))
+                if (File.Exists(curFile))
                 {
                     // if not exist, creates the file.
                     pFileDotH.Write(dataMaker);

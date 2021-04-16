@@ -126,7 +126,7 @@ namespace Entities.Entities
             get => aliasShortName;
             set
             {
-                if (!(value is null) && value.Length < 6)
+                if (!(value is null))
                 {
                     aliasShortName = value;
                 }

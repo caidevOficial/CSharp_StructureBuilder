@@ -1,0 +1,10 @@
+C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\bin\Debug\StructureBuilder.exe.config
+C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\bin\Debug\StructureBuilder.exe
+C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\bin\Debug\StructureBuilder.pdb
+C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\bin\Debug\Entities.dll
+C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\bin\Debug\Entities.pdb
+C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Debug\StructureBuilder.csprojAssemblyReference.cache
+C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Debug\StructureBuilder.csproj.CoreCompileInputs.cache
+C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Debug\StructureBuilder.csproj.CopyComplete
+C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Debug\StructureBuilder.exe
+C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Debug\StructureBuilder.pdb

@@ -42,6 +42,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AuxiliarClass\ConsolePrinter.cs" />
+    <Compile Include="AuxiliarClass\DataCollector.cs" />
+    <Compile Include="AuxiliarClass\DataValidator.cs" />
     <Compile Include="Entities\Parameter.cs" />
     <Compile Include="Entities\Structure.cs" />
     <Compile Include="FileBuilders\CreatorDotC.cs" />
