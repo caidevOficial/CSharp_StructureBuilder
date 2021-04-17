@@ -177,7 +177,7 @@ namespace Entities.FileBuilders
         }
 
         /// <summary>
-        /// Creates the Getter and Setter of the file.
+        /// Creates the Comparers, Getter and Setter of the file.
         /// </summary>
         /// <param name="myStructure">Structure to extract the data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
@@ -186,19 +186,31 @@ namespace Entities.FileBuilders
         /// <returns>The amount of steps done.</returns>
         private static short CreateGettersAndSetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
         {
-            streamText.Append($"// ## {myStructure.FinalStructureName}: COMPARERS, GETTERS & SETTERS\n");
+            streamText.Append($"// ## {myStructure.FinalStructureName}: GETTERS\n");
 
             foreach (Parameter aParam in myStructure.ListParamaters)
             {
                 // Create Getters
                 packsDone = CreateGetters(myStructure, aParam, streamText, packsDone, fullPackSize);
+            }
+            streamText.Append("\n");
 
+            streamText.Append($"// ## {myStructure.FinalStructureName}: SETTERS\n");
+            foreach (Parameter aParam in myStructure.ListParamaters)
+            {
                 // Create Setters
                 packsDone = CreateSetters(myStructure, aParam, streamText, packsDone, fullPackSize);
+            }
+            streamText.Append("\n");
 
+            streamText.Append($"// ## {myStructure.FinalStructureName}: COMPARERS\n");
+            foreach (Parameter aParam in myStructure.ListParamaters)
+            {
                 // Create Comparators
                 packsDone = CreateComparers(myStructure, aParam, streamText, packsDone, fullPackSize);
             }
+            streamText.Append("\n");
+
             return packsDone;
         }
 
@@ -217,7 +229,7 @@ namespace Entities.FileBuilders
         /// <returns>The amount of steps done.</returns>
         private static short CreateComparers(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
         {
-            streamText.Append($"int {myStructure.AliasName}_compare{paramA.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2);\n\n");
+            streamText.Append($"int {myStructure.AliasName}_compare{paramA.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2);\n");
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 

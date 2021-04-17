@@ -275,7 +275,16 @@ namespace Entities.AuxiliarClass
                     }
 
                     AssembleParameter(myParameter);
-                    myStructure.AddParameter(myParameter); // adds the parameter to the LL.
+                    
+                    if(myStructure + myParameter)
+                    {
+                        Console.WriteLine($"Parameter: {myParameter.TypeParameter} {myParameter.NameParameter} added to structure {myStructure.FinalStructureName} successfully!.\n");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"ERROR: something get wrong while trying to add {myParameter.NameParameter} to the structure. Try again.\n");
+                    }
+                    //myStructure.AddParameter(myParameter); // adds the parameter to the LL.
 
                 } while (ContinueAddingParameters() != 0);
             }

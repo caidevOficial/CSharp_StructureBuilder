@@ -31,7 +31,7 @@ namespace Entities.Entities
         private string structureName;
         private string finalStructureName;
         private string aliasShortName;
-        private List<Parameter> listOfParamaters;
+        private List<Parameter> listOfParameters;
 
         #region Builders
 
@@ -40,7 +40,7 @@ namespace Entities.Entities
         /// </summary>
         public Structure()
         {
-            listOfParamaters = new List<Parameter>();
+            listOfParameters = new List<Parameter>();
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Entities.Entities
         /// </summary>
         public List<Parameter> ListParamaters
         {
-            get => listOfParamaters;
+            get => listOfParameters;
         }
 
         /// <summary>
@@ -176,17 +176,18 @@ namespace Entities.Entities
         /// <param name="s1">Structure to check its list of parameters.</param>
         /// <param name="p1">Parameter to try to add in the list of the structure.</param>
         /// <returns></returns>
-        public static Structure operator +(Structure s1, Parameter p1)
+        public static bool operator +(Structure s1, Parameter p1)
         {
             if (!(s1 is null) && !(p1 is null))
             {
                 if (!(s1 == p1))
                 {
                     s1.AddParameter(p1);
+                    return true;
                 }
             }
 
-            return s1;
+            return false;
         }
 
         #endregion
@@ -197,7 +198,7 @@ namespace Entities.Entities
         /// Adds a parameter in the list of parameters of the structure.
         /// </summary>
         /// <param name="p1">Parameter to add in the list.</param>
-        public void AddParameter(Parameter p1)
+        private void AddParameter(Parameter p1)
         {
             this.listOfParamaters.Add(p1);
         }

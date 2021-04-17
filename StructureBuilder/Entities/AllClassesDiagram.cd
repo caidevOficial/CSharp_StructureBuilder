@@ -1,0 +1,53 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Entities.AuxiliarClass.ConsolePrinter">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEACAAAAAAAAQAAAAAAAIAAAAAAgAAAAAA=</HashCode>
+      <FileName>AuxiliarClass\ConsolePrinter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.AuxiliarClass.DataCollector">
+    <Position X="2.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>IAQAEAAABAAgCAAAEAAAABAAAGAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>AuxiliarClass\DataCollector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.AuxiliarClass.DataValidator">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>AuxiliarClass\DataValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Entities.Parameter">
+    <Position X="4.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAIEAAAABAAAAAAAAAAAAAAAEAhAAhiI=</HashCode>
+      <FileName>Entities\Parameter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Entities.Structure">
+    <Position X="7.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAQAAAAAAAAQAAAAAACAEAAABBgAAAAAAAAwiA=</HashCode>
+      <FileName>Entities\Structure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.FileBuilders.CreatorDotC">
+    <Position X="12.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>YAAAAAAAEAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAQAAA=</HashCode>
+      <FileName>FileBuilders\CreatorDotC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.FileBuilders.CreatorDotH">
+    <Position X="9.75" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAEABAAAgAAgAAQAAEAAAAAAgAAAAEAAAAAAA=</HashCode>
+      <FileName>FileBuilders\CreatorDotH.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
