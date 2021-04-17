@@ -15,7 +15,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="Entities.AuxiliarClass.DataValidator">
-    <Position X="0.5" Y="2.75" Width="1.5" />
+    <Position X="0.5" Y="2.5" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>AuxiliarClass\DataValidator.cs</FileName>
