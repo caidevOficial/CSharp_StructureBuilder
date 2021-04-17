@@ -200,7 +200,7 @@ namespace Entities.Entities
         /// <param name="p1">Parameter to add in the list.</param>
         private void AddParameter(Parameter p1)
         {
-            this.listOfParamaters.Add(p1);
+            this.listOfParameters.Add(p1);
         }
 
         #endregion
