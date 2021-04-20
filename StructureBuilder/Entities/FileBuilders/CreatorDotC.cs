@@ -28,8 +28,10 @@ using System.Text;
 
 namespace Entities.FileBuilders
 {
-    public sealed class CreatorDotC
+    public sealed class CreatorDotC: Creator
     {
+
+        public CreatorDotC() : base() { }
 
         #region CreateBuilders
 
@@ -41,7 +43,7 @@ namespace Entities.FileBuilders
         /// <param name="packsDone">Amount of steps done.</param>
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
-        private static int CreateBuilderEmpty(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
+        protected override short CreateBuilderEmpty(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
         {
             streamText.Append($"\n{myStructure.FinalStructureName}* {myStructure.AliasName}_newEmpty(){{ \n"); // sUser* usr_newEmpty()
             streamText.Append($"    return ({myStructure.FinalStructureName}*) calloc(sizeof({myStructure.FinalStructureName}),1);\n}}\n\n"); // return (sUser*) malloc(sizeof(sUser));
@@ -59,7 +61,7 @@ namespace Entities.FileBuilders
         /// <param name="packsDone">Amount of steps done.</param>
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
-        private static int CreateBuilderWithParams(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
+        protected override void CreateBuilderWithParams(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
         {
             streamText.Append($"{myStructure.FinalStructureName}* {myStructure.AliasName}_new("); // auxStrName* strShort_new(parametersLine);
             foreach (Parameter aParam in myStructure.ListParamaters)
@@ -89,10 +91,9 @@ namespace Entities.FileBuilders
                 streamText.Append($"        {myStructure.AliasName}_set{aParam.AliasNameParameter}({myStructure.StructureName}, {aParam.NameParameter});\n"); // usr_setId(user,id);
             }
             streamText.Append($"    }}\n    return {myStructure.StructureName};\n{{\n\n");
-            packsDone++;
-            ConsolePrinter.ShowProgress(fullPackSize, packsDone);
+            //packsDone++;
+            //ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
-            return packsDone;
         }
 
         #endregion
@@ -105,7 +106,7 @@ namespace Entities.FileBuilders
         /// <param name="myStructure">Structure to extract the data.</param>
         /// <param name="aParam">A parameter to extract its data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
-        private static void CreateCompareWithChar(Structure myStructure, Parameter aParam, StringBuilder streamText)
+        private void CreateCompareWithChar(Structure myStructure, Parameter aParam, StringBuilder streamText)
         {
             streamText.Append($"// For use in a sort function - Compare {myStructure.StructureName}->{aParam.NameParameter}\n");
             streamText.Append($"int {myStructure.AliasName}_compare{aParam.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2){{\n");
@@ -128,7 +129,7 @@ namespace Entities.FileBuilders
         /// <param name="myStructure">Structure to extract the data.</param>
         /// <param name="aParam">A parameter to extract its data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
-        private static void CreateCompareWithoutChar(Structure myStructure, Parameter aParam, StringBuilder streamText)
+        private void CreateCompareWithoutChar(Structure myStructure, Parameter aParam, StringBuilder streamText)
         {
             streamText.Append($"// For use in a sort function - Compare {myStructure.StructureName}->{aParam.NameParameter}\n");
             streamText.Append($"int {myStructure.AliasName}_compare{aParam.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2){{\n");
@@ -149,6 +150,20 @@ namespace Entities.FileBuilders
             streamText.Append($"    return anw;\n}}\n\n");
         }
 
+        protected override short CreateComparer(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            if (paramA.LengthParameter == 1)
+            {
+                CreateCompareWithoutChar(myStructure, paramA, streamText);
+            }
+            else if (paramA.TypeParameter.Equals("char"))
+            {
+                CreateCompareWithChar(myStructure, paramA, streamText);
+            }
+
+            return packsDone;
+        }
+
         /// <summary>
         /// Creates the comparers of all the parameters of the structure.
         /// </summary>
@@ -157,18 +172,11 @@ namespace Entities.FileBuilders
         /// <param name="packsDone">Amount of steps done.</param>
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
-        private static short CreateComparers(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
+        private short CreateComparers(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
         {
             foreach (Parameter aParam in myStructure.ListParamaters)
             {
-                if (aParam.LengthParameter == 1)
-                {
-                    CreateCompareWithoutChar(myStructure, aParam, streamText);
-                }
-                else if (aParam.TypeParameter.Equals("char"))
-                {
-                    CreateCompareWithChar(myStructure, aParam, streamText);
-                }
+                packsDone = CreateComparer(myStructure, aParam, streamText, packsDone, fullPackSize);
             }
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
@@ -177,5 +185,72 @@ namespace Entities.FileBuilders
         }
 
         #endregion
+
+        #region CreateGetterSetterComparer
+
+        protected override short CreateGetter(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override short CreateSetter(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            throw new System.NotImplementedException();
+        }
+
+
+        protected override short CreateGettersAndSetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
+
+        #region CreateShow
+
+        protected override short ShowOneEntity(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override short ShowAllEntities(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
+
+        #region CreateBasicStructureFunctions
+
+        protected override short CreateBasicStructFunctions(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
+
+        #region AddParametersToStructure
+
+        protected override void AddParameterIntoConstructor(Structure myStructure, Parameter myParam, StringBuilder streamText)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        protected override void AddParametersToConstructor(Structure myStructure, StringBuilder streamText)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
+
+        #region FileMaker
+
+        public override short FileMaker(Structure myStructure, short packsDone, short fullPackSize)
+        {
+            throw new System.NotImplementedException();
+        }
+
+        #endregion
+
     }
 }
