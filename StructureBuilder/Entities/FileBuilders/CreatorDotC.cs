@@ -190,6 +190,7 @@ namespace Entities.FileBuilders
 
         protected override short CreateGetter(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
         {
+            
             throw new System.NotImplementedException();
         }
 

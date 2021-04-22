@@ -34,11 +34,12 @@ namespace StructureBuilder
     {
         static void Main(string[] args)
         {
+            CreatorDotH maker = new CreatorDotH();
             Structure myStructure = new Structure();
-            StringBuilder streamText = new StringBuilder();
-            Parameter myParameter = new Parameter();
-            string structureName = string.Empty;
-            string structureAlias = string.Empty;
+            StringBuilder streamText;
+            //Parameter myParameter = new Parameter();
+            string structureName;
+            string structureAlias;
             string appVersion = "Structure Builder [v1.2.0.1]";
             short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
             short auxParNum = 6; // Basic functions by parameter com + get + set
@@ -57,7 +58,7 @@ namespace StructureBuilder
             fullPackSize += auxParNum;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
-            packsDone = CreatorDotH.FileMaker(myStructure, packsDone, fullPackSize);
+            packsDone = maker.FileMaker(myStructure, packsDone, fullPackSize);
 
 
             Console.ReadKey();
