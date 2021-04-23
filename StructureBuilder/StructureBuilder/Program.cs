@@ -34,9 +34,10 @@ namespace StructureBuilder
     {
         static void Main(string[] args)
         {
-            CreatorDotH maker = new CreatorDotH();
+            CreatorDotH makerH = new CreatorDotH();
+            CreatorDotC makerC = new CreatorDotC();
             Structure myStructure = new Structure();
-            StringBuilder streamText;
+            //StringBuilder streamText;
             //Parameter myParameter = new Parameter();
             string structureName;
             string structureAlias;
@@ -58,8 +59,10 @@ namespace StructureBuilder
             fullPackSize += auxParNum;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
-            packsDone = maker.FileMaker(myStructure, packsDone, fullPackSize);
+            packsDone = makerH.FileMaker(myStructure, packsDone, fullPackSize);
+            packsDone = makerC.FileMaker(myStructure, packsDone, fullPackSize);
 
+            ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
             Console.ReadKey();
         }

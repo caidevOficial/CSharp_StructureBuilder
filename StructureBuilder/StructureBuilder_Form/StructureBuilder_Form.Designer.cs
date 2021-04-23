@@ -351,7 +351,7 @@ namespace StructureBuilder_Form
             // btnLock
             // 
             this.btnLock.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnLock.Location = new System.Drawing.Point(116, 436);
+            this.btnLock.Location = new System.Drawing.Point(79, 416);
             this.btnLock.Name = "btnLock";
             this.btnLock.Size = new System.Drawing.Size(189, 64);
             this.btnLock.TabIndex = 16;
@@ -361,7 +361,7 @@ namespace StructureBuilder_Form
             // btnCreate
             // 
             this.btnCreate.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnCreate.Location = new System.Drawing.Point(325, 436);
+            this.btnCreate.Location = new System.Drawing.Point(298, 416);
             this.btnCreate.Name = "btnCreate";
             this.btnCreate.Size = new System.Drawing.Size(189, 64);
             this.btnCreate.TabIndex = 17;
@@ -373,7 +373,7 @@ namespace StructureBuilder_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(573, 560);
+            this.ClientSize = new System.Drawing.Size(523, 560);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnLock);
             this.Controls.Add(this.txtStructureName);
