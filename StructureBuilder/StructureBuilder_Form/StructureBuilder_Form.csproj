@@ -32,6 +32,9 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>fort.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -54,6 +57,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="StructureBuilder_Form.en-CA.resx">
+      <DependentUpon>StructureBuilder_Form.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="StructureBuilder_Form.resx">
       <DependentUpon>StructureBuilder_Form.cs</DependentUpon>
     </EmbeddedResource>
@@ -84,6 +90,9 @@
       <Project>{d3f8e021-3053-46ec-9b67-c77bdb077fc1}</Project>
       <Name>Entities</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="fort.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

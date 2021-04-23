@@ -230,10 +230,8 @@ namespace Entities.AuxiliarClass
 
             do
             {
-                parameterName = ParameterNameCollector(); // Set the name
-                myParameter.NameParameter = parameterName; // Insert the name
-                parameterAlias = ParameterAliasCollector(parameterName); // Set the alias
-                myParameter.AliasNameParameter = parameterAlias; // insert the alias.
+                myParameter.NameParameter = ParameterNameCollector(); // Set the name
+                myParameter.AliasNameParameter = myParameter.NameParameter; // insert the alias.
                 myParameter.TypeParameter = ParameterTypeCollector(myParameter); // Set the type
                 myParameter.LengthParameter = LengthCharCollector(myParameter); // Set the length
 

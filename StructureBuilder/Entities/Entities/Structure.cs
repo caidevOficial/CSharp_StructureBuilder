@@ -22,6 +22,7 @@
  * SOFTWARE.
  */
 
+using Entities.AuxiliarClass;
 using System.Collections.Generic;
 
 namespace Entities.Entities
@@ -112,7 +113,7 @@ namespace Entities.Entities
             {
                 if (!(value is null))
                 {
-                    finalStructureName = value;
+                    finalStructureName = "s" + value;
                 }
             }
         }
@@ -128,7 +129,7 @@ namespace Entities.Entities
             {
                 if (!(value is null))
                 {
-                    aliasShortName = value;
+                    aliasShortName = DataCollector.StructureAliasCollector(value);
                 }
             }
         }

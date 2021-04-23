@@ -22,6 +22,8 @@
  * SOFTWARE.
  */
 
+using Entities.AuxiliarClass;
+
 namespace Entities.Entities
 {
     public sealed class Parameter
@@ -141,7 +143,7 @@ namespace Entities.Entities
             {
                 if (!(value is null))
                 {
-                    aliasNameParameter = value;
+                    aliasNameParameter = DataCollector.ParameterAliasCollector(value);
                 }
             }
         }

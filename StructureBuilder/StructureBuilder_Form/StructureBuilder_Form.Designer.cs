@@ -29,6 +29,7 @@ namespace StructureBuilder_Form
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StructureBuilder));
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -56,345 +57,309 @@ namespace StructureBuilder_Form
             this.chkFourthParam = new System.Windows.Forms.CheckBox();
             this.txtStructureName = new System.Windows.Forms.TextBox();
             this.btnLock = new System.Windows.Forms.Button();
+            this.LockIcons = new System.Windows.Forms.ImageList(this.components);
             this.btnCreate = new System.Windows.Forms.Button();
+            this.grpAllComponents = new System.Windows.Forms.GroupBox();
+            this.lblVersion = new System.Windows.Forms.Label();
             this.grpSecondParam.SuspendLayout();
             this.grpFirstParam.SuspendLayout();
             this.grpThirdParam.SuspendLayout();
             this.grpFourthParam.SuspendLayout();
+            this.grpAllComponents.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
             // 
-            this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Gabriola", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(165, 9);
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.ForeColor = System.Drawing.Color.Red;
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(137, 39);
-            this.label1.TabIndex = 0;
-            this.label1.Text = "Structure Name:";
             // 
             // label2
             // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Gabriola", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(226, 48);
+            resources.ApplyResources(this.label2, "label2");
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 39);
-            this.label2.TabIndex = 1;
-            this.label2.Text = "Parameters";
             // 
             // label3
             // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Gabriola", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(138, 87);
+            resources.ApplyResources(this.label3, "label3");
+            this.label3.ForeColor = System.Drawing.Color.Red;
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 39);
-            this.label3.TabIndex = 2;
-            this.label3.Text = "Type";
             // 
             // label4
             // 
-            this.label4.AutoSize = true;
-            this.label4.Font = new System.Drawing.Font("Gabriola", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(246, 87);
+            resources.ApplyResources(this.label4, "label4");
+            this.label4.BackColor = System.Drawing.Color.Transparent;
+            this.label4.ForeColor = System.Drawing.Color.Red;
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(59, 39);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Name";
             // 
             // label5
             // 
-            this.label5.AutoSize = true;
-            this.label5.Font = new System.Drawing.Font("Gabriola", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label5.Location = new System.Drawing.Point(361, 87);
+            resources.ApplyResources(this.label5, "label5");
+            this.label5.ForeColor = System.Drawing.Color.Red;
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(68, 39);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "Length";
             // 
             // chkSecondParam
             // 
-            this.chkSecondParam.AutoSize = true;
-            this.chkSecondParam.Location = new System.Drawing.Point(19, 233);
+            resources.ApplyResources(this.chkSecondParam, "chkSecondParam");
+            this.chkSecondParam.BackColor = System.Drawing.Color.Transparent;
+            this.chkSecondParam.ForeColor = System.Drawing.Color.Red;
             this.chkSecondParam.Name = "chkSecondParam";
-            this.chkSecondParam.Size = new System.Drawing.Size(59, 17);
-            this.chkSecondParam.TabIndex = 4;
-            this.chkSecondParam.Text = "Enable";
-            this.chkSecondParam.UseVisualStyleBackColor = true;
+            this.chkSecondParam.UseVisualStyleBackColor = false;
             this.chkSecondParam.CheckedChanged += new System.EventHandler(this.chkSecondParam_CheckedChanged);
             // 
             // cmbSecondParamType
             // 
+            this.cmbSecondParamType.BackColor = System.Drawing.Color.Black;
             this.cmbSecondParamType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbSecondParamType.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.cmbSecondParamType, "cmbSecondParamType");
+            this.cmbSecondParamType.ForeColor = System.Drawing.Color.Red;
             this.cmbSecondParamType.FormattingEnabled = true;
             this.cmbSecondParamType.Items.AddRange(new object[] {
-            "int",
-            "float",
-            "char",
-            "short",
-            "long int"});
-            this.cmbSecondParamType.Location = new System.Drawing.Point(20, 18);
+            resources.GetString("cmbSecondParamType.Items"),
+            resources.GetString("cmbSecondParamType.Items1"),
+            resources.GetString("cmbSecondParamType.Items2"),
+            resources.GetString("cmbSecondParamType.Items3"),
+            resources.GetString("cmbSecondParamType.Items4")});
             this.cmbSecondParamType.Name = "cmbSecondParamType";
-            this.cmbSecondParamType.Size = new System.Drawing.Size(64, 43);
-            this.cmbSecondParamType.TabIndex = 5;
+            this.cmbSecondParamType.SelectedIndexChanged += new System.EventHandler(this.cmbSecondParamType_SelectedIndexChanged);
             // 
             // txtSecondParamLenght
             // 
-            this.txtSecondParamLenght.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecondParamLenght.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.txtSecondParamLenght.Location = new System.Drawing.Point(246, 21);
+            this.txtSecondParamLenght.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.txtSecondParamLenght, "txtSecondParamLenght");
+            this.txtSecondParamLenght.ForeColor = System.Drawing.Color.Red;
             this.txtSecondParamLenght.Name = "txtSecondParamLenght";
-            this.txtSecondParamLenght.Size = new System.Drawing.Size(79, 40);
-            this.txtSecondParamLenght.TabIndex = 7;
-            this.txtSecondParamLenght.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtSecondParamName
             // 
-            this.txtSecondParamName.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSecondParamName.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.txtSecondParamName.Location = new System.Drawing.Point(105, 21);
+            this.txtSecondParamName.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.txtSecondParamName, "txtSecondParamName");
+            this.txtSecondParamName.ForeColor = System.Drawing.Color.Red;
             this.txtSecondParamName.Name = "txtSecondParamName";
-            this.txtSecondParamName.Size = new System.Drawing.Size(119, 40);
-            this.txtSecondParamName.TabIndex = 6;
-            this.txtSecondParamName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // grpSecondParam
             // 
+            this.grpSecondParam.BackColor = System.Drawing.Color.Transparent;
             this.grpSecondParam.Controls.Add(this.cmbSecondParamType);
             this.grpSecondParam.Controls.Add(this.txtSecondParamLenght);
             this.grpSecondParam.Controls.Add(this.txtSecondParamName);
-            this.grpSecondParam.Location = new System.Drawing.Point(113, 201);
+            this.grpSecondParam.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.grpSecondParam, "grpSecondParam");
             this.grpSecondParam.Name = "grpSecondParam";
-            this.grpSecondParam.Size = new System.Drawing.Size(341, 75);
-            this.grpSecondParam.TabIndex = 12;
             this.grpSecondParam.TabStop = false;
-            this.grpSecondParam.Text = "2° Parameter";
             // 
             // grpFirstParam
             // 
+            this.grpFirstParam.BackColor = System.Drawing.Color.Transparent;
             this.grpFirstParam.Controls.Add(this.cmbFirstParamType);
             this.grpFirstParam.Controls.Add(this.txtFirstParamLenght);
             this.grpFirstParam.Controls.Add(this.txtFirstParamName);
-            this.grpFirstParam.Location = new System.Drawing.Point(113, 120);
+            this.grpFirstParam.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.grpFirstParam, "grpFirstParam");
             this.grpFirstParam.Name = "grpFirstParam";
-            this.grpFirstParam.Size = new System.Drawing.Size(341, 75);
-            this.grpFirstParam.TabIndex = 13;
             this.grpFirstParam.TabStop = false;
-            this.grpFirstParam.Text = "1° Parameter";
             // 
             // cmbFirstParamType
             // 
+            this.cmbFirstParamType.BackColor = System.Drawing.Color.Black;
             this.cmbFirstParamType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFirstParamType.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.cmbFirstParamType, "cmbFirstParamType");
+            this.cmbFirstParamType.ForeColor = System.Drawing.Color.Red;
             this.cmbFirstParamType.FormattingEnabled = true;
             this.cmbFirstParamType.Items.AddRange(new object[] {
-            "int",
-            "float",
-            "char",
-            "short",
-            "long int"});
-            this.cmbFirstParamType.Location = new System.Drawing.Point(20, 18);
+            resources.GetString("cmbFirstParamType.Items"),
+            resources.GetString("cmbFirstParamType.Items1"),
+            resources.GetString("cmbFirstParamType.Items2"),
+            resources.GetString("cmbFirstParamType.Items3"),
+            resources.GetString("cmbFirstParamType.Items4")});
             this.cmbFirstParamType.Name = "cmbFirstParamType";
-            this.cmbFirstParamType.Size = new System.Drawing.Size(64, 43);
-            this.cmbFirstParamType.TabIndex = 1;
+            this.cmbFirstParamType.SelectedIndexChanged += new System.EventHandler(this.cmbFirstParamType_SelectedIndexChanged);
             // 
             // txtFirstParamLenght
             // 
-            this.txtFirstParamLenght.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFirstParamLenght.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.txtFirstParamLenght.Location = new System.Drawing.Point(246, 21);
+            this.txtFirstParamLenght.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.txtFirstParamLenght, "txtFirstParamLenght");
+            this.txtFirstParamLenght.ForeColor = System.Drawing.Color.Red;
             this.txtFirstParamLenght.Name = "txtFirstParamLenght";
-            this.txtFirstParamLenght.Size = new System.Drawing.Size(79, 40);
-            this.txtFirstParamLenght.TabIndex = 3;
-            this.txtFirstParamLenght.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtFirstParamName
             // 
-            this.txtFirstParamName.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFirstParamName.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.txtFirstParamName.Location = new System.Drawing.Point(105, 21);
+            this.txtFirstParamName.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.txtFirstParamName, "txtFirstParamName");
+            this.txtFirstParamName.ForeColor = System.Drawing.Color.Red;
             this.txtFirstParamName.Name = "txtFirstParamName";
-            this.txtFirstParamName.Size = new System.Drawing.Size(119, 40);
-            this.txtFirstParamName.TabIndex = 2;
-            this.txtFirstParamName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // grpThirdParam
             // 
+            this.grpThirdParam.BackColor = System.Drawing.Color.Transparent;
             this.grpThirdParam.Controls.Add(this.cmbThirdParamType);
             this.grpThirdParam.Controls.Add(this.txtThirdParamLenght);
             this.grpThirdParam.Controls.Add(this.txtThirdParamName);
-            this.grpThirdParam.Location = new System.Drawing.Point(113, 268);
+            this.grpThirdParam.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.grpThirdParam, "grpThirdParam");
             this.grpThirdParam.Name = "grpThirdParam";
-            this.grpThirdParam.Size = new System.Drawing.Size(341, 75);
-            this.grpThirdParam.TabIndex = 13;
             this.grpThirdParam.TabStop = false;
-            this.grpThirdParam.Text = "3° Parameter";
             // 
             // cmbThirdParamType
             // 
+            this.cmbThirdParamType.BackColor = System.Drawing.Color.Black;
             this.cmbThirdParamType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbThirdParamType.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.cmbThirdParamType, "cmbThirdParamType");
+            this.cmbThirdParamType.ForeColor = System.Drawing.Color.Red;
             this.cmbThirdParamType.FormattingEnabled = true;
             this.cmbThirdParamType.Items.AddRange(new object[] {
-            "int",
-            "float",
-            "char",
-            "short",
-            "long int"});
-            this.cmbThirdParamType.Location = new System.Drawing.Point(20, 18);
+            resources.GetString("cmbThirdParamType.Items"),
+            resources.GetString("cmbThirdParamType.Items1"),
+            resources.GetString("cmbThirdParamType.Items2"),
+            resources.GetString("cmbThirdParamType.Items3"),
+            resources.GetString("cmbThirdParamType.Items4")});
             this.cmbThirdParamType.Name = "cmbThirdParamType";
-            this.cmbThirdParamType.Size = new System.Drawing.Size(64, 43);
-            this.cmbThirdParamType.TabIndex = 9;
+            this.cmbThirdParamType.SelectedIndexChanged += new System.EventHandler(this.cmbThirdParamType_SelectedIndexChanged);
             // 
             // txtThirdParamLenght
             // 
-            this.txtThirdParamLenght.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtThirdParamLenght.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.txtThirdParamLenght.Location = new System.Drawing.Point(246, 21);
+            this.txtThirdParamLenght.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.txtThirdParamLenght, "txtThirdParamLenght");
+            this.txtThirdParamLenght.ForeColor = System.Drawing.Color.Red;
             this.txtThirdParamLenght.Name = "txtThirdParamLenght";
-            this.txtThirdParamLenght.Size = new System.Drawing.Size(79, 40);
-            this.txtThirdParamLenght.TabIndex = 11;
-            this.txtThirdParamLenght.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtThirdParamName
             // 
-            this.txtThirdParamName.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtThirdParamName.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.txtThirdParamName.Location = new System.Drawing.Point(105, 21);
+            this.txtThirdParamName.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.txtThirdParamName, "txtThirdParamName");
+            this.txtThirdParamName.ForeColor = System.Drawing.Color.Red;
             this.txtThirdParamName.Name = "txtThirdParamName";
-            this.txtThirdParamName.Size = new System.Drawing.Size(119, 40);
-            this.txtThirdParamName.TabIndex = 10;
-            this.txtThirdParamName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // grpFourthParam
             // 
+            this.grpFourthParam.BackColor = System.Drawing.Color.Transparent;
             this.grpFourthParam.Controls.Add(this.cmbFourthParamType);
             this.grpFourthParam.Controls.Add(this.txtFourthParamLenght);
             this.grpFourthParam.Controls.Add(this.txtFourthParamName);
-            this.grpFourthParam.Location = new System.Drawing.Point(113, 335);
+            this.grpFourthParam.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.grpFourthParam, "grpFourthParam");
             this.grpFourthParam.Name = "grpFourthParam";
-            this.grpFourthParam.Size = new System.Drawing.Size(341, 75);
-            this.grpFourthParam.TabIndex = 13;
             this.grpFourthParam.TabStop = false;
-            this.grpFourthParam.Text = "4° Parameter";
             // 
             // cmbFourthParamType
             // 
+            this.cmbFourthParamType.BackColor = System.Drawing.Color.Black;
             this.cmbFourthParamType.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cmbFourthParamType.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold);
+            resources.ApplyResources(this.cmbFourthParamType, "cmbFourthParamType");
+            this.cmbFourthParamType.ForeColor = System.Drawing.Color.Red;
             this.cmbFourthParamType.FormattingEnabled = true;
             this.cmbFourthParamType.Items.AddRange(new object[] {
-            "int",
-            "float",
-            "char",
-            "short",
-            "long int"});
-            this.cmbFourthParamType.Location = new System.Drawing.Point(20, 18);
+            resources.GetString("cmbFourthParamType.Items"),
+            resources.GetString("cmbFourthParamType.Items1"),
+            resources.GetString("cmbFourthParamType.Items2"),
+            resources.GetString("cmbFourthParamType.Items3"),
+            resources.GetString("cmbFourthParamType.Items4")});
             this.cmbFourthParamType.Name = "cmbFourthParamType";
-            this.cmbFourthParamType.Size = new System.Drawing.Size(64, 43);
-            this.cmbFourthParamType.TabIndex = 13;
+            this.cmbFourthParamType.SelectedIndexChanged += new System.EventHandler(this.cmbFourthParamType_SelectedIndexChanged);
             // 
             // txtFourthParamLenght
             // 
-            this.txtFourthParamLenght.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFourthParamLenght.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.txtFourthParamLenght.Location = new System.Drawing.Point(246, 21);
+            this.txtFourthParamLenght.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.txtFourthParamLenght, "txtFourthParamLenght");
+            this.txtFourthParamLenght.ForeColor = System.Drawing.Color.Red;
             this.txtFourthParamLenght.Name = "txtFourthParamLenght";
-            this.txtFourthParamLenght.Size = new System.Drawing.Size(79, 40);
-            this.txtFourthParamLenght.TabIndex = 15;
-            this.txtFourthParamLenght.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txtFourthParamName
             // 
-            this.txtFourthParamName.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtFourthParamName.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.txtFourthParamName.Location = new System.Drawing.Point(105, 21);
+            this.txtFourthParamName.BackColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.txtFourthParamName, "txtFourthParamName");
+            this.txtFourthParamName.ForeColor = System.Drawing.Color.Red;
             this.txtFourthParamName.Name = "txtFourthParamName";
-            this.txtFourthParamName.Size = new System.Drawing.Size(119, 40);
-            this.txtFourthParamName.TabIndex = 14;
-            this.txtFourthParamName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // chkThirdParam
             // 
-            this.chkThirdParam.AutoSize = true;
-            this.chkThirdParam.Location = new System.Drawing.Point(19, 300);
+            resources.ApplyResources(this.chkThirdParam, "chkThirdParam");
+            this.chkThirdParam.BackColor = System.Drawing.Color.Transparent;
+            this.chkThirdParam.ForeColor = System.Drawing.Color.Red;
             this.chkThirdParam.Name = "chkThirdParam";
-            this.chkThirdParam.Size = new System.Drawing.Size(59, 17);
-            this.chkThirdParam.TabIndex = 8;
-            this.chkThirdParam.Text = "Enable";
-            this.chkThirdParam.UseVisualStyleBackColor = true;
+            this.chkThirdParam.UseVisualStyleBackColor = false;
             this.chkThirdParam.CheckedChanged += new System.EventHandler(this.chkThirdParam_CheckedChanged);
             // 
             // chkFourthParam
             // 
-            this.chkFourthParam.AutoSize = true;
-            this.chkFourthParam.Location = new System.Drawing.Point(19, 367);
+            resources.ApplyResources(this.chkFourthParam, "chkFourthParam");
+            this.chkFourthParam.BackColor = System.Drawing.Color.Transparent;
+            this.chkFourthParam.ForeColor = System.Drawing.Color.Red;
             this.chkFourthParam.Name = "chkFourthParam";
-            this.chkFourthParam.Size = new System.Drawing.Size(59, 17);
-            this.chkFourthParam.TabIndex = 12;
-            this.chkFourthParam.Text = "Enable";
-            this.chkFourthParam.UseVisualStyleBackColor = true;
+            this.chkFourthParam.UseVisualStyleBackColor = false;
             this.chkFourthParam.CheckedChanged += new System.EventHandler(this.chkFourthParam_CheckedChanged);
             // 
             // txtStructureName
             // 
-            this.txtStructureName.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtStructureName.ImeMode = System.Windows.Forms.ImeMode.AlphaFull;
-            this.txtStructureName.Location = new System.Drawing.Point(298, 12);
+            resources.ApplyResources(this.txtStructureName, "txtStructureName");
             this.txtStructureName.Name = "txtStructureName";
-            this.txtStructureName.Size = new System.Drawing.Size(119, 40);
-            this.txtStructureName.TabIndex = 0;
-            this.txtStructureName.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // btnLock
             // 
-            this.btnLock.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnLock.Location = new System.Drawing.Point(79, 416);
+            resources.ApplyResources(this.btnLock, "btnLock");
+            this.btnLock.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnLock.ImageList = this.LockIcons;
             this.btnLock.Name = "btnLock";
-            this.btnLock.Size = new System.Drawing.Size(189, 64);
-            this.btnLock.TabIndex = 16;
-            this.btnLock.Text = "button1";
             this.btnLock.UseVisualStyleBackColor = true;
+            this.btnLock.Click += new System.EventHandler(this.btnLock_Click);
+            // 
+            // LockIcons
+            // 
+            this.LockIcons.ImageStream = ((System.Windows.Forms.ImageListStreamer)(resources.GetObject("LockIcons.ImageStream")));
+            this.LockIcons.TransparentColor = System.Drawing.Color.Transparent;
+            this.LockIcons.Images.SetKeyName(0, "padlock.png");
+            this.LockIcons.Images.SetKeyName(1, "lock.png");
             // 
             // btnCreate
             // 
-            this.btnCreate.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold);
-            this.btnCreate.Location = new System.Drawing.Point(298, 416);
+            resources.ApplyResources(this.btnCreate, "btnCreate");
+            this.btnCreate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.Size = new System.Drawing.Size(189, 64);
-            this.btnCreate.TabIndex = 17;
-            this.btnCreate.Text = "Create Structure";
             this.btnCreate.UseVisualStyleBackColor = true;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
+            // grpAllComponents
+            // 
+            this.grpAllComponents.BackColor = System.Drawing.Color.Transparent;
+            this.grpAllComponents.Controls.Add(this.txtStructureName);
+            this.grpAllComponents.Controls.Add(this.chkFourthParam);
+            this.grpAllComponents.Controls.Add(this.chkThirdParam);
+            this.grpAllComponents.Controls.Add(this.grpFourthParam);
+            this.grpAllComponents.Controls.Add(this.grpThirdParam);
+            this.grpAllComponents.Controls.Add(this.grpFirstParam);
+            this.grpAllComponents.Controls.Add(this.grpSecondParam);
+            this.grpAllComponents.Controls.Add(this.chkSecondParam);
+            this.grpAllComponents.Controls.Add(this.label5);
+            this.grpAllComponents.Controls.Add(this.label4);
+            this.grpAllComponents.Controls.Add(this.label3);
+            this.grpAllComponents.Controls.Add(this.label2);
+            this.grpAllComponents.Controls.Add(this.label1);
+            this.grpAllComponents.ForeColor = System.Drawing.Color.White;
+            resources.ApplyResources(this.grpAllComponents, "grpAllComponents");
+            this.grpAllComponents.Name = "grpAllComponents";
+            this.grpAllComponents.TabStop = false;
+            // 
+            // lblVersion
+            // 
+            resources.ApplyResources(this.lblVersion, "lblVersion");
+            this.lblVersion.ForeColor = System.Drawing.Color.Red;
+            this.lblVersion.Name = "lblVersion";
+            // 
             // StructureBuilder
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(523, 560);
+            this.BackColor = System.Drawing.Color.Black;
+            this.Controls.Add(this.lblVersion);
+            this.Controls.Add(this.grpAllComponents);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnLock);
-            this.Controls.Add(this.txtStructureName);
-            this.Controls.Add(this.chkFourthParam);
-            this.Controls.Add(this.chkThirdParam);
-            this.Controls.Add(this.grpFourthParam);
-            this.Controls.Add(this.grpThirdParam);
-            this.Controls.Add(this.grpFirstParam);
-            this.Controls.Add(this.grpSecondParam);
-            this.Controls.Add(this.chkSecondParam);
-            this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
-            this.Controls.Add(this.label3);
-            this.Controls.Add(this.label2);
-            this.Controls.Add(this.label1);
+            this.DoubleBuffered = true;
+            this.ForeColor = System.Drawing.SystemColors.ButtonFace;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
-            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StructureBuilder";
-            this.Text = "Structure Builder";
             this.grpSecondParam.ResumeLayout(false);
             this.grpSecondParam.PerformLayout();
             this.grpFirstParam.ResumeLayout(false);
@@ -403,6 +368,8 @@ namespace StructureBuilder_Form
             this.grpThirdParam.PerformLayout();
             this.grpFourthParam.ResumeLayout(false);
             this.grpFourthParam.PerformLayout();
+            this.grpAllComponents.ResumeLayout(false);
+            this.grpAllComponents.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -437,6 +404,9 @@ namespace StructureBuilder_Form
         private System.Windows.Forms.TextBox txtStructureName;
         private System.Windows.Forms.Button btnLock;
         private System.Windows.Forms.Button btnCreate;
+        private System.Windows.Forms.ImageList LockIcons;
+        private System.Windows.Forms.GroupBox grpAllComponents;
+        private System.Windows.Forms.Label lblVersion;
     }
 }
 

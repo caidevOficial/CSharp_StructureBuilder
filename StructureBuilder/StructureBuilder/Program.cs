@@ -37,21 +37,15 @@ namespace StructureBuilder
             CreatorDotH makerH = new CreatorDotH();
             CreatorDotC makerC = new CreatorDotC();
             Structure myStructure = new Structure();
-            //StringBuilder streamText;
-            //Parameter myParameter = new Parameter();
-            string structureName;
-            string structureAlias;
             string appVersion = "Structure Builder [v1.2.0.1]";
             short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
             short auxParNum = 6; // Basic functions by parameter com + get + set
             short packsDone = 0;
 
             Console.WriteLine(appVersion);
-            structureName = DataCollector.StructureNameCollector();
-            structureAlias = DataCollector.StructureAliasCollector(structureName);
-            myStructure.StructureName = structureName;
-            myStructure.AliasName = structureAlias;
-            myStructure.FinalStructureName = "s" + structureAlias;
+            myStructure.StructureName = DataCollector.StructureNameCollector();
+            myStructure.AliasName = DataCollector.StructureAliasCollector(myStructure.StructureName);
+            myStructure.FinalStructureName = myStructure.AliasName;
 
             DataCollector.AddParameterToStructure(myStructure);
 
