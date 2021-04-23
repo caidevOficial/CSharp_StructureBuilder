@@ -360,6 +360,7 @@ namespace StructureBuilder_Form
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "StructureBuilder";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StructureBuilder_FormClosing);
             this.grpSecondParam.ResumeLayout(false);
             this.grpSecondParam.PerformLayout();
             this.grpFirstParam.ResumeLayout(false);

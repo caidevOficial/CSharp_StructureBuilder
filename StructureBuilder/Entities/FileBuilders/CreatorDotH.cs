@@ -30,7 +30,7 @@ using System.Text;
 
 namespace Entities.FileBuilders
 {
-    public sealed class CreatorDotH: Creator
+    public sealed class CreatorDotH : Creator
     {
         public CreatorDotH() { }
 
@@ -304,6 +304,20 @@ namespace Entities.FileBuilders
 
         #endregion
 
+        #region CreateDeleteFunction
+
+        /// <summary>
+        /// Creates the function for delete the entity.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        protected override void CreateDeleteFunction(Structure myStructure, StringBuilder streamText)
+        {
+            streamText.Append($"void {myStructure.AliasName}_delete({myStructure.FinalStructureName}* this);\n");
+        }
+
+        #endregion
+
         #region FileMaker_DotH
 
         /// <summary>
@@ -322,7 +336,6 @@ namespace Entities.FileBuilders
                 string curFile = $"{myStructure.FinalStructureName}.h";
 
                 Console.WriteLine($"Final Structure Name: {myStructure.FinalStructureName}");
-                //Console.WriteLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
                 Console.WriteLine($"\nAmount of steps: {fullPackSize}\nActions completed: {packsDone}\n");
 
                 dataMaker = CreateStructure(myStructure, dataMaker);
@@ -331,11 +344,13 @@ namespace Entities.FileBuilders
                 dataMaker.Append("\n// # CREDITS TO:\n");
                 dataMaker.Append("// ## Idea in C: Santiago Herrera.\n");
                 dataMaker.Append("// ## Advanced Improvement And develop in C#: FacuFalcone - CaidevOficial.\n");
+                dataMaker.Append("// ## Follow me on -> github.com/CaidevOficial\n");
                 packsDone++;
                 ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
                 packsDone = CreateBasicStructFunctions(myStructure, dataMaker, packsDone, fullPackSize);
                 packsDone = CreateGettersAndSetters(myStructure, dataMaker, packsDone, fullPackSize);
+                CreateDeleteFunction(myStructure, dataMaker);
 
                 if (File.Exists(curFile))
                 {

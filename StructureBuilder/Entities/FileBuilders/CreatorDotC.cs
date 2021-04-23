@@ -30,11 +30,29 @@ using System.Text;
 
 namespace Entities.FileBuilders
 {
-    public sealed class CreatorDotC: Creator
+    public sealed class CreatorDotC : Creator
     {
         public CreatorDotC() : base() { }
 
         #region CreateBuilders
+
+        /// <summary>
+        /// Checks if one at least one parameter is type ''char''.
+        /// </summary>
+        /// <param name="myStructure">Structure for check the parameters.</param>
+        /// <returns>True if at least one parameter is char-type, otherwise returns false.</returns>
+        private bool CheckCharParam(Structure myStructure)
+        {
+            foreach (Parameter myParam in myStructure.ListParamaters)
+            {
+                if (myParam.TypeParameter.Equals("char"))
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
 
         /// <summary>
         /// Creates in the stream the basic builder of the structure.
@@ -46,6 +64,15 @@ namespace Entities.FileBuilders
         /// <returns>The amount of steps done.</returns>
         protected override short CreateBuilderEmpty(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
         {
+            streamText.Append($"#include <stdlib.h>\n");
+            streamText.Append($"#include <stdio.h>\n");
+            if (CheckCharParam(myStructure))
+            {
+                streamText.Append($"#include <string.h>\n");
+            }
+            streamText.Append($"#include \"LinkedList.h\"\n");
+            streamText.Append($"#include \"{myStructure.FinalStructureName}.h\"\n");
+
             streamText.Append($"\n{myStructure.FinalStructureName}* {myStructure.AliasName}_newEmpty(){{ \n"); // sUser* usr_newEmpty()
             streamText.Append($"    return ({myStructure.FinalStructureName}*) calloc(sizeof({myStructure.FinalStructureName}),1);\n}}\n\n"); // return (sUser*) malloc(sizeof(sUser));
             packsDone++;
@@ -577,6 +604,23 @@ namespace Entities.FileBuilders
 
         #endregion
 
+        #region CreateDeleteStructure
+
+        /// <summary>
+        /// Creates the function for delete the entity.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        protected override void CreateDeleteFunction(Structure myStructure, StringBuilder streamText)
+        {
+            streamText.Append($"void {myStructure.AliasName}_delete({myStructure.FinalStructureName}* this){{\n"); // void usr_delete(sUser* this)
+            streamText.Append($"    if(this!=NULL){{\n");
+            streamText.Append($"        free(this);\n    }}\n");
+            streamText.Append($"}}\n");
+        }
+
+        #endregion
+
         #region FileMaker
 
         /// <summary>
@@ -596,13 +640,14 @@ namespace Entities.FileBuilders
 
                 packsDone = CreateBasicStructFunctions(myStructure, dataMaker, packsDone, fullPackSize);
                 packsDone = CreateGettersAndSetters(myStructure, dataMaker, packsDone, fullPackSize);
+                CreateDeleteFunction(myStructure, dataMaker);
 
                 if (File.Exists(curFile))
                 {
                     // if not exist, creates the file.
                     pFileDotC.Write(dataMaker);
                 }
-                
+
             }
             catch (Exception e)
             {

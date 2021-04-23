@@ -139,6 +139,13 @@ namespace Entities.FileBuilders
         protected abstract short CreateGettersAndSetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize);
 
         /// <summary>
+        /// Creates the function for delete the entity.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        protected abstract void CreateDeleteFunction(Structure myStructure, StringBuilder streamText);
+
+        /// <summary>
         /// Creates and Writes the '.h' file.
         /// </summary>
         /// <param name="myStructure">Structure to extract the data.</param>

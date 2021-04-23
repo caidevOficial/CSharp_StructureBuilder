@@ -273,8 +273,8 @@ namespace Entities.AuxiliarClass
                     }
 
                     AssembleParameter(myParameter);
-                    
-                    if(myStructure + myParameter)
+
+                    if (myStructure + myParameter)
                     {
                         Console.WriteLine($"Parameter: {myParameter.TypeParameter} {myParameter.NameParameter} added to structure {myStructure.FinalStructureName} successfully!.\n");
                     }

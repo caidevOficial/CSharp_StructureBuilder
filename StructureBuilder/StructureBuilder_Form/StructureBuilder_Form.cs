@@ -37,7 +37,6 @@ namespace StructureBuilder_Form
         private CreatorDotH makerH = new CreatorDotH();
         private CreatorDotC makerC = new CreatorDotC();
         private short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
-        //private short auxParNum = 6; // Basic functions by parameter com + get + set
         private short packsDone = 0;
         private bool locked = false;
         private string appVersion = "Version [2.5.0.2]";
@@ -327,6 +326,27 @@ namespace StructureBuilder_Form
                 btnLock.ImageIndex = 0;
                 grpAllComponents.Enabled = true;
                 btnCreate.Enabled = false;
+            }
+        }
+
+        #endregion
+
+        #region CloseEvent
+
+        /// <summary>
+        /// Send a messageBox to the screen asking if the user want to quit the app.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void StructureBuilder_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (MessageBox.Show("Do you want to quit?", "Choose Wisely", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                Dispose();
+            }
+            else
+            {
+                e.Cancel = true;
             }
         }
 

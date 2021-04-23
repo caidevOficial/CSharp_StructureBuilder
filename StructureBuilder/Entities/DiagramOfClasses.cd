@@ -1,59 +1,59 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ClassDiagram MajorVersion="1" MinorVersion="1">
   <Class Name="Entities.AuxiliarClass.ConsolePrinter">
-    <Position X="0.5" Y="0.5" Width="1.5" />
+    <Position X="3" Y="4.75" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAEACAAAAAAAAQAAAAAAAIAAAAAAgAAAAAA=</HashCode>
       <FileName>AuxiliarClass\ConsolePrinter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Entities.AuxiliarClass.DataCollector">
-    <Position X="2.25" Y="0.5" Width="2.25" />
+    <Position X="0.5" Y="4.25" Width="2.25" />
     <TypeIdentifier>
       <HashCode>IAQAEAAABAAgCAAAEAAAABAAAGAAAAAAAAAAAAAIAAA=</HashCode>
       <FileName>AuxiliarClass\DataCollector.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Entities.AuxiliarClass.DataValidator">
-    <Position X="0.5" Y="2.5" Width="1.5" />
+    <Position X="9" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>AuxiliarClass\DataValidator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Entities.Entities.Parameter">
-    <Position X="4.75" Y="0.5" Width="2.25" />
+    <Position X="9" Y="0.5" Width="2.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAQAIEAAAABAAAAAAAAAAAAAAAEAhAAhiI=</HashCode>
       <FileName>Entities\Parameter.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Entities.Entities.Structure">
-    <Position X="7.25" Y="0.5" Width="2.25" />
+    <Position X="11.5" Y="0.5" Width="2" />
     <TypeIdentifier>
       <HashCode>BAAAAAAQAAAAAAAAQAAAAAACAEAAABBgAAAAAAAAwiA=</HashCode>
       <FileName>Entities\Structure.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="Entities.FileBuilders.CreatorDotC">
-    <Position X="15.5" Y="0.5" Width="2.25" />
+  <Class Name="Entities.FileBuilders.Creator">
+    <Position X="0.5" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>YAAAAAAAEAAAAAAAAAAAAAAAAIAAAAAAAAAAAAAQAAA=</HashCode>
+      <HashCode>QIIAAAAAEABAACgAAoAAAAAAAIAIAAgAAAAAAAAAACA=</HashCode>
+      <FileName>FileBuilders\Creator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.FileBuilders.CreatorDotC">
+    <Position X="6.25" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>YIIIAAAAUABAAAgAAoAAQAAEAIAIAAgAAEBAAACQACA=</HashCode>
       <FileName>FileBuilders\CreatorDotC.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Entities.FileBuilders.CreatorDotH">
-    <Position X="12.5" Y="0.5" Width="2.25" />
+    <Position X="3.25" Y="0.5" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>QIIAAAAAEABAACgAAoAAAAAAAIAIAAgAAAAEAAAAAAA=</HashCode>
+      <HashCode>QIIAAAAAEABAACgAAoAAAAAAAIAIAAgAAAAEAAAAACA=</HashCode>
       <FileName>FileBuilders\CreatorDotH.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="Entities.FileBuilders.Creator">
-    <Position X="9.75" Y="0.5" Width="2.25" />
-    <TypeIdentifier>
-      <HashCode>QIIAAAAAEABAACgAAoAAAAAAAIAIAAgAAAAAAAAAAAA=</HashCode>
-      <FileName>FileBuilders\Creator.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

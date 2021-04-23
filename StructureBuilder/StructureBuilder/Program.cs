@@ -26,7 +26,6 @@ using Entities.AuxiliarClass;
 using Entities.Entities;
 using Entities.FileBuilders;
 using System;
-using System.Text;
 
 namespace StructureBuilder
 {
