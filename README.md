@@ -21,7 +21,7 @@
   <th>App UI</th>
   <tr>
     <td>
-      <img src="/Media/sample.png" height="200px"/>
+      <img src="/Media/sample.png" height="600px"/>
     </td>
   </tr>
 </table>
