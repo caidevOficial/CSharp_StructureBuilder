@@ -13,7 +13,19 @@
 
 ---
 
-# C# Structure Builder for C(Dynamic Memory). 👨‍💻
+# C# Structure Builder for C Language (Dynamic Memory). 👨‍💻
+---
+
+
+<table>
+  <th>App UI</th>
+  <tr>
+    <td>
+      <img src="/Media/sample.png" height="200px"/>
+    </td>
+  </tr>
+</table>
+
 ---
 
 <details>
