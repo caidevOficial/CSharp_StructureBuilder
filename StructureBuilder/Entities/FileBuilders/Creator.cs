@@ -86,14 +86,14 @@ namespace Entities.FileBuilders
         /// <param name="myStructure">Structure to extract the data.</param>
         /// <param name="myParam">Parameter to extract the data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
-        protected abstract void AddParameterIntoConstructor(Structure myStructure, Parameter myParam, StringBuilder streamText);
+        protected virtual void AddParameterIntoConstructor(Structure myStructure, Parameter myParam, StringBuilder streamText) { }
 
         /// <summary>
         /// Adds parameters data to the 'parameters' of the constructor.
         /// </summary>
         /// <param name="myStructure">Structure to extract the data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
-        protected abstract void AddParametersToConstructor(Structure myStructure, StringBuilder streamText);
+        protected virtual void AddParametersToConstructor(Structure myStructure, StringBuilder streamText) { }
 
         /// <summary>
         /// Creates the Getter of the file.

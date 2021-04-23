@@ -24,13 +24,14 @@
 
 using Entities.AuxiliarClass;
 using Entities.Entities;
+using System;
+using System.IO;
 using System.Text;
 
 namespace Entities.FileBuilders
 {
     public sealed class CreatorDotC: Creator
     {
-
         public CreatorDotC() : base() { }
 
         #region CreateBuilders
@@ -94,270 +95,6 @@ namespace Entities.FileBuilders
             //packsDone++;
             //ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
-        }
-
-        #endregion
-
-        #region CreateComparers
-
-        /// <summary>
-        /// Creates the comparer of parameters that are a char's array type
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="aParam">A parameter to extract its data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        private void CreateCompareWithChar(Structure myStructure, Parameter aParam, StringBuilder streamText)
-        {
-            streamText.Append($"// For use in a sort function - Compare {myStructure.StructureName}->{aParam.NameParameter}\n");
-            streamText.Append($"int {myStructure.AliasName}_compare{aParam.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2){{\n");
-            streamText.Append($"    int anw;\n");
-            // First variable
-            streamText.Append($"    {aParam.TypeParameter} {aParam.NameParameter}1_1[{aParam.LengthParameter}];\n");
-            // Second variable
-            streamText.Append($"    {aParam.TypeParameter} {aParam.NameParameter}2_2[{aParam.LengthParameter}];\n\n");
-            // First getter
-            streamText.Append($"    {myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}1, {aParam.NameParameter}1_1);\n");
-            // Second getter
-            streamText.Append($"    {myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}2, {aParam.NameParameter}2_2);\n\n");
-            streamText.Append($"    anw = strcmp({aParam.NameParameter}1_1,{aParam.NameParameter}2_2);\n");
-            streamText.Append($"    return anw;\n}}\n\n");
-        }
-
-        /// <summary>
-        /// Creates the comparer of parameters that aren't a char's array type
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="aParam">A parameter to extract its data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        private void CreateCompareWithoutChar(Structure myStructure, Parameter aParam, StringBuilder streamText)
-        {
-            streamText.Append($"// For use in a sort function - Compare {myStructure.StructureName}->{aParam.NameParameter}\n");
-            streamText.Append($"int {myStructure.AliasName}_compare{aParam.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2){{\n");
-            streamText.Append($"    int anw = 0;\n");
-            // First variable
-            streamText.Append($"    {aParam.TypeParameter} {aParam.NameParameter}1_1;\n");
-            // Second variable
-            streamText.Append($"    {aParam.TypeParameter} {aParam.NameParameter}2_2;\n\n");
-            // First getter
-            streamText.Append($"    {myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}1, &{aParam.NameParameter}1_1);\n");
-            // Second getter
-            streamText.Append($"    {myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}2, &{aParam.NameParameter}2_2);\n");
-            // Comparator Area
-            streamText.Append($"    if({aParam.NameParameter}1_1>{aParam.NameParameter}2_2){{\n");
-            streamText.Append($"        anw=1;\n    }}\n");
-            streamText.Append($"    else if({aParam.NameParameter}1_1<{aParam.NameParameter}2_2){{\n");
-            streamText.Append($"        anw=-1;\n    }}\n");
-            streamText.Append($"    return anw;\n}}\n\n");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="paramA">A parameter to extract its data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        /// <param name="packsDone">Amount of steps done.</param>
-        /// <param name="fullPackSize">Amount of total steps to do.</param>
-        /// <returns>The amount of steps done.</returns>
-        protected override short CreateComparer(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
-        {
-            if (paramA.LengthParameter == 1)
-            {
-                CreateCompareWithoutChar(myStructure, paramA, streamText);
-            }
-            else if (paramA.TypeParameter.Equals("char"))
-            {
-                CreateCompareWithChar(myStructure, paramA, streamText);
-            }
-
-            return packsDone;
-        }
-
-        /// <summary>
-        /// Creates the comparers of all the parameters of the structure.
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        /// <param name="packsDone">Amount of steps done.</param>
-        /// <param name="fullPackSize">Amount of total steps to do.</param>
-        /// <returns>The amount of steps done.</returns>
-        private short CreateComparers(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
-        {
-            foreach (Parameter aParam in myStructure.ListParamaters)
-            {
-                packsDone = CreateComparer(myStructure, aParam, streamText, packsDone, fullPackSize);
-            }
-            packsDone++;
-            ConsolePrinter.ShowProgress(fullPackSize, packsDone);
-
-            return packsDone;
-        }
-
-        #endregion
-
-        #region CreateGetters
-
-        /// <summary>
-        /// Creates the getters of parameters that aren't a char's array type
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="paramA">A parameter to extract its data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        private void CreateGettersNoCharInFile(Structure myStructure, Parameter paramA, StringBuilder streamText)
-        {
-            streamText.Append($"int {myStructure.AliasName}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter}){{\n");
-            streamText.Append($"    int isError = 1;\n");
-            streamText.Append($"    if({myStructure.StructureName}!=NULL){{\n");
-            streamText.Append($"        *{paramA.NameParameter} = {myStructure.StructureName}->{paramA.NameParameter};\n");
-            streamText.Append($"        isError = 0;\n    }}\n");
-            streamText.Append($"    return isError;\n}}\n\n");
-        }
-
-        /// <summary>
-        /// Creates the getters of parameters that are a char's array type
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="aParam">A parameter to extract its data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        private void CreateGettersWithCharInFile(Structure myStructure, Parameter paramA, StringBuilder streamText)
-        {
-            streamText.Append($"int {myStructure.AliasName}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter}){{\n");
-            streamText.Append($"    int isError = 1;\n");
-            streamText.Append($"    if({myStructure.StructureName}!=NULL){{\n");
-            streamText.Append($"        strcpy({paramA.NameParameter},{myStructure.StructureName}->{paramA.NameParameter});\n");
-            streamText.Append($"        isError = 0;\n    }}\n");
-            streamText.Append($"    return isError;\n}}\n\n");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="paramA"></param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        /// <param name="packsDone">Amount of steps done.</param>
-        /// <param name="fullPackSize">Amount of total steps to do.</param>
-        /// <returns>The amount of steps done.</returns>
-        protected override short CreateGetter(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
-        {
-            if (paramA.LengthParameter == 1)
-            {
-                CreateGettersNoCharInFile(myStructure, paramA, streamText);
-            }
-            else if (paramA.TypeParameter.Equals("char"))
-            {
-                CreateGettersWithCharInFile(myStructure, paramA, streamText);
-            }
-
-            return packsDone;
-        }
-
-        /// <summary>
-        /// Creates the getters of all the parameters of the structure.
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        /// <param name="packsDone">Amount of steps done.</param>
-        /// <param name="fullPackSize">Amount of total steps to do.</param>
-        /// <returns>The amount of steps done.</returns>
-        private short CreateGetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
-        {
-            foreach (Parameter aParam in myStructure.ListParamaters)
-            {
-                packsDone = CreateGetter(myStructure, aParam, streamText, packsDone, fullPackSize);
-            }
-            packsDone++;
-            ConsolePrinter.ShowProgress(fullPackSize, packsDone);
-
-            return packsDone;
-        }
-
-        #endregion
-
-        #region CreateSetters
-
-        /// <summary>
-        /// Creates the setters of parameters that aren't a char's array type
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="aParam">A parameter to extract its data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        private void CreateSettersNoCharInFile(Structure myStructure, Parameter aParam, StringBuilder streamText)
-        {
-            streamText.Append($"int {myStructure.AliasName}_set{aParam.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {aParam.TypeParameter} {aParam.NameParameter}){{\n");
-            streamText.Append($"    int isError = 1;\n");
-            streamText.Append($"    if({myStructure.StructureName}!=NULL){{\n");
-            streamText.Append($"        {myStructure.StructureName}->{aParam.NameParameter} = {aParam.NameParameter};\n");
-            streamText.Append($"        isError = 0;\n    }}\n");
-            streamText.Append($"    return isError;\n}}\n\n");
-        }
-
-        /// <summary>
-        /// Creates the setter of parameters that are a char's array type
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="paramA">A parameter to extract its data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        private void CreateSettersWithCharInFile(Structure myStructure, Parameter paramA, StringBuilder streamText)
-        {
-            streamText.Append($"int {myStructure.AliasName}_set{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter}){{\n");
-            streamText.Append($"    int isError = 1;\n");
-            streamText.Append($"    if({myStructure.StructureName}!=NULL){{\n");
-            streamText.Append($"        strcpy({myStructure.StructureName}->{paramA.NameParameter},{paramA.NameParameter});\n");
-            streamText.Append($"        isError = 0;\n    }}\n");
-            streamText.Append($"    return isError;\n}}\n\n");
-        }
-
-        /// <summary>
-        /// 
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="paramA">A parameter to extract its data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        /// <param name="packsDone">Amount of steps done.</param>
-        /// <param name="fullPackSize">Amount of total steps to do.</param>
-        /// <returns>The amount of steps done.</returns>
-        protected override short CreateSetter(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
-        {
-            if (paramA.LengthParameter == 1)
-            {
-                CreateSettersNoCharInFile(myStructure, paramA, streamText);
-            }
-            else if (paramA.TypeParameter.Equals("char"))
-            {
-                CreateSettersWithCharInFile(myStructure, paramA, streamText);
-            }
-
-            return packsDone;
-        }
-
-        /// <summary>
-        /// Creates the setters of all the parameters of the structure.
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        /// <param name="packsDone">Amount of steps done.</param>
-        /// <param name="fullPackSize">Amount of total steps to do.</param>
-        /// <returns>The amount of steps done.</returns>
-        private short CreateSetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
-        {
-            foreach (Parameter aParam in myStructure.ListParamaters)
-            {
-                packsDone = CreateSetter(myStructure, aParam, streamText, packsDone, fullPackSize);
-            }
-            packsDone++;
-            ConsolePrinter.ShowProgress(fullPackSize, packsDone);
-
-            return packsDone;
-        }
-
-        #endregion
-
-        #region CreateGetterSetter
-
-        protected override short CreateGettersAndSetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
-        {
-            throw new System.NotImplementedException();
         }
 
         #endregion
@@ -452,7 +189,7 @@ namespace Entities.FileBuilders
         }
 
         /// <summary>
-        /// 
+        /// Creates the nesessary infrastructure for the function 'ShowAll'.
         /// </summary>
         /// <param name="myStructure">Structure to extract the data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
@@ -468,8 +205,8 @@ namespace Entities.FileBuilders
             streamText.Append($"    length = ll_len(this);\n");
             streamText.Append($"    if(length>0){{\n");
             streamText.Append($"        printf(\"");
-            
-            foreach(Parameter myParam in myStructure.ListParamaters)
+
+            foreach (Parameter myParam in myStructure.ListParamaters)
             {
                 streamText.Append($"{myParam.NameParameter}");
 
@@ -493,12 +230,12 @@ namespace Entities.FileBuilders
 
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
-            
+
             return packsDone;
         }
 
         /// <summary>
-        /// 
+        /// This one Creates the nesessary infrastructure for the function 'ShowAll'.
         /// </summary>
         /// <param name="myStructure">Structure to extract the data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
@@ -516,32 +253,375 @@ namespace Entities.FileBuilders
 
         #region CreateBasicStructureFunctions
 
+        /// <summary>
+        /// Creates the basic functions such as Constructors, Show and ShowAll.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        /// <param name="packsDone">Amount of steps done.</param>
+        /// <param name="fullPackSize">Amount of total steps to do.</param>
+        /// <returns>The amount of steps done.</returns>
         protected override short CreateBasicStructFunctions(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
         {
-            throw new System.NotImplementedException();
+            // Empty builder
+            packsDone = CreateBuilderEmpty(myStructure, streamText, packsDone, fullPackSize);
+
+            // Builder with params.
+            CreateBuilderWithParams(myStructure, streamText, packsDone, fullPackSize);
+
+            // Show one
+            packsDone = ShowOneEntity(myStructure, streamText, packsDone, fullPackSize);
+
+            // Show All
+            packsDone = ShowAllEntities(myStructure, streamText, packsDone, fullPackSize);
+
+            return packsDone;
         }
 
         #endregion
 
-        #region AddParametersToStructure
+        #region CreateComparers
 
-        protected override void AddParameterIntoConstructor(Structure myStructure, Parameter myParam, StringBuilder streamText)
+        /// <summary>
+        /// Creates the comparer of parameters that are a char's array type
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="aParam">A parameter to extract its data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        private void CreateCompareWithChar(Structure myStructure, Parameter aParam, StringBuilder streamText)
         {
-            throw new System.NotImplementedException();
+            streamText.Append($"// For use in a sort function - Compare {myStructure.StructureName}->{aParam.NameParameter}\n");
+            streamText.Append($"int {myStructure.AliasName}_compare{aParam.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2){{\n");
+            streamText.Append($"    int anw;\n");
+            // First variable
+            streamText.Append($"    {aParam.TypeParameter} {aParam.NameParameter}1_1[{aParam.LengthParameter}];\n");
+            // Second variable
+            streamText.Append($"    {aParam.TypeParameter} {aParam.NameParameter}2_2[{aParam.LengthParameter}];\n\n");
+            // First getter
+            streamText.Append($"    {myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}1, {aParam.NameParameter}1_1);\n");
+            // Second getter
+            streamText.Append($"    {myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}2, {aParam.NameParameter}2_2);\n\n");
+            streamText.Append($"    anw = strcmp({aParam.NameParameter}1_1,{aParam.NameParameter}2_2);\n");
+            streamText.Append($"    return anw;\n}}\n\n");
         }
 
-        protected override void AddParametersToConstructor(Structure myStructure, StringBuilder streamText)
+        /// <summary>
+        /// Creates the comparer of parameters that aren't a char's array type
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="aParam">A parameter to extract its data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        private void CreateCompareWithoutChar(Structure myStructure, Parameter aParam, StringBuilder streamText)
         {
-            throw new System.NotImplementedException();
+            streamText.Append($"// For use in a sort function - Compare {myStructure.StructureName}->{aParam.NameParameter}\n");
+            streamText.Append($"int {myStructure.AliasName}_compare{aParam.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2){{\n");
+            streamText.Append($"    int anw = 0;\n");
+            // First variable
+            streamText.Append($"    {aParam.TypeParameter} {aParam.NameParameter}1_1;\n");
+            // Second variable
+            streamText.Append($"    {aParam.TypeParameter} {aParam.NameParameter}2_2;\n\n");
+            // First getter
+            streamText.Append($"    {myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}1, &{aParam.NameParameter}1_1);\n");
+            // Second getter
+            streamText.Append($"    {myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}2, &{aParam.NameParameter}2_2);\n");
+            // Comparator Area
+            streamText.Append($"    if({aParam.NameParameter}1_1>{aParam.NameParameter}2_2){{\n");
+            streamText.Append($"        anw=1;\n    }}\n");
+            streamText.Append($"    else if({aParam.NameParameter}1_1<{aParam.NameParameter}2_2){{\n");
+            streamText.Append($"        anw=-1;\n    }}\n");
+            streamText.Append($"    return anw;\n}}\n\n");
+        }
+
+        /// <summary>
+        /// Creates the Comparer of the file.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="paramA">Parameter to extract info to make a part of the function's sign.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        /// <param name="packsDone">Amount of steps done.</param>
+        /// <param name="fullPackSize">Amount of total steps to do.</param>
+        /// <returns>The amount of steps done.</returns>
+        protected override short CreateComparer(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            if (paramA.LengthParameter == 1)
+            {
+                CreateCompareWithoutChar(myStructure, paramA, streamText);
+            }
+            else if (paramA.TypeParameter.Equals("char"))
+            {
+                CreateCompareWithChar(myStructure, paramA, streamText);
+            }
+
+            return packsDone;
+        }
+
+        /// <summary>
+        /// Creates the comparers of all the parameters of the structure.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        /// <param name="packsDone">Amount of steps done.</param>
+        /// <param name="fullPackSize">Amount of total steps to do.</param>
+        /// <returns>The amount of steps done.</returns>
+        private short CreateComparers(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            foreach (Parameter aParam in myStructure.ListParamaters)
+            {
+                packsDone = CreateComparer(myStructure, aParam, streamText, packsDone, fullPackSize);
+            }
+            packsDone++;
+            ConsolePrinter.ShowProgress(fullPackSize, packsDone);
+
+            return packsDone;
+        }
+
+        #endregion
+
+        #region CreateGetters
+
+        /// <summary>
+        /// Creates the getters of parameters that aren't a char's array type
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="paramA">A parameter to extract its data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        private void CreateGettersNoCharInFile(Structure myStructure, Parameter paramA, StringBuilder streamText)
+        {
+            streamText.Append($"int {myStructure.AliasName}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter}){{\n");
+            streamText.Append($"    int isError = 1;\n");
+            streamText.Append($"    if({myStructure.StructureName}!=NULL){{\n");
+            streamText.Append($"        *{paramA.NameParameter} = {myStructure.StructureName}->{paramA.NameParameter};\n");
+            streamText.Append($"        isError = 0;\n    }}\n");
+            streamText.Append($"    return isError;\n}}\n\n");
+        }
+
+        /// <summary>
+        /// Creates the getters of parameters that are a char's array type
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="aParam">A parameter to extract its data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        private void CreateGettersWithCharInFile(Structure myStructure, Parameter paramA, StringBuilder streamText)
+        {
+            streamText.Append($"int {myStructure.AliasName}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter}){{\n");
+            streamText.Append($"    int isError = 1;\n");
+            streamText.Append($"    if({myStructure.StructureName}!=NULL){{\n");
+            streamText.Append($"        strcpy({paramA.NameParameter},{myStructure.StructureName}->{paramA.NameParameter});\n");
+            streamText.Append($"        isError = 0;\n    }}\n");
+            streamText.Append($"    return isError;\n}}\n\n");
+        }
+
+        /// <summary>
+        /// Creates the Getter of the file.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="paramA"></param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        /// <param name="packsDone">Amount of steps done.</param>
+        /// <param name="fullPackSize">Amount of total steps to do.</param>
+        /// <returns>The amount of steps done.</returns>
+        protected override short CreateGetter(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            if (paramA.LengthParameter == 1)
+            {
+                CreateGettersNoCharInFile(myStructure, paramA, streamText);
+            }
+            else if (paramA.TypeParameter.Equals("char"))
+            {
+                CreateGettersWithCharInFile(myStructure, paramA, streamText);
+            }
+
+            return packsDone;
+        }
+
+        /// <summary>
+        /// Creates the getters of all the parameters of the structure.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        /// <param name="packsDone">Amount of steps done.</param>
+        /// <param name="fullPackSize">Amount of total steps to do.</param>
+        /// <returns>The amount of steps done.</returns>
+        private short CreateGetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            foreach (Parameter aParam in myStructure.ListParamaters)
+            {
+                packsDone = CreateGetter(myStructure, aParam, streamText, packsDone, fullPackSize);
+            }
+            packsDone++;
+            ConsolePrinter.ShowProgress(fullPackSize, packsDone);
+
+            return packsDone;
+        }
+
+        #endregion
+
+        #region CreateSetters
+
+        /// <summary>
+        /// Creates the setters of parameters that aren't a char's array type
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="aParam">A parameter to extract its data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        private void CreateSettersNoCharInFile(Structure myStructure, Parameter aParam, StringBuilder streamText)
+        {
+            streamText.Append($"int {myStructure.AliasName}_set{aParam.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {aParam.TypeParameter} {aParam.NameParameter}){{\n");
+            streamText.Append($"    int isError = 1;\n");
+            streamText.Append($"    if({myStructure.StructureName}!=NULL){{\n");
+            streamText.Append($"        {myStructure.StructureName}->{aParam.NameParameter} = {aParam.NameParameter};\n");
+            streamText.Append($"        isError = 0;\n    }}\n");
+            streamText.Append($"    return isError;\n}}\n\n");
+        }
+
+        /// <summary>
+        /// Creates the setter of parameters that are a char's array type
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="paramA">A parameter to extract its data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        private void CreateSettersWithCharInFile(Structure myStructure, Parameter paramA, StringBuilder streamText)
+        {
+            streamText.Append($"int {myStructure.AliasName}_set{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter}){{\n");
+            streamText.Append($"    int isError = 1;\n");
+            streamText.Append($"    if({myStructure.StructureName}!=NULL){{\n");
+            streamText.Append($"        strcpy({myStructure.StructureName}->{paramA.NameParameter},{paramA.NameParameter});\n");
+            streamText.Append($"        isError = 0;\n    }}\n");
+            streamText.Append($"    return isError;\n}}\n\n");
+        }
+
+        /// <summary>
+        /// Creates the Setter of the file.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="paramA"></param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        /// <param name="packsDone">Amount of steps done.</param>
+        /// <param name="fullPackSize">Amount of total steps to do.</param>
+        /// <returns>The amount of steps done.</returns>
+        protected override short CreateSetter(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            if (paramA.LengthParameter == 1)
+            {
+                CreateSettersNoCharInFile(myStructure, paramA, streamText);
+            }
+            else if (paramA.TypeParameter.Equals("char"))
+            {
+                CreateSettersWithCharInFile(myStructure, paramA, streamText);
+            }
+
+            return packsDone;
+        }
+
+        /// <summary>
+        /// Creates the setters of all the parameters of the structure.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        /// <param name="packsDone">Amount of steps done.</param>
+        /// <param name="fullPackSize">Amount of total steps to do.</param>
+        /// <returns>The amount of steps done.</returns>
+        private short CreateSetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            foreach (Parameter aParam in myStructure.ListParamaters)
+            {
+                packsDone = CreateSetter(myStructure, aParam, streamText, packsDone, fullPackSize);
+            }
+            packsDone++;
+            ConsolePrinter.ShowProgress(fullPackSize, packsDone);
+
+            return packsDone;
+        }
+
+        #endregion
+
+        #region CreateGetterSetter
+
+        /// <summary>
+        /// Creates the Comparers, Getter and Setter of the file.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        /// <param name="packsDone">Amount of steps done.</param>
+        /// <param name="fullPackSize">Amount of total steps to do.</param>
+        /// <returns>The amount of steps done.</returns>
+        protected override short CreateGettersAndSetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize)
+        {
+            streamText.Append($"// ## {myStructure.FinalStructureName}: GETTERS\n");
+
+            foreach (Parameter aParam in myStructure.ListParamaters)
+            {
+                // Create Getters
+                packsDone = CreateGetter(myStructure, aParam, streamText, packsDone, fullPackSize);
+            }
+            streamText.Append("\n");
+
+            streamText.Append($"// ## {myStructure.FinalStructureName}: SETTERS\n");
+            foreach (Parameter aParam in myStructure.ListParamaters)
+            {
+                // Create Setters
+                packsDone = CreateSetter(myStructure, aParam, streamText, packsDone, fullPackSize);
+            }
+            streamText.Append("\n");
+
+            streamText.Append($"// ## {myStructure.FinalStructureName}: COMPARERS\n");
+            foreach (Parameter aParam in myStructure.ListParamaters)
+            {
+                // Create Comparators
+                packsDone = CreateComparer(myStructure, aParam, streamText, packsDone, fullPackSize);
+            }
+            streamText.Append("\n");
+
+            return packsDone;
         }
 
         #endregion
 
         #region FileMaker
 
+        /// <summary>
+        /// Creates and Writes the '.c' file.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="packsDone">Amount of steps done.</param>
+        /// <param name="fullPackSize">Amount of total steps to do.</param>
+        /// <returns>The amount of steps done.</returns>
         public override short FileMaker(Structure myStructure, short packsDone, short fullPackSize)
         {
-            throw new System.NotImplementedException();
+            TextWriter pFileDotC = new StreamWriter($"{myStructure.FinalStructureName}.c");
+            try
+            {
+                StringBuilder dataMaker = new StringBuilder();
+                string curFile = $"{myStructure.FinalStructureName}.c";
+
+                packsDone = CreateBasicStructFunctions(myStructure, dataMaker, packsDone, fullPackSize);
+                packsDone = CreateGettersAndSetters(myStructure, dataMaker, packsDone, fullPackSize);
+
+                if (File.Exists(curFile))
+                {
+                    // if not exist, creates the file.
+                    pFileDotC.Write(dataMaker);
+                }
+                
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e.StackTrace);
+            }
+            // Here we close the file if there is an error or not.
+            try
+            {
+                if (!(pFileDotC is null))
+                {
+                    pFileDotC.Close();
+                }
+            }
+            catch (Exception e2)
+            {
+                Console.WriteLine(e2.StackTrace);
+            }
+
+            return packsDone;
         }
 
         #endregion

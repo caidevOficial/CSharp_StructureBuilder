@@ -32,7 +32,6 @@ namespace Entities.FileBuilders
 {
     public sealed class CreatorDotH: Creator
     {
-
         public CreatorDotH() { }
 
         #region CreateStructure
@@ -322,7 +321,7 @@ namespace Entities.FileBuilders
                 StringBuilder dataMaker = new StringBuilder();
                 string curFile = $"{myStructure.FinalStructureName}.h";
 
-                Console.WriteLine($"auxStrName: {myStructure.FinalStructureName}");
+                Console.WriteLine($"Final Structure Name: {myStructure.FinalStructureName}");
                 //Console.WriteLine(File.Exists(curFile) ? "File exists." : "File does not exist.");
                 Console.WriteLine($"\nAmount of steps: {fullPackSize}\nActions completed: {packsDone}\n");
 
@@ -350,7 +349,7 @@ namespace Entities.FileBuilders
             }
             catch (Exception e)
             {
-                //e.printStackTrace();
+                Console.WriteLine(e.StackTrace);
             }
             finally
             {
@@ -364,7 +363,7 @@ namespace Entities.FileBuilders
                 }
                 catch (Exception e2)
                 {
-                    //e2.printStackTrace();
+                    Console.WriteLine(e2.StackTrace);
                 }
             }
 
