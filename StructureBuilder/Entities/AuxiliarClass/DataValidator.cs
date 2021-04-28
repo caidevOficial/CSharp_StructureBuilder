@@ -24,10 +24,8 @@
 
 using System;
 
-namespace Entities.AuxiliarClass
-{
-    public sealed class DataValidator
-    {
+namespace Entities.AuxiliarClass {
+    public sealed class DataValidator {
 
         #region Validator
 
@@ -36,14 +34,12 @@ namespace Entities.AuxiliarClass
         /// </summary>
         /// <param name="message">Message to show in console.</param>
         /// <returns>true if the answer is 'y', otherwise returns false.</returns>
-        public static bool ValidateAnswer(string message)
-        {
+        public static bool ValidateAnswer(string message) {
             string answerFromUser;
             Console.Write(message);
             answerFromUser = Console.ReadLine().Trim();
 
-            if (answerFromUser.Equals("y"))
-            {
+            if (answerFromUser.Equals("y")) {
                 return true;
             }
 

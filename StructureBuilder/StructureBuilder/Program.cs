@@ -27,12 +27,9 @@ using Entities.Entities;
 using Entities.FileBuilders;
 using System;
 
-namespace StructureBuilder
-{
-    class Program
-    {
-        static void Main(string[] args)
-        {
+namespace StructureBuilder {
+    class Program {
+        static void Main(string[] args) {
             CreatorDotH makerH = new CreatorDotH();
             CreatorDotC makerC = new CreatorDotC();
             Structure myStructure = new Structure();

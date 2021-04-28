@@ -24,10 +24,8 @@
 
 using Entities.AuxiliarClass;
 
-namespace Entities.Entities
-{
-    public sealed class Parameter
-    {
+namespace Entities.Entities {
+    public sealed class Parameter {
         private short idParameter;
         private int lengthParameter;
         private string typeParameter;
@@ -45,8 +43,7 @@ namespace Entities.Entities
         /// Builds the entity with the id.
         /// </summary>
         /// <param name="idParameter">ID/PK of the entity.</param>
-        public Parameter(short idParameter) : this()
-        {
+        public Parameter(short idParameter) : this() {
             IdParameter = idParameter;
         }
 
@@ -55,8 +52,7 @@ namespace Entities.Entities
         /// </summary>
         /// <param name="idParameter">ID/PK of the entity.</param>
         /// /// <param name="nameParameter">Name of the parameter.</param>
-        public Parameter(short idParameter, string nameParameter) : this(idParameter)
-        {
+        public Parameter(short idParameter, string nameParameter) : this(idParameter) {
             this.NameParameter = nameParameter;
         }
 
@@ -66,8 +62,7 @@ namespace Entities.Entities
         /// <param name="idParameter">ID/PK of the entity.</param>
         /// <param name="nameParameter">Name of the parameter.</param>
         /// <param name="typeParameter">Type of the parameter.</param>
-        public Parameter(short idParameter, string nameParameter, string typeParameter) : this(idParameter, nameParameter)
-        {
+        public Parameter(short idParameter, string nameParameter, string typeParameter) : this(idParameter, nameParameter) {
             this.TypeParameter = typeParameter;
         }
 
@@ -78,8 +73,7 @@ namespace Entities.Entities
         /// <param name="nameParameter">Name of the parameter.</param>
         /// <param name="typeParameter">Type of the parameter.</param>
         /// <param name="lengthParameter">Length of the parameter.</param>
-        public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter) : this(idParameter, nameParameter, typeParameter)
-        {
+        public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter) : this(idParameter, nameParameter, typeParameter) {
             this.LengthParameter = lengthParameter;
         }
 
@@ -91,8 +85,7 @@ namespace Entities.Entities
         /// <param name="typeParameter">Type of the parameter.</param>
         /// <param name="lengthParameter">Length of the parameter.</param>
         /// <param name="aliasNameParameter">Alias - Short name of the parameter.</param>
-        public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter, string aliasNameParameter) : this(idParameter, nameParameter, typeParameter, lengthParameter)
-        {
+        public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter, string aliasNameParameter) : this(idParameter, nameParameter, typeParameter, lengthParameter) {
             this.AliasNameParameter = aliasNameParameter;
         }
 
@@ -104,13 +97,10 @@ namespace Entities.Entities
         /// Get: Gets the type of the parameter.
         /// Set: Sets the type of the parameter.
         /// </summary>
-        public string TypeParameter
-        {
+        public string TypeParameter {
             get => typeParameter;
-            set
-            {
-                if (!(value is null))
-                {
+            set {
+                if (!(value is null)) {
                     typeParameter = value;
                 }
             }
@@ -120,13 +110,10 @@ namespace Entities.Entities
         /// Get: Gets the name of the parameter.
         /// Set: Sets the name of the parameter.
         /// </summary>
-        public string NameParameter
-        {
+        public string NameParameter {
             get => nameParameter;
-            set
-            {
-                if (!(value is null))
-                {
+            set {
+                if (!(value is null)) {
                     nameParameter = value;
                 }
             }
@@ -136,13 +123,10 @@ namespace Entities.Entities
         /// Get: Gets the alias of the parameter.
         /// Set: Sets the alias of the parameter.
         /// </summary>
-        public string AliasNameParameter
-        {
+        public string AliasNameParameter {
             get => aliasNameParameter;
-            set
-            {
-                if (!(value is null))
-                {
+            set {
+                if (!(value is null)) {
                     aliasNameParameter = DataCollector.ParameterAliasCollector(value);
                 }
             }
@@ -152,13 +136,10 @@ namespace Entities.Entities
         /// Get: Gets the length of the parameter.
         /// Set: Sets the length of the parameter.
         /// </summary>
-        public int LengthParameter
-        {
+        public int LengthParameter {
             get => lengthParameter;
-            set
-            {
-                if (value > 0)
-                {
+            set {
+                if (value > 0) {
                     lengthParameter = value;
                 }
             }
@@ -168,13 +149,10 @@ namespace Entities.Entities
         /// Get: Gets the id of the parameter.
         /// Set: Sets the id of the parameter.
         /// </summary>
-        public short IdParameter
-        {
+        public short IdParameter {
             get => idParameter;
-            set
-            {
-                if (value > 0)
-                {
+            set {
+                if (value > 0) {
                     idParameter = value;
                 }
             }
@@ -190,8 +168,7 @@ namespace Entities.Entities
         /// <param name="p1">First parameter to check.</param>
         /// <param name="p2">Second parameter to check.</param>
         /// <returns>True if both are equals, otherwise returns false.</returns>
-        public static bool operator ==(Parameter p1, Parameter p2)
-        {
+        public static bool operator ==(Parameter p1, Parameter p2) {
             return p1.IdParameter == p2.IdParameter;
         }
 
@@ -201,8 +178,7 @@ namespace Entities.Entities
         /// <param name="p1">First parameter to check.</param>
         /// <param name="p2">Second parameter to check.</param>
         /// <returns>True if both aren't equals, otherwise returns false.</returns>
-        public static bool operator !=(Parameter p1, Parameter p2)
-        {
+        public static bool operator !=(Parameter p1, Parameter p2) {
             return !(p1 == p2);
         }
 

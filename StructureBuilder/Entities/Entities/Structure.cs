@@ -25,10 +25,8 @@
 using Entities.AuxiliarClass;
 using System.Collections.Generic;
 
-namespace Entities.Entities
-{
-    public sealed class Structure
-    {
+namespace Entities.Entities {
+    public sealed class Structure {
         private string structureName;
         private string finalStructureName;
         private string aliasShortName;
@@ -39,8 +37,7 @@ namespace Entities.Entities
         /// <summary>
         /// Initializes the list of parameters.
         /// </summary>
-        public Structure()
-        {
+        public Structure() {
             listOfParameters = new List<Parameter>();
         }
 
@@ -48,8 +45,7 @@ namespace Entities.Entities
         /// Builds the entity with the name.
         /// </summary>
         /// <param name="structureName">Name of the entity.</param>
-        public Structure(string structureName) : this()
-        {
+        public Structure(string structureName) : this() {
             StructureName = structureName;
         }
 
@@ -58,8 +54,7 @@ namespace Entities.Entities
         /// </summary>
         /// <param name="structureName">Name of the entity.</param>
         /// <param name="aliasShortName">Short Name (Alias) of the entity.</param>
-        public Structure(string structureName, string aliasShortName) : this(structureName)
-        {
+        public Structure(string structureName, string aliasShortName) : this(structureName) {
             AliasName = aliasShortName;
         }
 
@@ -69,8 +64,7 @@ namespace Entities.Entities
         /// <param name="structureName">Name of the entity.</param>
         /// <param name="aliasShortName">Short Name (Alias) of the entity.</param>
         /// <param name="finalStructureName">Final name of the entity, it will have an 's' at the beginning of the name.</param>
-        public Structure(string structureName, string aliasShortName, string finalStructureName) : this(structureName, aliasShortName)
-        {
+        public Structure(string structureName, string aliasShortName, string finalStructureName) : this(structureName, aliasShortName) {
             FinalStructureName = finalStructureName;
         }
 
@@ -81,8 +75,7 @@ namespace Entities.Entities
         /// <summary>
         /// Get: Gets the list of parameters of the entity.
         /// </summary>
-        public List<Parameter> ListParamaters
-        {
+        public List<Parameter> ListParamaters {
             get => listOfParameters;
         }
 
@@ -90,13 +83,10 @@ namespace Entities.Entities
         /// Get: Gets the name of the entity.
         /// Set: Sets the name of the entity.
         /// </summary>
-        public string StructureName
-        {
+        public string StructureName {
             get => structureName;
-            set
-            {
-                if (!(value is null))
-                {
+            set {
+                if (!(value is null)) {
                     structureName = value;
                 }
             }
@@ -106,13 +96,10 @@ namespace Entities.Entities
         /// Get: Gets the final name of the entity.
         /// Set: Sets the final name of the entity.
         /// </summary>
-        public string FinalStructureName
-        {
+        public string FinalStructureName {
             get => finalStructureName;
-            set
-            {
-                if (!(value is null))
-                {
+            set {
+                if (!(value is null)) {
                     finalStructureName = "s" + value;
                 }
             }
@@ -122,13 +109,10 @@ namespace Entities.Entities
         /// Get: Gets the alias of the entity.
         /// Set: Sets the alias of the entity.
         /// </summary>
-        public string AliasName
-        {
+        public string AliasName {
             get => aliasShortName;
-            set
-            {
-                if (!(value is null))
-                {
+            set {
+                if (!(value is null)) {
                     aliasShortName = DataCollector.StructureAliasCollector(value);
                 }
             }
@@ -144,14 +128,10 @@ namespace Entities.Entities
         /// <param name="s1">Structure to check its list of parameters.</param>
         /// <param name="p1">Parameter to verify if is inside the list of the structure.</param>
         /// <returns>True if the parameter is in the list, otherwise returns false.</returns>
-        public static bool operator ==(Structure s1, Parameter p1)
-        {
-            if (!(s1 is null || p1 is null))
-            {
-                foreach (Parameter aParameter in s1.ListParamaters)
-                {
-                    if (p1 == aParameter)
-                    {
+        public static bool operator ==(Structure s1, Parameter p1) {
+            if (!(s1 is null || p1 is null)) {
+                foreach (Parameter aParameter in s1.ListParamaters) {
+                    if (p1 == aParameter) {
                         return true;
                     }
                 }
@@ -166,8 +146,7 @@ namespace Entities.Entities
         /// <param name="s1">Structure to check its list of parameters.</param>
         /// <param name="p1">Parameter to verify if isn't inside the list of the structure.</param>
         /// <returns>True if the parameter isn't in the list, otherwise returns false.</returns>
-        public static bool operator !=(Structure s1, Parameter p1)
-        {
+        public static bool operator !=(Structure s1, Parameter p1) {
             return !(s1 == p1);
         }
 
@@ -177,12 +156,9 @@ namespace Entities.Entities
         /// <param name="s1">Structure to check its list of parameters.</param>
         /// <param name="p1">Parameter to try to add in the list of the structure.</param>
         /// <returns></returns>
-        public static bool operator +(Structure s1, Parameter p1)
-        {
-            if (!(s1 is null) && !(p1 is null))
-            {
-                if (!(s1 == p1))
-                {
+        public static bool operator +(Structure s1, Parameter p1) {
+            if (!(s1 is null) && !(p1 is null)) {
+                if (!(s1 == p1)) {
                     s1.AddParameter(p1);
                     return true;
                 }
@@ -199,8 +175,7 @@ namespace Entities.Entities
         /// Adds a parameter in the list of parameters of the structure.
         /// </summary>
         /// <param name="p1">Parameter to add in the list.</param>
-        private void AddParameter(Parameter p1)
-        {
+        private void AddParameter(Parameter p1) {
             this.listOfParameters.Add(p1);
         }
 

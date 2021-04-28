@@ -25,10 +25,8 @@
 using Entities.Entities;
 using System.Text;
 
-namespace Entities.FileBuilders
-{
-    public abstract class Creator
-    {
+namespace Entities.FileBuilders {
+    public abstract class Creator {
         public Creator() { }
 
         /// <summary>

@@ -28,10 +28,8 @@ using Entities.FileBuilders;
 using System;
 using System.Windows.Forms;
 
-namespace StructureBuilder_Form
-{
-    public partial class StructureBuilder : Form
-    {
+namespace StructureBuilder_Form {
+    public partial class StructureBuilder : Form {
         private static Structure myStructure;
         private Parameter myParameter;
         private CreatorDotH makerH = new CreatorDotH();
@@ -43,8 +41,7 @@ namespace StructureBuilder_Form
 
         #region Builder
 
-        public StructureBuilder()
-        {
+        public StructureBuilder() {
             InitializeComponent();
             myStructure = new Structure();
             myParameter = new Parameter();
@@ -67,15 +64,11 @@ namespace StructureBuilder_Form
 
         #region CheckButtons
 
-        private void chkSecondParam_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkSecondParam.Checked is true)
-            {
+        private void chkSecondParam_CheckedChanged(object sender, EventArgs e) {
+            if (chkSecondParam.Checked is true) {
                 grpSecondParam.Enabled = true;
                 chkThirdParam.Enabled = true;
-            }
-            else
-            {
+            } else {
                 grpSecondParam.Enabled = false;
                 grpThirdParam.Enabled = false;
                 grpFourthParam.Enabled = false;
@@ -85,15 +78,11 @@ namespace StructureBuilder_Form
             }
         }
 
-        private void chkThirdParam_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkThirdParam.Checked is true)
-            {
+        private void chkThirdParam_CheckedChanged(object sender, EventArgs e) {
+            if (chkThirdParam.Checked is true) {
                 grpThirdParam.Enabled = true;
                 chkFourthParam.Enabled = true;
-            }
-            else
-            {
+            } else {
                 grpThirdParam.Enabled = false;
                 grpFourthParam.Enabled = false;
 
@@ -101,14 +90,10 @@ namespace StructureBuilder_Form
             }
         }
 
-        private void chkFourthParam_CheckedChanged(object sender, EventArgs e)
-        {
-            if (chkFourthParam.Checked is true)
-            {
+        private void chkFourthParam_CheckedChanged(object sender, EventArgs e) {
+            if (chkFourthParam.Checked is true) {
                 grpFourthParam.Enabled = true;
-            }
-            else
-            {
+            } else {
                 grpFourthParam.Enabled = false;
             }
         }
@@ -125,17 +110,13 @@ namespace StructureBuilder_Form
         /// <param name="typeParameter">type of the parameter.</param>
         /// <param name="lengthParameter">length of the parameter.</param>
         /// <returns>Returns the parameter.</returns>
-        private Parameter CreateParameter(Parameter myParameter, string nameParameter, string typeParameter, string lengthParameter)
-        {
+        private Parameter CreateParameter(Parameter myParameter, string nameParameter, string typeParameter, string lengthParameter) {
             myParameter.NameParameter = nameParameter.Trim().Replace(" ", "");
             myParameter.AliasNameParameter = myParameter.NameParameter;
             myParameter.TypeParameter = typeParameter;
-            if (int.TryParse(lengthParameter, out int paramLength))
-            {
+            if (int.TryParse(lengthParameter, out int paramLength)) {
                 myParameter.LengthParameter = paramLength;
-            }
-            else
-            {
+            } else {
                 myParameter.LengthParameter = 1;
             }
 
@@ -152,8 +133,7 @@ namespace StructureBuilder_Form
         /// <param name="myStructure">Structure to add the parameter.</param>
         /// <param name="myParameter">Parameter to add into the list of parameters of the structure.</param>
         /// <returns>The structure with the parameter inside its list of parameters.</returns>
-        private void AddParameterToStructure(Structure myStructure, Parameter myParameter)
-        {
+        private void AddParameterToStructure(Structure myStructure, Parameter myParameter) {
             myStructure.ListParamaters.Add(myParameter);
         }
 
@@ -165,14 +145,10 @@ namespace StructureBuilder_Form
         /// Creates the structure with one parameter inside its list.
         /// </summary>
         /// <returns>True if can create the entity, otherwise returns false.</returns>
-        private bool CreateStructure()
-        {
-            if (String.IsNullOrWhiteSpace(txtFirstParamName.Text) || String.IsNullOrWhiteSpace(txtFirstParamLenght.Text))
-            {
+        private bool CreateStructure() {
+            if (String.IsNullOrWhiteSpace(txtFirstParamName.Text) || String.IsNullOrWhiteSpace(txtFirstParamLenght.Text)) {
                 MessageBox.Show("There are at least one field empty, fix that!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
+            } else {
                 //Set structure
                 myStructure.StructureName = txtStructureName.Text.Trim().Replace(" ", "");
                 myStructure.AliasName = myStructure.StructureName;
@@ -192,8 +168,7 @@ namespace StructureBuilder_Form
 
         #region CreateFile
 
-        private void CreateFiles(Structure myStructure, short packsDone, short fullPackSize)
-        {
+        private void CreateFiles(Structure myStructure, short packsDone, short fullPackSize) {
             packsDone = makerH.FileMaker(myStructure, packsDone, fullPackSize);
             packsDone = makerC.FileMaker(myStructure, packsDone, fullPackSize);
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
@@ -203,41 +178,30 @@ namespace StructureBuilder_Form
 
         #region ButtonCreate
 
-        private void btnCreate_Click(object sender, EventArgs e)
-        {
-            if (String.IsNullOrWhiteSpace(txtStructureName.Text))
-            {
+        private void btnCreate_Click(object sender, EventArgs e) {
+            if (String.IsNullOrWhiteSpace(txtStructureName.Text)) {
                 MessageBox.Show("The structure name is empty, fix that!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            else
-            {
-                if (CreateStructure())
-                {
-                    if (chkSecondParam.Checked)
-                    {
+            } else {
+                if (CreateStructure()) {
+                    if (chkSecondParam.Checked) {
                         Parameter secondPa = new Parameter();
-                        if (!String.IsNullOrWhiteSpace(txtSecondParamName.Text) && !String.IsNullOrWhiteSpace(txtSecondParamLenght.Text))
-                        {
+                        if (!String.IsNullOrWhiteSpace(txtSecondParamName.Text) && !String.IsNullOrWhiteSpace(txtSecondParamLenght.Text)) {
                             secondPa = CreateParameter(secondPa, txtSecondParamName.Text, cmbSecondParamType.SelectedItem.ToString(), txtSecondParamLenght.Text);
                             AddParameterToStructure(myStructure, secondPa);
                         }
                     }
 
-                    if (chkThirdParam.Checked)
-                    {
+                    if (chkThirdParam.Checked) {
                         Parameter ThirdPa = new Parameter();
-                        if (!String.IsNullOrWhiteSpace(txtThirdParamName.Text) && !String.IsNullOrWhiteSpace(txtThirdParamLenght.Text))
-                        {
+                        if (!String.IsNullOrWhiteSpace(txtThirdParamName.Text) && !String.IsNullOrWhiteSpace(txtThirdParamLenght.Text)) {
                             ThirdPa = CreateParameter(ThirdPa, txtThirdParamName.Text, cmbThirdParamType.SelectedItem.ToString(), txtThirdParamLenght.Text);
                             AddParameterToStructure(myStructure, ThirdPa);
                         }
                     }
 
-                    if (chkFourthParam.Checked)
-                    {
+                    if (chkFourthParam.Checked) {
                         Parameter fourthPa = new Parameter();
-                        if (!String.IsNullOrWhiteSpace(txtFourthParamName.Text) && !String.IsNullOrWhiteSpace(txtFourthParamLenght.Text))
-                        {
+                        if (!String.IsNullOrWhiteSpace(txtFourthParamName.Text) && !String.IsNullOrWhiteSpace(txtFourthParamLenght.Text)) {
                             fourthPa = CreateParameter(fourthPa, txtFourthParamName.Text, cmbFourthParamType.SelectedItem.ToString(), txtFourthParamLenght.Text);
                             AddParameterToStructure(myStructure, fourthPa);
                         }
@@ -255,53 +219,37 @@ namespace StructureBuilder_Form
 
         #region ComboBoxEvents
 
-        private void cmbFirstParamType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbFirstParamType.SelectedItem.Equals("char"))
-            {
+        private void cmbFirstParamType_SelectedIndexChanged(object sender, EventArgs e) {
+            if (cmbFirstParamType.SelectedItem.Equals("char")) {
                 txtFirstParamLenght.Enabled = true;
-            }
-            else
-            {
+            } else {
                 txtFirstParamLenght.Text = "1";
                 txtFirstParamLenght.Enabled = false;
             }
         }
 
-        private void cmbSecondParamType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbSecondParamType.SelectedItem.Equals("char"))
-            {
+        private void cmbSecondParamType_SelectedIndexChanged(object sender, EventArgs e) {
+            if (cmbSecondParamType.SelectedItem.Equals("char")) {
                 txtSecondParamLenght.Enabled = true;
-            }
-            else
-            {
+            } else {
                 txtSecondParamLenght.Text = "1";
                 txtSecondParamLenght.Enabled = false;
             }
         }
 
-        private void cmbThirdParamType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbThirdParamType.SelectedItem.Equals("char"))
-            {
+        private void cmbThirdParamType_SelectedIndexChanged(object sender, EventArgs e) {
+            if (cmbThirdParamType.SelectedItem.Equals("char")) {
                 txtThirdParamLenght.Enabled = true;
-            }
-            else
-            {
+            } else {
                 txtThirdParamLenght.Text = "1";
                 txtThirdParamLenght.Enabled = false;
             }
         }
 
-        private void cmbFourthParamType_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (cmbFourthParamType.SelectedItem.Equals("char"))
-            {
+        private void cmbFourthParamType_SelectedIndexChanged(object sender, EventArgs e) {
+            if (cmbFourthParamType.SelectedItem.Equals("char")) {
                 txtFourthParamLenght.Enabled = true;
-            }
-            else
-            {
+            } else {
                 txtFourthParamLenght.Text = "1";
                 txtFourthParamLenght.Enabled = false;
             }
@@ -311,17 +259,13 @@ namespace StructureBuilder_Form
 
         #region LockEvent
 
-        private void btnLock_Click(object sender, EventArgs e)
-        {
-            if (!locked)
-            {
+        private void btnLock_Click(object sender, EventArgs e) {
+            if (!locked) {
                 locked = !locked;
                 btnLock.ImageIndex = 1;
                 grpAllComponents.Enabled = false;
                 btnCreate.Enabled = true;
-            }
-            else
-            {
+            } else {
                 locked = !locked;
                 btnLock.ImageIndex = 0;
                 grpAllComponents.Enabled = true;
@@ -338,14 +282,10 @@ namespace StructureBuilder_Form
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void StructureBuilder_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (MessageBox.Show("Do you want to quit?", "Choose Wisely", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
-            {
+        private void StructureBuilder_FormClosing(object sender, FormClosingEventArgs e) {
+            if (MessageBox.Show("Do you want to quit?", "Choose Wisely", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes) {
                 Dispose();
-            }
-            else
-            {
+            } else {
                 e.Cancel = true;
             }
         }
