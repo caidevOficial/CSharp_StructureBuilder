@@ -10,7 +10,7 @@
   <Class Name="StructureBuilder_Form.StructureBuilder">
     <Position X="0.5" Y="0.5" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>AIAxAEAAAChAIBwBNGmAAACGGEAKACCAmAAmAAAIAI4=</HashCode>
+      <HashCode>AIAxAEAAAChAIBwBJGmAAACGGEAKACCAmAAmAAAIAI4=</HashCode>
       <FileName>StructureBuilder_Form.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -24,6 +24,13 @@
     <Position X="3" Y="4.25" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="StructureBuilder_Form.frmException">
+    <Position X="5" Y="0.5" Width="2" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACQAQAAAACCAAAACEBEAAAAACAAAAAAAAAA=</HashCode>
+      <FileName>frmException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -24,6 +24,7 @@
 
 using Entities.Entities;
 using System;
+using System.Text;
 
 namespace Entities.AuxiliarClass {
     public sealed class DataCollector {
@@ -31,7 +32,7 @@ namespace Entities.AuxiliarClass {
         #region StructureName
 
         public static string StructureNameCollector() {
-            string name = "";
+            StringBuilder data = new StringBuilder();
             do {
                 ConsolePrinter.PrintHeader("# Idea in C Language by: Santiago Herrera.\n## Advanced improvement & Development in C# by: CaidevOficial - FacuFalcone.\n", ConsoleColor.Green, ConsoleColor.Yellow);
                 Console.WriteLine("Through this program you'll be asked many times for yes or no.");
@@ -40,24 +41,22 @@ namespace Entities.AuxiliarClass {
                 Console.WriteLine("The saving will only procced after the \"LAST CONFIRMATION\" Question.");
                 Console.WriteLine("(An \"s\" will be added at the beginning) so.. \n");
                 Console.Write("Write the name of the Structure: ");
-                name = Console.ReadLine().Trim();
-                //name = name.Trim();
-
+                data.Append(Console.ReadLine().Trim());
 
             } while (!DataValidator.ValidateAnswer("Are you sure? [y/n]: "));
 
-            return name;
+            return data.ToString();
         }
 
         public static string StructureAliasCollector(string structureName) {
-            string aliasName = string.Empty;
+            StringBuilder data = new StringBuilder();
             structureName = structureName.Trim().ToLower();
             ConsolePrinter.PrintHeader($"Generating data For Structure: {structureName}.", ConsoleColor.Green, ConsoleColor.Yellow);
             ConsolePrinter.PrintSubHeader("Creating Alias For Structure", ConsoleColor.Green, ConsoleColor.Yellow);
-            aliasName = structureName.Substring(0, 1).ToUpper();
-            aliasName += structureName.Substring(1, structureName.Length - 1).ToLower();
+            data.Append(structureName.Substring(0, 1).ToUpper());
+            data.Append(structureName.Substring(1, structureName.Length - 1).ToLower());
 
-            return aliasName;
+            return data.ToString();
         }
 
         #endregion
@@ -65,27 +64,27 @@ namespace Entities.AuxiliarClass {
         #region ParameterName
 
         public static string ParameterNameCollector() {
-            string parameterName = string.Empty;
+            StringBuilder data = new StringBuilder();
             do {
                 ConsolePrinter.PrintHeader("Struct DotH DotC Builder", ConsoleColor.Green, ConsoleColor.Yellow);
                 ConsolePrinter.PrintSubHeader("Step 2: Parameters: [For the structure]", ConsoleColor.Green, ConsoleColor.Yellow);
                 Console.Write("\nWrite the name of the Parameter: ");
-                parameterName = Console.ReadLine().Trim().Replace(" ", "").ToLower();
+                data.Append(Console.ReadLine().Trim().Replace(" ", "").ToLower());
 
             } while (!DataValidator.ValidateAnswer("Are you sure? [y/n]: "));
 
-            return parameterName;
+            return data.ToString();
         }
 
         public static String ParameterAliasCollector(string parameterName) {
-            string aliasParameter = string.Empty;
+            StringBuilder data = new StringBuilder();
             parameterName = parameterName.Trim().ToLower();
             ConsolePrinter.PrintHeader($"Generating data For Parameter: {parameterName}.", ConsoleColor.Green, ConsoleColor.Yellow);
             ConsolePrinter.PrintSubHeader("Creating Alias For Parameter", ConsoleColor.Green, ConsoleColor.Yellow);
-            aliasParameter = parameterName.Substring(0, 1).ToUpper();
-            aliasParameter += parameterName.Substring(1, parameterName.Length - 1).ToLower();
+            data.Append(parameterName.Substring(0, 1).ToUpper());
+            data.Append(parameterName.Substring(1, parameterName.Length - 1).ToLower());
 
-            return aliasParameter;
+            return data.ToString();
         }
 
         #endregion
@@ -125,18 +124,21 @@ namespace Entities.AuxiliarClass {
         }
 
         public static string ParameterTypeCollector(Parameter myParam) {
-            string type = string.Empty;
-            do {
-                ConsolePrinter.PrintHeader("Struct DotH DotC Builder", ConsoleColor.Green, ConsoleColor.Yellow);
-                ConsolePrinter.PrintSubHeader("Step 2: Name of the Parameters: [Select a type of the parameter.]", ConsoleColor.Green, ConsoleColor.Yellow);
-                Console.WriteLine($"\nName of the Parameter: {myParam.NameParameter}\nAlias: {myParam.AliasNameParameter}\n");
-                type = MenuOfTypes();
+            string type = "int";
 
-                while (type.Equals("")) {
-                    ConsolePrinter.PrintHeader("Error, invalid option selected. Please, Try Again.", ConsoleColor.Red, ConsoleColor.Magenta);
+            if (!(myParam is null)) {
+                do {
+                    ConsolePrinter.PrintHeader("Struct DotH DotC Builder", ConsoleColor.Green, ConsoleColor.Yellow);
+                    ConsolePrinter.PrintSubHeader("Step 2: Name of the Parameters: [Select a type of the parameter.]", ConsoleColor.Green, ConsoleColor.Yellow);
+                    Console.WriteLine($"\nName of the Parameter: {myParam.NameParameter}\nAlias: {myParam.AliasNameParameter}\n");
                     type = MenuOfTypes();
-                }
-            } while (!DataValidator.ValidateAnswer("Are you sure? [y/n]: "));
+
+                    while (type.Equals("")) {
+                        ConsolePrinter.PrintHeader("Error, invalid option selected. Please, Try Again.", ConsoleColor.Red, ConsoleColor.Magenta);
+                        type = MenuOfTypes();
+                    }
+                } while (!DataValidator.ValidateAnswer("Are you sure? [y/n]: "));
+            }
 
             return type;
         }
@@ -147,18 +149,20 @@ namespace Entities.AuxiliarClass {
 
         public static short LengthCharCollector(Parameter myParam) {
             int sizeChar = 1;
-            if (myParam.TypeParameter.Equals("char")) {
-                do {
-                    ConsolePrinter.PrintHeader("Struct DotH DotC Builder", ConsoleColor.Green, ConsoleColor.Yellow);
-                    ConsolePrinter.PrintSubHeader("Step 2: Name of the Parameters: [Specify size of the char array]", ConsoleColor.Green, ConsoleColor.Yellow);
-                    Console.Write("\nThe type of the parameter is char, if its a string [char's array] \n"
-                            + "Write the length [Default 1]: ");
-                    int.TryParse(Console.ReadLine(), out sizeChar);
+            if (!(myParam is null)) {
+                if (myParam.TypeParameter.Equals("char")) {
+                    do {
+                        ConsolePrinter.PrintHeader("Struct DotH DotC Builder", ConsoleColor.Green, ConsoleColor.Yellow);
+                        ConsolePrinter.PrintSubHeader("Step 2: Name of the Parameters: [Specify size of the char array]", ConsoleColor.Green, ConsoleColor.Yellow);
+                        Console.Write("\nThe type of the parameter is char, if its a string [char's array] \n"
+                                + "Write the length [Default 1]: ");
+                        int.TryParse(Console.ReadLine(), out sizeChar);
 
-                } while (!DataValidator.ValidateAnswer("Are you sure? [y/n]: "));
+                    } while (!DataValidator.ValidateAnswer("Are you sure? [y/n]: "));
 
-                if (sizeChar <= 0) {
-                    sizeChar = 1;
+                    if (sizeChar <= 0) {
+                        sizeChar = 1;
+                    }
                 }
             }
 
@@ -166,9 +170,11 @@ namespace Entities.AuxiliarClass {
         }
 
         public static bool NeedStringImport(Structure myStructure) {
-            foreach (Parameter aParameter in myStructure.ListParamaters) {
-                if (aParameter.LengthParameter > 1) {
-                    return true;
+            if (!(myStructure is null)) {
+                foreach (Parameter aParameter in myStructure.ListParamaters) {
+                    if (aParameter.LengthParameter > 1) {
+                        return true;
+                    }
                 }
             }
 
@@ -204,27 +210,22 @@ namespace Entities.AuxiliarClass {
             string parameterName = string.Empty;
             string parameterAlias = string.Empty;
 
-            do {
-                myParameter.NameParameter = ParameterNameCollector(); // Set the name
-                myParameter.AliasNameParameter = myParameter.NameParameter; // insert the alias.
-                myParameter.TypeParameter = ParameterTypeCollector(myParameter); // Set the type
-                myParameter.LengthParameter = LengthCharCollector(myParameter); // Set the length
+            if (!(myParameter is null)) {
+                do {
+                    myParameter.NameParameter = ParameterNameCollector(); // Set the name
+                    myParameter.AliasNameParameter = myParameter.NameParameter; // insert the alias.
+                    myParameter.TypeParameter = ParameterTypeCollector(myParameter); // Set the type
+                    myParameter.LengthParameter = LengthCharCollector(myParameter); // Set the length
 
-                //Steart.progHeader("Struct DotH DotC Builder");
-                //Steart.subHeader("Step 2: Name Your Parameters");
-                if (myParameter.TypeParameter.Equals("char")) {
-                    Console.Write($"\nParameter status: \nName: {myParameter.NameParameter}\nAlias: {myParameter.AliasNameParameter}\nType: {myParameter.TypeParameter}[{myParameter.LengthParameter}]\n");
-                    ConsolePrinter.PrintHeader($"Preview: {myParameter.TypeParameter} {myParameter.NameParameter}[{myParameter.LengthParameter}];", ConsoleColor.White, ConsoleColor.Cyan);
-                    //Console.Write($"Preview: {myParameter.TypeParameter} {myParameter.NameParameter}[{myParameter.LengthParameter}];\n");
-                    //ConsolePrinter.PrintSubHeader("############################", ConsoleColor.White, ConsoleColor.Cyan);
-                } else {
-                    Console.Write($"\nParameter status: \nName: {myParameter.NameParameter}\nAlias: {myParameter.AliasNameParameter}\nType: {myParameter.TypeParameter}\n");
-                    ConsolePrinter.PrintHeader($"Preview: {myParameter.TypeParameter} {myParameter.NameParameter};", ConsoleColor.White, ConsoleColor.Cyan);
-                    //Console.Write($"Preview: {myParameter.TypeParameter} {myParameter.NameParameter};\n");
-                    //ConsolePrinter.PrintSubHeader("############################", ConsoleColor.White, ConsoleColor.Cyan);
-                }
-                // Valido que este todo correcto
-            } while (!DataValidator.ValidateAnswer("Is it OK? [y/n]: "));
+                    if (myParameter.TypeParameter.Equals("char")) {
+                        Console.Write($"\nParameter status: \nName: {myParameter.NameParameter}\nAlias: {myParameter.AliasNameParameter}\nType: {myParameter.TypeParameter}[{myParameter.LengthParameter}]\n");
+                        ConsolePrinter.PrintHeader($"Preview: {myParameter.TypeParameter} {myParameter.NameParameter}[{myParameter.LengthParameter}];", ConsoleColor.White, ConsoleColor.Cyan);
+                    } else {
+                        Console.Write($"\nParameter status: \nName: {myParameter.NameParameter}\nAlias: {myParameter.AliasNameParameter}\nType: {myParameter.TypeParameter}\n");
+                        ConsolePrinter.PrintHeader($"Preview: {myParameter.TypeParameter} {myParameter.NameParameter};", ConsoleColor.White, ConsoleColor.Cyan);
+                    }
+                } while (!DataValidator.ValidateAnswer("Is it OK? [y/n]: "));
+            }
         }
 
         public static void AddParameterToStructure(Structure myStructure) {
@@ -245,8 +246,6 @@ namespace Entities.AuxiliarClass {
                     } else {
                         Console.WriteLine($"ERROR: something get wrong while trying to add {myParameter.NameParameter} to the structure. Try again.\n");
                     }
-                    //myStructure.AddParameter(myParameter); // adds the parameter to the LL.
-
                 } while (ContinueAddingParameters() != 0);
             }
         }

@@ -49,18 +49,27 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="StructureBuilder_Form.cs">
+    <Compile Include="Forms\frmException.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="StructureBuilder_Form.Designer.cs">
+    <Compile Include="Forms\frmException.designer.cs">
+      <DependentUpon>frmException.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\StructureBuilder_Form.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\StructureBuilder_Form.Designer.cs">
       <DependentUpon>StructureBuilder_Form.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="StructureBuilder_Form.en-CA.resx">
+    <EmbeddedResource Include="Forms\frmException.resx">
+      <DependentUpon>frmException.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\StructureBuilder_Form.en-CA.resx">
       <DependentUpon>StructureBuilder_Form.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="StructureBuilder_Form.resx">
+    <EmbeddedResource Include="Forms\StructureBuilder_Form.resx">
       <DependentUpon>StructureBuilder_Form.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -72,7 +81,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="DiagramForm.cd" />
+    <None Include="Forms\DiagramForm.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>

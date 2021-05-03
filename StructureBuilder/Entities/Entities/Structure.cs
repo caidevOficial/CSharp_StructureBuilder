@@ -27,10 +27,15 @@ using System.Collections.Generic;
 
 namespace Entities.Entities {
     public sealed class Structure {
+
+        #region Attributes
+
         private string structureName;
         private string finalStructureName;
         private string aliasShortName;
         private List<Parameter> listOfParameters;
+        
+        #endregion
 
         #region Builders
 
@@ -54,7 +59,8 @@ namespace Entities.Entities {
         /// </summary>
         /// <param name="structureName">Name of the entity.</param>
         /// <param name="aliasShortName">Short Name (Alias) of the entity.</param>
-        public Structure(string structureName, string aliasShortName) : this(structureName) {
+        public Structure(string structureName, string aliasShortName) 
+            : this(structureName) {
             AliasName = aliasShortName;
         }
 
@@ -64,7 +70,8 @@ namespace Entities.Entities {
         /// <param name="structureName">Name of the entity.</param>
         /// <param name="aliasShortName">Short Name (Alias) of the entity.</param>
         /// <param name="finalStructureName">Final name of the entity, it will have an 's' at the beginning of the name.</param>
-        public Structure(string structureName, string aliasShortName, string finalStructureName) : this(structureName, aliasShortName) {
+        public Structure(string structureName, string aliasShortName, string finalStructureName) 
+            : this(structureName, aliasShortName) {
             FinalStructureName = finalStructureName;
         }
 
@@ -158,7 +165,7 @@ namespace Entities.Entities {
         /// <returns></returns>
         public static bool operator +(Structure s1, Parameter p1) {
             if (!(s1 is null) && !(p1 is null)) {
-                if (!(s1 == p1)) {
+                if (s1 != p1) {
                     s1.AddParameter(p1);
                     return true;
                 }

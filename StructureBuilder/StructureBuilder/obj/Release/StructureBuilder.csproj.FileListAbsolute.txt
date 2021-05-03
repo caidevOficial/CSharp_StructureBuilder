@@ -8,3 +8,13 @@ C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureB
 C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Release\StructureBuilder.csproj.CopyComplete
 C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Release\StructureBuilder.exe
 C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Release\StructureBuilder.pdb
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\bin\Release\StructureBuilder.exe.config
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\bin\Release\StructureBuilder.exe
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\bin\Release\StructureBuilder.pdb
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\bin\Release\Entities.dll
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\bin\Release\Entities.pdb
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Release\StructureBuilder.csprojAssemblyReference.cache
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Release\StructureBuilder.csproj.CoreCompileInputs.cache
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Release\StructureBuilder.csproj.CopyComplete
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Release\StructureBuilder.exe
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder\obj\Release\StructureBuilder.pdb

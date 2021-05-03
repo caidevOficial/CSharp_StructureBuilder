@@ -55,10 +55,8 @@ namespace Entities.AuxiliarClass {
             int lengthLine = (length);
 
             PrintSymbols(lengthLine, '=', symbolForegroundColor);
-            //PrintSymbols(lengthLine, ' ', symbolForegroundColor);
             Console.ForegroundColor = titleForegroundColor;
             Console.WriteLine(title);
-            //PrintSymbols(lengthLine, ' ', symbolForegroundColor);
             PrintSymbols(lengthLine, '=', symbolForegroundColor);
         }
 

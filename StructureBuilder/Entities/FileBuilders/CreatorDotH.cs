@@ -296,46 +296,48 @@ namespace Entities.FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         public override short FileMaker(Structure myStructure, short packsDone, short fullPackSize) {
-            TextWriter pFileDotH = new StreamWriter($"{myStructure.FinalStructureName}.h");
-            try {
-                StringBuilder dataMaker = new StringBuilder();
-                string curFile = $"{myStructure.FinalStructureName}.h";
-
-                Console.WriteLine($"Final Structure Name: {myStructure.FinalStructureName}");
-                Console.WriteLine($"\nAmount of steps: {fullPackSize}\nActions completed: {packsDone}\n");
-
-                dataMaker = CreateStructure(myStructure, dataMaker);
-
-                dataMaker.Append("#endif \n");
-                dataMaker.Append("\n// # CREDITS TO:\n");
-                dataMaker.Append("// ## Idea in C: Santiago Herrera.\n");
-                dataMaker.Append("// ## Advanced Improvement And develop in C#: FacuFalcone - CaidevOficial.\n");
-                dataMaker.Append("// ## Follow me on -> github.com/CaidevOficial\n");
-                packsDone++;
-                ConsolePrinter.ShowProgress(fullPackSize, packsDone);
-
-                packsDone = CreateBasicStructFunctions(myStructure, dataMaker, packsDone, fullPackSize);
-                packsDone = CreateGettersAndSetters(myStructure, dataMaker, packsDone, fullPackSize);
-                CreateDeleteFunction(myStructure, dataMaker);
-
-                if (File.Exists(curFile)) {
-                    // if not exist, creates the file.
-                    pFileDotH.Write(dataMaker);
-                }
-
-                packsDone++;
-                ConsolePrinter.ShowProgress(fullPackSize, packsDone);
-
-            } catch (Exception e) {
-                Console.WriteLine(e.StackTrace);
-            } finally {
-                // Here we close the file if there is an error or not.
+            if (!(myStructure is null)) {
+                TextWriter pFileDotH = new StreamWriter($"{myStructure.FinalStructureName}.h");
                 try {
-                    if (!(pFileDotH is null)) {
-                        pFileDotH.Close();
+                    StringBuilder dataMaker = new StringBuilder();
+                    string curFile = $"{myStructure.FinalStructureName}.h";
+
+                    Console.WriteLine($"Final Structure Name: {myStructure.FinalStructureName}");
+                    Console.WriteLine($"\nAmount of steps: {fullPackSize}\nActions completed: {packsDone}\n");
+
+                    dataMaker = CreateStructure(myStructure, dataMaker);
+
+                    dataMaker.Append("#endif \n");
+                    dataMaker.Append("\n// # CREDITS TO:\n");
+                    dataMaker.Append("// ## Idea in C: Santiago Herrera.\n");
+                    dataMaker.Append("// ## Advanced Improvement And develop in C#: FacuFalcone - CaidevOficial.\n");
+                    dataMaker.Append("// ## Follow me on -> github.com/CaidevOficial\n");
+                    packsDone++;
+                    ConsolePrinter.ShowProgress(fullPackSize, packsDone);
+
+                    packsDone = CreateBasicStructFunctions(myStructure, dataMaker, packsDone, fullPackSize);
+                    packsDone = CreateGettersAndSetters(myStructure, dataMaker, packsDone, fullPackSize);
+                    CreateDeleteFunction(myStructure, dataMaker);
+
+                    if (File.Exists(curFile)) {
+                        // if not exist, creates the file.
+                        pFileDotH.Write(dataMaker);
                     }
-                } catch (Exception e2) {
-                    Console.WriteLine(e2.StackTrace);
+
+                    packsDone++;
+                    ConsolePrinter.ShowProgress(fullPackSize, packsDone);
+
+                } catch (Exception e) {
+                    Console.WriteLine(e.StackTrace);
+                } finally {
+                    // Here we close the file if there is an error or not.
+                    try {
+                        if (!(pFileDotH is null)) {
+                            pFileDotH.Close();
+                        }
+                    } catch (Exception e2) {
+                        Console.WriteLine(e2.StackTrace);
+                    }
                 }
             }
 

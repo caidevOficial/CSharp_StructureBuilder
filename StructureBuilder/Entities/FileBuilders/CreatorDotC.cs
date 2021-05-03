@@ -40,9 +40,11 @@ namespace Entities.FileBuilders {
         /// <param name="myStructure">Structure for check the parameters.</param>
         /// <returns>True if at least one parameter is char-type, otherwise returns false.</returns>
         private bool CheckCharParam(Structure myStructure) {
-            foreach (Parameter myParam in myStructure.ListParamaters) {
-                if (myParam.TypeParameter.Equals("char")) {
-                    return true;
+            if (!(myStructure is null)) {
+                foreach (Parameter myParam in myStructure.ListParamaters) {
+                    if (myParam.TypeParameter.Equals("char")) {
+                        return true;
+                    }
                 }
             }
 
@@ -60,6 +62,7 @@ namespace Entities.FileBuilders {
         protected override short CreateBuilderEmpty(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
             streamText.Append($"#include <stdlib.h>\n");
             streamText.Append($"#include <stdio.h>\n");
+
             if (CheckCharParam(myStructure)) {
                 streamText.Append($"#include <string.h>\n");
             }
@@ -83,6 +86,7 @@ namespace Entities.FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override void CreateBuilderWithParams(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
+
             streamText.Append($"{myStructure.FinalStructureName}* {myStructure.AliasName}_new("); // auxStrName* strShort_new(parametersLine);
             foreach (Parameter aParam in myStructure.ListParamaters) {
                 if (aParam.LengthParameter == 1) {
@@ -103,9 +107,6 @@ namespace Entities.FileBuilders {
                 streamText.Append($"        {myStructure.AliasName}_set{aParam.AliasNameParameter}({myStructure.StructureName}, {aParam.NameParameter});\n"); // usr_setId(user,id);
             }
             streamText.Append($"    }}\n    return {myStructure.StructureName};\n{{\n\n");
-            //packsDone++;
-            //ConsolePrinter.ShowProgress(fullPackSize, packsDone);
-
         }
 
         #endregion
@@ -118,8 +119,8 @@ namespace Entities.FileBuilders {
         /// <param name="myStructure">Structure to extract the data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
         public void CreateShowEntity(Structure myStructure, StringBuilder streamText) {
+
             streamText.Append($"void {myStructure.AliasName}_show({myStructure.FinalStructureName}* {myStructure.StructureName}){{\n"); // void usr_show(sUser* user)
-            //FIXME: agregar auxiliares para los getters
             foreach (Parameter aParam in myStructure.ListParamaters) {
                 // recorrer 1 vez para variables auxiliares.
                 streamText.Append($" {aParam.TypeParameter} {aParam.NameParameter}");
@@ -176,7 +177,9 @@ namespace Entities.FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override short ShowOneEntity(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
-            CreateShowEntity(myStructure, streamText);
+            if (!(myStructure is null)) {
+                CreateShowEntity(myStructure, streamText);
+            }
 
             return packsDone;
         }
@@ -190,6 +193,7 @@ namespace Entities.FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         public static short CreateShowAll(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
+
             streamText.Append($"int {myStructure.AliasName}_showAll(LinkedList* this, char* errorMesage){{\n");
             streamText.Append($"    int length;\n");
             streamText.Append($"    int isError = 1;\n");
@@ -231,7 +235,9 @@ namespace Entities.FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override short ShowAllEntities(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
-            packsDone = CreateShowAll(myStructure, streamText, packsDone, fullPackSize);
+            if (!(myStructure is null)) {
+                packsDone = CreateShowAll(myStructure, streamText, packsDone, fullPackSize);
+            }
 
             return packsDone;
         }
@@ -249,18 +255,19 @@ namespace Entities.FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override short CreateBasicStructFunctions(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
-            // Empty builder
-            packsDone = CreateBuilderEmpty(myStructure, streamText, packsDone, fullPackSize);
+            if (!(myStructure is null)) {
+                // Empty builder
+                packsDone = CreateBuilderEmpty(myStructure, streamText, packsDone, fullPackSize);
 
-            // Builder with params.
-            CreateBuilderWithParams(myStructure, streamText, packsDone, fullPackSize);
+                // Builder with params.
+                CreateBuilderWithParams(myStructure, streamText, packsDone, fullPackSize);
 
-            // Show one
-            packsDone = ShowOneEntity(myStructure, streamText, packsDone, fullPackSize);
+                // Show one
+                packsDone = ShowOneEntity(myStructure, streamText, packsDone, fullPackSize);
 
-            // Show All
-            packsDone = ShowAllEntities(myStructure, streamText, packsDone, fullPackSize);
-
+                // Show All
+                packsDone = ShowAllEntities(myStructure, streamText, packsDone, fullPackSize);
+            }
             return packsDone;
         }
 
@@ -508,27 +515,30 @@ namespace Entities.FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override short CreateGettersAndSetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
-            streamText.Append($"// ## {myStructure.FinalStructureName}: GETTERS\n");
+            if (!(myStructure is null)) {
 
-            foreach (Parameter aParam in myStructure.ListParamaters) {
-                // Create Getters
-                packsDone = CreateGetter(myStructure, aParam, streamText, packsDone, fullPackSize);
-            }
-            streamText.Append("\n");
+                streamText.Append($"// ## {myStructure.FinalStructureName}: GETTERS\n");
 
-            streamText.Append($"// ## {myStructure.FinalStructureName}: SETTERS\n");
-            foreach (Parameter aParam in myStructure.ListParamaters) {
-                // Create Setters
-                packsDone = CreateSetter(myStructure, aParam, streamText, packsDone, fullPackSize);
-            }
-            streamText.Append("\n");
+                foreach (Parameter aParam in myStructure.ListParamaters) {
+                    // Create Getters
+                    packsDone = CreateGetter(myStructure, aParam, streamText, packsDone, fullPackSize);
+                }
+                streamText.Append("\n");
 
-            streamText.Append($"// ## {myStructure.FinalStructureName}: COMPARERS\n");
-            foreach (Parameter aParam in myStructure.ListParamaters) {
-                // Create Comparators
-                packsDone = CreateComparer(myStructure, aParam, streamText, packsDone, fullPackSize);
+                streamText.Append($"// ## {myStructure.FinalStructureName}: SETTERS\n");
+                foreach (Parameter aParam in myStructure.ListParamaters) {
+                    // Create Setters
+                    packsDone = CreateSetter(myStructure, aParam, streamText, packsDone, fullPackSize);
+                }
+                streamText.Append("\n");
+
+                streamText.Append($"// ## {myStructure.FinalStructureName}: COMPARERS\n");
+                foreach (Parameter aParam in myStructure.ListParamaters) {
+                    // Create Comparators
+                    packsDone = CreateComparer(myStructure, aParam, streamText, packsDone, fullPackSize);
+                }
+                streamText.Append("\n");
             }
-            streamText.Append("\n");
 
             return packsDone;
         }
@@ -561,30 +571,32 @@ namespace Entities.FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         public override short FileMaker(Structure myStructure, short packsDone, short fullPackSize) {
-            TextWriter pFileDotC = new StreamWriter($"{myStructure.FinalStructureName}.c");
-            try {
-                StringBuilder dataMaker = new StringBuilder();
-                string curFile = $"{myStructure.FinalStructureName}.c";
+            if (!(myStructure is null)) {
+                TextWriter pFileDotC = new StreamWriter($"{myStructure.FinalStructureName}.c");
+                try {
+                    StringBuilder dataMaker = new StringBuilder();
+                    string curFile = $"{myStructure.FinalStructureName}.c";
 
-                packsDone = CreateBasicStructFunctions(myStructure, dataMaker, packsDone, fullPackSize);
-                packsDone = CreateGettersAndSetters(myStructure, dataMaker, packsDone, fullPackSize);
-                CreateDeleteFunction(myStructure, dataMaker);
+                    packsDone = CreateBasicStructFunctions(myStructure, dataMaker, packsDone, fullPackSize);
+                    packsDone = CreateGettersAndSetters(myStructure, dataMaker, packsDone, fullPackSize);
+                    CreateDeleteFunction(myStructure, dataMaker);
 
-                if (File.Exists(curFile)) {
-                    // if not exist, creates the file.
-                    pFileDotC.Write(dataMaker);
+                    if (File.Exists(curFile)) {
+                        // if not exist, creates the file.
+                        pFileDotC.Write(dataMaker);
+                    }
+
+                } catch (Exception e) {
+                    Console.WriteLine(e.StackTrace);
                 }
-
-            } catch (Exception e) {
-                Console.WriteLine(e.StackTrace);
-            }
-            // Here we close the file if there is an error or not.
-            try {
-                if (!(pFileDotC is null)) {
-                    pFileDotC.Close();
+                // Here we close the file if there is an error or not.
+                try {
+                    if (!(pFileDotC is null)) {
+                        pFileDotC.Close();
+                    }
+                } catch (Exception e2) {
+                    Console.WriteLine(e2.StackTrace);
                 }
-            } catch (Exception e2) {
-                Console.WriteLine(e2.StackTrace);
             }
 
             return packsDone;

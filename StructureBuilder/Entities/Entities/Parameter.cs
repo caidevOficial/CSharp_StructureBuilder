@@ -26,11 +26,16 @@ using Entities.AuxiliarClass;
 
 namespace Entities.Entities {
     public sealed class Parameter {
+
+        #region Attributes
+
         private short idParameter;
         private int lengthParameter;
         private string typeParameter;
         private string nameParameter;
         private string aliasNameParameter;
+
+        #endregion
 
         #region Builders
 
@@ -52,7 +57,8 @@ namespace Entities.Entities {
         /// </summary>
         /// <param name="idParameter">ID/PK of the entity.</param>
         /// /// <param name="nameParameter">Name of the parameter.</param>
-        public Parameter(short idParameter, string nameParameter) : this(idParameter) {
+        public Parameter(short idParameter, string nameParameter)
+            : this(idParameter) {
             this.NameParameter = nameParameter;
         }
 
@@ -62,7 +68,8 @@ namespace Entities.Entities {
         /// <param name="idParameter">ID/PK of the entity.</param>
         /// <param name="nameParameter">Name of the parameter.</param>
         /// <param name="typeParameter">Type of the parameter.</param>
-        public Parameter(short idParameter, string nameParameter, string typeParameter) : this(idParameter, nameParameter) {
+        public Parameter(short idParameter, string nameParameter, string typeParameter)
+            : this(idParameter, nameParameter) {
             this.TypeParameter = typeParameter;
         }
 
@@ -73,7 +80,8 @@ namespace Entities.Entities {
         /// <param name="nameParameter">Name of the parameter.</param>
         /// <param name="typeParameter">Type of the parameter.</param>
         /// <param name="lengthParameter">Length of the parameter.</param>
-        public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter) : this(idParameter, nameParameter, typeParameter) {
+        public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter)
+            : this(idParameter, nameParameter, typeParameter) {
             this.LengthParameter = lengthParameter;
         }
 
@@ -85,7 +93,8 @@ namespace Entities.Entities {
         /// <param name="typeParameter">Type of the parameter.</param>
         /// <param name="lengthParameter">Length of the parameter.</param>
         /// <param name="aliasNameParameter">Alias - Short name of the parameter.</param>
-        public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter, string aliasNameParameter) : this(idParameter, nameParameter, typeParameter, lengthParameter) {
+        public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter, string aliasNameParameter)
+            : this(idParameter, nameParameter, typeParameter, lengthParameter) {
             this.AliasNameParameter = aliasNameParameter;
         }
 
@@ -98,7 +107,7 @@ namespace Entities.Entities {
         /// Set: Sets the type of the parameter.
         /// </summary>
         public string TypeParameter {
-            get => typeParameter;
+            get => this.typeParameter;
             set {
                 if (!(value is null)) {
                     typeParameter = value;

@@ -3,3 +3,8 @@ C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\b
 C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Release\Entities.csproj.CoreCompileInputs.cache
 C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Release\Entities.dll
 C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Release\Entities.pdb
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\bin\Release\Entities.dll
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\bin\Release\Entities.pdb
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Release\Entities.csproj.CoreCompileInputs.cache
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Release\Entities.dll
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Release\Entities.pdb
