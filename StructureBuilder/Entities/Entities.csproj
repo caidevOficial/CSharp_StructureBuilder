@@ -41,18 +41,19 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuxiliarClass\ConsolePrinter.cs" />
-    <Compile Include="AuxiliarClass\DataCollector.cs" />
-    <Compile Include="AuxiliarClass\DataValidator.cs" />
-    <Compile Include="Entities\Parameter.cs" />
-    <Compile Include="Entities\Structure.cs" />
-    <Compile Include="FileBuilders\Creator.cs" />
-    <Compile Include="FileBuilders\CreatorDotC.cs" />
-    <Compile Include="FileBuilders\CreatorDotH.cs" />
+    <Compile Include="Classes\AuxiliarClass\ConsolePrinter.cs" />
+    <Compile Include="Classes\AuxiliarClass\DataCollector.cs" />
+    <Compile Include="Classes\AuxiliarClass\DataValidator.cs" />
+    <Compile Include="Classes\Entities\Parameter.cs" />
+    <Compile Include="Classes\Entities\Structure.cs" />
+    <Compile Include="Classes\Exceptions\EmptyFieldException.cs" />
+    <Compile Include="Classes\FileBuilders\Creator.cs" />
+    <Compile Include="Classes\FileBuilders\CreatorDotC.cs" />
+    <Compile Include="Classes\FileBuilders\CreatorDotH.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="DiagramOfClasses.cd" />
+    <None Include="Classes\ClassDiagram1.cd" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

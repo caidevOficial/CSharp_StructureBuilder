@@ -1,0 +1,67 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="AuxiliarClass.ConsolePrinter">
+    <Position X="1.5" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEACAAAAAAAAQAAAAAAAIAAAAAAgAAAAAA=</HashCode>
+      <FileName>Classes\AuxiliarClass\ConsolePrinter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AuxiliarClass.DataCollector">
+    <Position X="13.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>IAQAEAAABAAgCAAAEAAAABAAAGAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>Classes\AuxiliarClass\DataCollector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AuxiliarClass.DataValidator">
+    <Position X="8.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Classes\AuxiliarClass\DataValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Parameter">
+    <Position X="11" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAIEAAAABAAAAAAAAAAAAAAAEAhAAhiI=</HashCode>
+      <FileName>Classes\Entities\Parameter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Structure">
+    <Position X="8.5" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAQAAAAAAAAQAAAAAACAEAAABBgAAAAAAAAwiA=</HashCode>
+      <FileName>Classes\Entities\Structure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SBExceptions.EmptyFieldException">
+    <Position X="5.75" Y="4.75" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Exceptions\EmptyFieldException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileBuilders.Creator">
+    <Position X="0.5" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QIIAAAAAEABAACgAAoAAAAAAAIAIAAgAAAAAAAAAACA=</HashCode>
+      <FileName>Classes\FileBuilders\Creator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileBuilders.CreatorDotC">
+    <Position X="3.25" Y="0.5" Width="2.25" />
+    <TypeIdentifier>
+      <HashCode>YIIIAAAAUABAAAgAAoAAQAAEAIAIAAgAAEBAAACQACA=</HashCode>
+      <FileName>Classes\FileBuilders\CreatorDotC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileBuilders.CreatorDotH">
+    <Position X="5.75" Y="0.5" Width="2.5" />
+    <TypeIdentifier>
+      <HashCode>QIIAAAAAEABAACgAAoAAAAAAAIAIAAgAAAAEAAAAACA=</HashCode>
+      <FileName>Classes\FileBuilders\CreatorDotH.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>

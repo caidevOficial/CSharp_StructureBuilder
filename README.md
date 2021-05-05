@@ -18,10 +18,13 @@
 
 
 <table>
-  <th>App UI</th>
+  <th>App UI</th><th>Exception Log</th>
   <tr>
     <td>
-      <img src="/Media/sample.png" height="600px"/>
+      <img src="Media/sample.png" height="600px"/>
+    </td>
+    <td>
+      <img src="Media/sample_1.png" height="600px"/>
     </td>
   </tr>
 </table>

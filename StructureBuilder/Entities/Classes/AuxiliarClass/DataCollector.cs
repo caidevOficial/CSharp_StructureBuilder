@@ -22,11 +22,11 @@
  * SOFTWARE.
  */
 
-using Entities.Entities;
+using Entities;
 using System;
 using System.Text;
 
-namespace Entities.AuxiliarClass {
+namespace AuxiliarClass {
     public sealed class DataCollector {
 
         #region StructureName
