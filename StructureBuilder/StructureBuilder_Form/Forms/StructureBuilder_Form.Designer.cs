@@ -60,7 +60,8 @@ namespace StructureBuilder_Form
             this.LockIcons = new System.Windows.Forms.ImageList(this.components);
             this.btnCreate = new System.Windows.Forms.Button();
             this.grpAllComponents = new System.Windows.Forms.GroupBox();
-            this.lblVersion = new System.Windows.Forms.Label();
+            this.lblLockTheButton = new System.Windows.Forms.Label();
+            this.lblNewVersion = new System.Windows.Forms.Label();
             this.grpSecondParam.SuspendLayout();
             this.grpFirstParam.SuspendLayout();
             this.grpThirdParam.SuspendLayout();
@@ -143,7 +144,7 @@ namespace StructureBuilder_Form
             this.grpSecondParam.Controls.Add(this.cmbSecondParamType);
             this.grpSecondParam.Controls.Add(this.txtSecondParamLenght);
             this.grpSecondParam.Controls.Add(this.txtSecondParamName);
-            this.grpSecondParam.ForeColor = System.Drawing.Color.White;
+            this.grpSecondParam.ForeColor = System.Drawing.Color.RoyalBlue;
             resources.ApplyResources(this.grpSecondParam, "grpSecondParam");
             this.grpSecondParam.Name = "grpSecondParam";
             this.grpSecondParam.TabStop = false;
@@ -236,7 +237,7 @@ namespace StructureBuilder_Form
             this.grpFourthParam.Controls.Add(this.cmbFourthParamType);
             this.grpFourthParam.Controls.Add(this.txtFourthParamLenght);
             this.grpFourthParam.Controls.Add(this.txtFourthParamName);
-            this.grpFourthParam.ForeColor = System.Drawing.Color.White;
+            this.grpFourthParam.ForeColor = System.Drawing.Color.RoyalBlue;
             resources.ApplyResources(this.grpFourthParam, "grpFourthParam");
             this.grpFourthParam.Name = "grpFourthParam";
             this.grpFourthParam.TabStop = false;
@@ -339,18 +340,26 @@ namespace StructureBuilder_Form
             this.grpAllComponents.Name = "grpAllComponents";
             this.grpAllComponents.TabStop = false;
             // 
-            // lblVersion
+            // lblLockTheButton
             // 
-            resources.ApplyResources(this.lblVersion, "lblVersion");
-            this.lblVersion.ForeColor = System.Drawing.Color.Red;
-            this.lblVersion.Name = "lblVersion";
+            resources.ApplyResources(this.lblLockTheButton, "lblLockTheButton");
+            this.lblLockTheButton.BackColor = System.Drawing.Color.Transparent;
+            this.lblLockTheButton.ForeColor = System.Drawing.Color.Red;
+            this.lblLockTheButton.Name = "lblLockTheButton";
+            // 
+            // lblNewVersion
+            // 
+            resources.ApplyResources(this.lblNewVersion, "lblNewVersion");
+            this.lblNewVersion.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblNewVersion.Name = "lblNewVersion";
             // 
             // StructureBuilder
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.Controls.Add(this.lblVersion);
+            this.Controls.Add(this.lblNewVersion);
+            this.Controls.Add(this.lblLockTheButton);
             this.Controls.Add(this.grpAllComponents);
             this.Controls.Add(this.btnCreate);
             this.Controls.Add(this.btnLock);
@@ -407,7 +416,8 @@ namespace StructureBuilder_Form
         private System.Windows.Forms.Button btnCreate;
         private System.Windows.Forms.ImageList LockIcons;
         private System.Windows.Forms.GroupBox grpAllComponents;
-        private System.Windows.Forms.Label lblVersion;
+        private System.Windows.Forms.Label lblLockTheButton;
+        private System.Windows.Forms.Label lblNewVersion;
     }
 }
 

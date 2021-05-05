@@ -22,14 +22,18 @@
  * SOFTWARE.
  */
 
-using Entities.AuxiliarClass;
-using Entities.Entities;
-using Entities.FileBuilders;
+using AuxiliarClass;
+using Entities;
+using FileBuilders;
+using SBExceptions;
 using System;
 using System.Windows.Forms;
 
 namespace StructureBuilder_Form {
     public partial class StructureBuilder : Form {
+
+        #region Attributes
+
         private static Structure myStructure;
         private Parameter myParameter;
         private CreatorDotH makerH = new CreatorDotH();
@@ -37,7 +41,9 @@ namespace StructureBuilder_Form {
         private short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private short packsDone = 0;
         private bool locked = false;
-        private string appVersion = "Version [2.5.0.3]";
+        private string appVersion = "Version [2.5.0.4]";
+
+        #endregion
 
         #region Builder
 
@@ -57,7 +63,7 @@ namespace StructureBuilder_Form {
             cmbSecondParamType.SelectedIndex = 0;
             cmbThirdParamType.SelectedIndex = 0;
             cmbFourthParamType.SelectedIndex = 0;
-            lblVersion.Text = appVersion;
+            lblNewVersion.Text = appVersion;
         }
 
         #endregion
@@ -138,7 +144,8 @@ namespace StructureBuilder_Form {
         /// <returns>True if can create the entity, otherwise returns false.</returns>
         private bool CreateStructure() {
             if (String.IsNullOrWhiteSpace(txtFirstParamName.Text) || String.IsNullOrWhiteSpace(txtFirstParamLenght.Text)) {
-                MessageBox.Show("There are at least one field empty, fix that!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                //MessageBox.Show("There are at least one field empty, fix that!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                throw new EmptyFieldException("You have at least one field Empty.");
             } else {
                 //Set structure
                 myStructure.StructureName = txtStructureName.Text.Trim().Replace(" ", "");
@@ -146,15 +153,13 @@ namespace StructureBuilder_Form {
                 myStructure.FinalStructureName = myStructure.AliasName;
 
                 // Set parameter
-                myParameter = CreateParameter(myStructure, myParameter, txtFirstParamName.Text, cmbFirstParamType.SelectedItem.ToString(), txtFirstParamLenght.Text);
+                myParameter = CreateParameter(myStructure, myParameter, txtFirstParamName.Text.Trim().Replace(" ", ""), cmbFirstParamType.SelectedItem.ToString(), txtFirstParamLenght.Text.Trim().Replace(" ", ""));
                 // add to list
                 if (!(myStructure + myParameter))
-                    MessageBox.Show($"An Error has occurred adding parameter: {myParameter.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"An Error has occurred adding the 1st parameter: {myParameter.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
 
                 return true;
             }
-
-            return false;
         }
 
         #endregion
@@ -182,8 +187,10 @@ namespace StructureBuilder_Form {
                             if (!String.IsNullOrWhiteSpace(txtSecondParamName.Text) && !String.IsNullOrWhiteSpace(txtSecondParamLenght.Text)) {
                                 secondPa = CreateParameter(myStructure, secondPa, txtSecondParamName.Text, cmbSecondParamType.SelectedItem.ToString(), txtSecondParamLenght.Text);
                                 if (!(myStructure + secondPa)) {
-                                    MessageBox.Show($"An Error has occurred adding parameter: {secondPa.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show($"An Error has occurred adding the 2nd parameter: {secondPa.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
+                            } else {
+                                throw new EmptyFieldException("You have at least one field Empty.");
                             }
                         }
 
@@ -192,8 +199,10 @@ namespace StructureBuilder_Form {
                             if (!String.IsNullOrWhiteSpace(txtThirdParamName.Text) && !String.IsNullOrWhiteSpace(txtThirdParamLenght.Text)) {
                                 ThirdPa = CreateParameter(myStructure, ThirdPa, txtThirdParamName.Text, cmbThirdParamType.SelectedItem.ToString(), txtThirdParamLenght.Text);
                                 if (!(myStructure + ThirdPa)) {
-                                    MessageBox.Show($"An Error has occurred adding parameter: {ThirdPa.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show($"An Error has occurred adding the 3rd parameter: {ThirdPa.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
+                            } else {
+                                throw new EmptyFieldException("You have at least one field Empty.");
                             }
                         }
 
@@ -202,13 +211,15 @@ namespace StructureBuilder_Form {
                             if (!String.IsNullOrWhiteSpace(txtFourthParamName.Text) && !String.IsNullOrWhiteSpace(txtFourthParamLenght.Text)) {
                                 fourthPa = CreateParameter(myStructure, fourthPa, txtFourthParamName.Text, cmbFourthParamType.SelectedItem.ToString(), txtFourthParamLenght.Text);
                                 if (!(myStructure + fourthPa)) {
-                                    MessageBox.Show($"An Error has occurred adding parameter: {fourthPa.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    MessageBox.Show($"An Error has occurred adding the 4th parameter: {fourthPa.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                 }
+                            } else {
+                                throw new EmptyFieldException("You have at least one field Empty.");
                             }
                         }
 
                         CreateFiles(myStructure, packsDone, fullPackSize);
-                        MessageBox.Show($"Structure {myStructure.FinalStructureName} Created Successfully, Congratulations!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MessageBox.Show($"Structure {myStructure.FinalStructureName} Created Successfully, Congratulations!\nCheck the files created in the directory of this App.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 } catch (Exception ex) {
                     frmException fe = new frmException(ex);

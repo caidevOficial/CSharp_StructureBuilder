@@ -24,7 +24,7 @@
 
 using System;
 
-namespace Entities.AuxiliarClass {
+namespace AuxiliarClass {
     public sealed class ConsolePrinter {
 
         #region Printers

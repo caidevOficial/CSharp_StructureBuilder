@@ -86,7 +86,7 @@ namespace StructureBuilder_Form {
             this.lblDateException.AutoSize = true;
             this.lblDateException.BackColor = System.Drawing.Color.Black;
             this.lblDateException.Font = new System.Drawing.Font("Ink Free", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDateException.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblDateException.ForeColor = System.Drawing.Color.LimeGreen;
             this.lblDateException.Location = new System.Drawing.Point(8, 313);
             this.lblDateException.Name = "lblDateException";
             this.lblDateException.Size = new System.Drawing.Size(172, 23);
@@ -98,7 +98,7 @@ namespace StructureBuilder_Form {
             this.lblRealDateException.AutoSize = true;
             this.lblRealDateException.BackColor = System.Drawing.Color.Black;
             this.lblRealDateException.Font = new System.Drawing.Font("Ink Free", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblRealDateException.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblRealDateException.ForeColor = System.Drawing.Color.LimeGreen;
             this.lblRealDateException.Location = new System.Drawing.Point(186, 313);
             this.lblRealDateException.Name = "lblRealDateException";
             this.lblRealDateException.Size = new System.Drawing.Size(167, 23);
@@ -117,6 +117,7 @@ namespace StructureBuilder_Form {
             this.Controls.Add(this.lblExceptionTitle);
             this.Controls.Add(this.btnExceptionOK);
             this.Controls.Add(this.rtbExceptionDescription);
+            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

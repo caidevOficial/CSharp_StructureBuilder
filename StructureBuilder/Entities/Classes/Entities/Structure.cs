@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-using Entities.AuxiliarClass;
+using AuxiliarClass;
 using System.Collections.Generic;
 
-namespace Entities.Entities {
+namespace Entities {
     public sealed class Structure {
 
         #region Attributes
@@ -34,7 +34,7 @@ namespace Entities.Entities {
         private string finalStructureName;
         private string aliasShortName;
         private List<Parameter> listOfParameters;
-        
+
         #endregion
 
         #region Builders
@@ -59,7 +59,7 @@ namespace Entities.Entities {
         /// </summary>
         /// <param name="structureName">Name of the entity.</param>
         /// <param name="aliasShortName">Short Name (Alias) of the entity.</param>
-        public Structure(string structureName, string aliasShortName) 
+        public Structure(string structureName, string aliasShortName)
             : this(structureName) {
             AliasName = aliasShortName;
         }
@@ -70,7 +70,7 @@ namespace Entities.Entities {
         /// <param name="structureName">Name of the entity.</param>
         /// <param name="aliasShortName">Short Name (Alias) of the entity.</param>
         /// <param name="finalStructureName">Final name of the entity, it will have an 's' at the beginning of the name.</param>
-        public Structure(string structureName, string aliasShortName, string finalStructureName) 
+        public Structure(string structureName, string aliasShortName, string finalStructureName)
             : this(structureName, aliasShortName) {
             FinalStructureName = finalStructureName;
         }

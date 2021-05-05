@@ -22,10 +22,10 @@
  * SOFTWARE.
  */
 
-using Entities.Entities;
+using Entities;
 using System.Text;
 
-namespace Entities.FileBuilders {
+namespace FileBuilders {
     public abstract class Creator {
         public Creator() { }
 
