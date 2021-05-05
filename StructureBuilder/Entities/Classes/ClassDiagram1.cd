@@ -15,7 +15,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="AuxiliarClass.DataValidator">
-    <Position X="8.75" Y="4.75" Width="1.5" />
+    <Position X="12" Y="4.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
       <FileName>Classes\AuxiliarClass\DataValidator.cs</FileName>
@@ -61,6 +61,13 @@
     <TypeIdentifier>
       <HashCode>QIIAAAAAEABAACgAAoAAAAAAAIAIAAgAAAAEAAAAACA=</HashCode>
       <FileName>Classes\FileBuilders\CreatorDotH.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SBExceptions.NoSoundFoundException">
+    <Position X="8.75" Y="4.75" Width="3" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Exceptions\NoSoundFoundException.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Font Name="Segoe UI" Size="9" />

@@ -46,6 +46,7 @@
     <Compile Include="Classes\AuxiliarClass\DataValidator.cs" />
     <Compile Include="Classes\Entities\Parameter.cs" />
     <Compile Include="Classes\Entities\Structure.cs" />
+    <Compile Include="Classes\Exceptions\NoSoundFoundException.cs" />
     <Compile Include="Classes\Exceptions\EmptyFieldException.cs" />
     <Compile Include="Classes\FileBuilders\Creator.cs" />
     <Compile Include="Classes\FileBuilders\CreatorDotC.cs" />
