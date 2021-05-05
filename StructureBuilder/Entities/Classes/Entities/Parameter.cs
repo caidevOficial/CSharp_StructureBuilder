@@ -22,9 +22,9 @@
  * SOFTWARE.
  */
 
-using Entities.AuxiliarClass;
+using AuxiliarClass;
 
-namespace Entities.Entities {
+namespace Entities {
     public sealed class Parameter {
 
         #region Attributes

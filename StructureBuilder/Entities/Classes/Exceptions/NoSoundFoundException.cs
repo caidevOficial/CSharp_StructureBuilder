@@ -24,23 +24,37 @@
 
 using System;
 using System.Text;
-using System.Windows.Forms;
 
-namespace StructureBuilder_Form {
-    public partial class frmException : Form {
-        public frmException(Exception ex) {
-            InitializeComponent();
-            DateTime dt = DateTime.Now;
+namespace SBExceptions {
+    public class NoSoundFoundException : Exception {
+
+        #region Builders
+
+        public NoSoundFoundException(string message)
+            : this(message, null) { }
+
+        public NoSoundFoundException(string message, Exception innerException)
+            : base(message, innerException) { }
+
+        #endregion
+
+        #region Method
+
+        /// <summary>
+        /// Gets the message of the exception.
+        /// </summary>
+        /// <returns>The message of the exception as a string.</returns>
+        public override string ToString() {
             StringBuilder data = new StringBuilder();
-            data.Append(ex.ToString());
+            data.AppendLine($"Excepcion: {this.Message}");
+            data.AppendLine($"Class afected: {this.Source}");
+            data.AppendLine($"Method afected: {this.TargetSite}");
+            if (!(this.InnerException is null))
+                data.AppendLine($"Details: {this.InnerException}");
 
-            rtbExceptionDescription.Text = data.ToString();
-            lblRealDateException.Text = dt.ToString();
+            return data.ToString(); ;
         }
 
-        private void btnExceptionOK_Click(object sender, EventArgs e) {
-            this.DialogResult = DialogResult.OK;
-            this.Dispose();
-        }
+        #endregion
     }
 }

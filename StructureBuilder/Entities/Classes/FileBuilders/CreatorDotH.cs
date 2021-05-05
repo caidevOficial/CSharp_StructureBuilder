@@ -22,13 +22,13 @@
  * SOFTWARE.
  */
 
-using Entities.AuxiliarClass;
-using Entities.Entities;
+using AuxiliarClass;
+using Entities;
 using System;
 using System.IO;
 using System.Text;
 
-namespace Entities.FileBuilders {
+namespace FileBuilders {
     public sealed class CreatorDotH : Creator {
         public CreatorDotH() { }
 

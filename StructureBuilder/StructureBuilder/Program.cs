@@ -22,9 +22,6 @@
  * SOFTWARE.
  */
 
-using Entities.AuxiliarClass;
-using Entities.Entities;
-using Entities.FileBuilders;
 using System;
 
 namespace StructureBuilder {
