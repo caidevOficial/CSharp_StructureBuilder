@@ -54,7 +54,7 @@ namespace StructureBuilder_Form {
         private short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private short packsDone = 0;
         private bool locked = false;
-        private string appVersion = "Version [2.5.1.0]";
+        private string appVersion = "Version [2.5.1.1]";
 
         #endregion
 
@@ -260,6 +260,7 @@ namespace StructureBuilder_Form {
                         MessageBox.Show($"Structure {myStructure.FinalStructureName} Created Successfully, Congratulations!\n" +
                             $"Check the files created in the directory of this App.\n\n" +
                             $"Now you have to come with me, where? Back to the future!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        myStructure.ListParamaters.Clear();
                     }
                 } catch (Exception ex) {
                     try {
