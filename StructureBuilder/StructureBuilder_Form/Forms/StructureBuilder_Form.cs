@@ -27,10 +27,23 @@ using Entities;
 using FileBuilders;
 using SBExceptions;
 using System;
+using System.Media;
 using System.Windows.Forms;
 
 namespace StructureBuilder_Form {
     public partial class StructureBuilder : Form {
+
+        #region AudioPaths
+
+        private static string pathToMusic = $"{Environment.CurrentDirectory}/Sounds";
+        private string lockOn = $"{pathToMusic}/Lock.wav";
+        private string lockOff = $"{pathToMusic}/Unlock.wav";
+        private string errorSound = $"{pathToMusic}/Exception.wav";
+        private string success = $"{pathToMusic}/Create.wav";
+
+        private readonly SoundPlayer myPlayer = new SoundPlayer();
+
+        #endregion
 
         #region Attributes
 
@@ -41,7 +54,7 @@ namespace StructureBuilder_Form {
         private short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private short packsDone = 0;
         private bool locked = false;
-        private string appVersion = "Version [2.5.0.4]";
+        private string appVersion = "Version [2.5.1.0]";
 
         #endregion
 
@@ -64,6 +77,30 @@ namespace StructureBuilder_Form {
             cmbThirdParamType.SelectedIndex = 0;
             cmbFourthParamType.SelectedIndex = 0;
             lblNewVersion.Text = appVersion;
+            try {
+                MyPlayer(success);
+            } catch (NoSoundFoundException ns) {
+                frmException fe = new frmException(ns);
+                fe.Location = this.Location;
+                fe.ShowDialog();
+            }
+        }
+
+        #endregion
+
+        #region MyPlayer
+
+        /// <summary>
+        /// Little soundPlayer of the app.
+        /// </summary>
+        /// <param name="soundPath"></param>
+        private void MyPlayer(string soundPath) {
+            myPlayer.SoundLocation = soundPath;
+            try {
+                myPlayer.Play();
+            } catch (Exception e) {
+                throw new NoSoundFoundException("No Sound Folder in the App's Directory.", e);
+            }
         }
 
         #endregion
@@ -219,12 +256,22 @@ namespace StructureBuilder_Form {
                         }
 
                         CreateFiles(myStructure, packsDone, fullPackSize);
-                        MessageBox.Show($"Structure {myStructure.FinalStructureName} Created Successfully, Congratulations!\nCheck the files created in the directory of this App.", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        MyPlayer(success);
+                        MessageBox.Show($"Structure {myStructure.FinalStructureName} Created Successfully, Congratulations!\n" +
+                            $"Check the files created in the directory of this App.\n\n" +
+                            $"Now you have to come with me, where? Back to the future!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 } catch (Exception ex) {
-                    frmException fe = new frmException(ex);
-                    fe.Location = this.Location;
-                    fe.ShowDialog();
+                    try {
+                        MyPlayer(errorSound);
+                        frmException fe = new frmException(ex);
+                        fe.Location = this.Location;
+                        fe.ShowDialog();
+                    } catch (NoSoundFoundException ns) {
+                        frmException fe = new frmException(ns);
+                        fe.Location = this.Location;
+                        fe.ShowDialog();
+                    }
                 }
             }
         }
@@ -273,17 +320,30 @@ namespace StructureBuilder_Form {
 
         #region LockEvent
 
+        /// <summary>
+        /// EventHandler of lock button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnLock_Click(object sender, EventArgs e) {
-            if (!locked) {
-                locked = !locked;
-                btnLock.ImageIndex = 1;
-                grpAllComponents.Enabled = false;
-                btnCreate.Enabled = true;
-            } else {
-                locked = !locked;
-                btnLock.ImageIndex = 0;
-                grpAllComponents.Enabled = true;
-                btnCreate.Enabled = false;
+            try {
+                if (!locked) {
+                    MyPlayer(lockOn);
+                    locked = !locked;
+                    btnLock.ImageIndex = 1;
+                    grpAllComponents.Enabled = false;
+                    btnCreate.Enabled = true;
+                } else {
+                    MyPlayer(lockOff);
+                    locked = !locked;
+                    btnLock.ImageIndex = 0;
+                    grpAllComponents.Enabled = true;
+                    btnCreate.Enabled = false;
+                }
+            } catch (NoSoundFoundException ns) {
+                frmException fe = new frmException(ns);
+                fe.Location = this.Location;
+                fe.ShowDialog();
             }
         }
 
