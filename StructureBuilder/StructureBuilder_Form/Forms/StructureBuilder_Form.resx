@@ -403,7 +403,7 @@
     <value>341, 75</value>
   </data>
   <data name="grpSecondParam.TabIndex" type="System.Int32, mscorlib">
-    <value>12</value>
+    <value>5</value>
   </data>
   <data name="grpSecondParam.Text" xml:space="preserve">
     <value>2° Parameter</value>
@@ -526,7 +526,7 @@
     <value>341, 75</value>
   </data>
   <data name="grpFirstParam.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>1</value>
   </data>
   <data name="grpFirstParam.Text" xml:space="preserve">
     <value>1° Parameter</value>
@@ -649,7 +649,7 @@
     <value>341, 75</value>
   </data>
   <data name="grpThirdParam.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
+    <value>9</value>
   </data>
   <data name="grpThirdParam.Text" xml:space="preserve">
     <value>3° Parameter</value>
@@ -665,6 +665,66 @@
   </data>
   <data name="&gt;&gt;grpThirdParam.ZOrder" xml:space="preserve">
     <value>4</value>
+  </data>
+  <data name="&gt;&gt;cmbFourthParamType.Name" xml:space="preserve">
+    <value>cmbFourthParamType</value>
+  </data>
+  <data name="&gt;&gt;cmbFourthParamType.Type" xml:space="preserve">
+    <value>System.Windows.Forms.ComboBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;cmbFourthParamType.Parent" xml:space="preserve">
+    <value>grpFourthParam</value>
+  </data>
+  <data name="&gt;&gt;cmbFourthParamType.ZOrder" xml:space="preserve">
+    <value>0</value>
+  </data>
+  <data name="&gt;&gt;txtFourthParamLenght.Name" xml:space="preserve">
+    <value>txtFourthParamLenght</value>
+  </data>
+  <data name="&gt;&gt;txtFourthParamLenght.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFourthParamLenght.Parent" xml:space="preserve">
+    <value>grpFourthParam</value>
+  </data>
+  <data name="&gt;&gt;txtFourthParamLenght.ZOrder" xml:space="preserve">
+    <value>1</value>
+  </data>
+  <data name="&gt;&gt;txtFourthParamName.Name" xml:space="preserve">
+    <value>txtFourthParamName</value>
+  </data>
+  <data name="&gt;&gt;txtFourthParamName.Type" xml:space="preserve">
+    <value>System.Windows.Forms.TextBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;txtFourthParamName.Parent" xml:space="preserve">
+    <value>grpFourthParam</value>
+  </data>
+  <data name="&gt;&gt;txtFourthParamName.ZOrder" xml:space="preserve">
+    <value>2</value>
+  </data>
+  <data name="grpFourthParam.Location" type="System.Drawing.Point, System.Drawing">
+    <value>89, 306</value>
+  </data>
+  <data name="grpFourthParam.Size" type="System.Drawing.Size, System.Drawing">
+    <value>341, 75</value>
+  </data>
+  <data name="grpFourthParam.TabIndex" type="System.Int32, mscorlib">
+    <value>13</value>
+  </data>
+  <data name="grpFourthParam.Text" xml:space="preserve">
+    <value>4° Parameter</value>
+  </data>
+  <data name="&gt;&gt;grpFourthParam.Name" xml:space="preserve">
+    <value>grpFourthParam</value>
+  </data>
+  <data name="&gt;&gt;grpFourthParam.Type" xml:space="preserve">
+    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </data>
+  <data name="&gt;&gt;grpFourthParam.Parent" xml:space="preserve">
+    <value>grpAllComponents</value>
+  </data>
+  <data name="&gt;&gt;grpFourthParam.ZOrder" xml:space="preserve">
+    <value>3</value>
   </data>
   <data name="cmbFourthParamType.Font" type="System.Drawing.Font, System.Drawing">
     <value>Gabriola, 14.25pt, style=Bold</value>
@@ -764,30 +824,6 @@
   </data>
   <data name="&gt;&gt;txtFourthParamName.ZOrder" xml:space="preserve">
     <value>2</value>
-  </data>
-  <data name="grpFourthParam.Location" type="System.Drawing.Point, System.Drawing">
-    <value>89, 306</value>
-  </data>
-  <data name="grpFourthParam.Size" type="System.Drawing.Size, System.Drawing">
-    <value>341, 75</value>
-  </data>
-  <data name="grpFourthParam.TabIndex" type="System.Int32, mscorlib">
-    <value>13</value>
-  </data>
-  <data name="grpFourthParam.Text" xml:space="preserve">
-    <value>4° Parameter</value>
-  </data>
-  <data name="&gt;&gt;grpFourthParam.Name" xml:space="preserve">
-    <value>grpFourthParam</value>
-  </data>
-  <data name="&gt;&gt;grpFourthParam.Type" xml:space="preserve">
-    <value>System.Windows.Forms.GroupBox, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
-  </data>
-  <data name="&gt;&gt;grpFourthParam.Parent" xml:space="preserve">
-    <value>grpAllComponents</value>
-  </data>
-  <data name="&gt;&gt;grpFourthParam.ZOrder" xml:space="preserve">
-    <value>3</value>
   </data>
   <data name="chkThirdParam.AutoSize" type="System.Boolean, mscorlib">
     <value>True</value>
