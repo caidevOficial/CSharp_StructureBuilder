@@ -54,12 +54,15 @@ namespace StructureBuilder_Form {
         private short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private short packsDone = 0;
         private bool locked = false;
-        private string appVersion = "Version [2.5.1.0]";
+        private string appVersion = "Version [2.5.1.3]";
 
         #endregion
 
         #region Builder
 
+        /// <summary>
+        /// Basic constructor of the form.
+        /// </summary>
         public StructureBuilder() {
             InitializeComponent();
             myStructure = new Structure();
@@ -107,6 +110,11 @@ namespace StructureBuilder_Form {
 
         #region CheckButtons
 
+        /// <summary>
+        /// Event manager of the second checkBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chkSecondParam_CheckedChanged(object sender, EventArgs e) {
             if (chkSecondParam.Checked is true) {
                 grpSecondParam.Enabled = true;
@@ -121,6 +129,11 @@ namespace StructureBuilder_Form {
             }
         }
 
+        /// <summary>
+        /// Event manager of the third checkBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chkThirdParam_CheckedChanged(object sender, EventArgs e) {
             if (chkThirdParam.Checked is true) {
                 grpThirdParam.Enabled = true;
@@ -133,6 +146,11 @@ namespace StructureBuilder_Form {
             }
         }
 
+        /// <summary>
+        /// Event manager of the fourth checkBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void chkFourthParam_CheckedChanged(object sender, EventArgs e) {
             if (chkFourthParam.Checked is true) {
                 grpFourthParam.Enabled = true;
@@ -203,6 +221,12 @@ namespace StructureBuilder_Form {
 
         #region CreateFile
 
+        /// <summary>
+        /// Creator fo both text files of the app.
+        /// </summary>
+        /// <param name="myStructure">Structure instance</param>
+        /// <param name="packsDone">Amount of completed steps.</param>
+        /// <param name="fullPackSize">Total amount of steps.</param>
         private void CreateFiles(Structure myStructure, short packsDone, short fullPackSize) {
             packsDone = makerH.FileMaker(myStructure, packsDone, fullPackSize);
             packsDone = makerC.FileMaker(myStructure, packsDone, fullPackSize);
@@ -213,6 +237,11 @@ namespace StructureBuilder_Form {
 
         #region ButtonCreate
 
+        /// <summary>
+        /// Event manager of the create button.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCreate_Click(object sender, EventArgs e) {
             if (String.IsNullOrWhiteSpace(txtStructureName.Text)) {
                 MessageBox.Show("The structure name is empty, fix that!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
@@ -260,6 +289,7 @@ namespace StructureBuilder_Form {
                         MessageBox.Show($"Structure {myStructure.FinalStructureName} Created Successfully, Congratulations!\n" +
                             $"Check the files created in the directory of this App.\n\n" +
                             $"Now you have to come with me, where? Back to the future!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        myStructure.ListParamaters.Clear();
                     }
                 } catch (Exception ex) {
                     try {
@@ -280,6 +310,11 @@ namespace StructureBuilder_Form {
 
         #region ComboBoxEvents
 
+        /// <summary>
+        /// Event handler of the first comboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbFirstParamType_SelectedIndexChanged(object sender, EventArgs e) {
             if (cmbFirstParamType.SelectedItem.Equals("char")) {
                 txtFirstParamLenght.Enabled = true;
@@ -289,6 +324,11 @@ namespace StructureBuilder_Form {
             }
         }
 
+        /// <summary>
+        /// Event handler of the second comboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbSecondParamType_SelectedIndexChanged(object sender, EventArgs e) {
             if (cmbSecondParamType.SelectedItem.Equals("char")) {
                 txtSecondParamLenght.Enabled = true;
@@ -298,6 +338,11 @@ namespace StructureBuilder_Form {
             }
         }
 
+        /// <summary>
+        /// Event handler of the third comboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbThirdParamType_SelectedIndexChanged(object sender, EventArgs e) {
             if (cmbThirdParamType.SelectedItem.Equals("char")) {
                 txtThirdParamLenght.Enabled = true;
@@ -307,6 +352,11 @@ namespace StructureBuilder_Form {
             }
         }
 
+        /// <summary>
+        /// Event handler of the fourth comboBox
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void cmbFourthParamType_SelectedIndexChanged(object sender, EventArgs e) {
             if (cmbFourthParamType.SelectedItem.Equals("char")) {
                 txtFourthParamLenght.Enabled = true;
@@ -321,7 +371,7 @@ namespace StructureBuilder_Form {
         #region LockEvent
 
         /// <summary>
-        /// EventHandler of lock button.
+        /// EventHandler of the lock button.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

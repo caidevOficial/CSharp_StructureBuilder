@@ -78,6 +78,7 @@ namespace StructureBuilder_Form
             // label2
             // 
             resources.ApplyResources(this.label2, "label2");
+            this.label2.ForeColor = System.Drawing.Color.RoyalBlue;
             this.label2.Name = "label2";
             // 
             // label3
@@ -144,7 +145,7 @@ namespace StructureBuilder_Form
             this.grpSecondParam.Controls.Add(this.cmbSecondParamType);
             this.grpSecondParam.Controls.Add(this.txtSecondParamLenght);
             this.grpSecondParam.Controls.Add(this.txtSecondParamName);
-            this.grpSecondParam.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.grpSecondParam.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             resources.ApplyResources(this.grpSecondParam, "grpSecondParam");
             this.grpSecondParam.Name = "grpSecondParam";
             this.grpSecondParam.TabStop = false;
@@ -335,7 +336,7 @@ namespace StructureBuilder_Form
             this.grpAllComponents.Controls.Add(this.label3);
             this.grpAllComponents.Controls.Add(this.label2);
             this.grpAllComponents.Controls.Add(this.label1);
-            this.grpAllComponents.ForeColor = System.Drawing.Color.White;
+            this.grpAllComponents.ForeColor = System.Drawing.Color.RoyalBlue;
             resources.ApplyResources(this.grpAllComponents, "grpAllComponents");
             this.grpAllComponents.Name = "grpAllComponents";
             this.grpAllComponents.TabStop = false;
