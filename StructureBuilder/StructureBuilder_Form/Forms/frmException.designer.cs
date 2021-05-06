@@ -40,6 +40,7 @@ namespace StructureBuilder_Form {
             this.rtbExceptionDescription.ForeColor = System.Drawing.Color.Red;
             this.rtbExceptionDescription.Location = new System.Drawing.Point(6, 91);
             this.rtbExceptionDescription.Name = "rtbExceptionDescription";
+            this.rtbExceptionDescription.ReadOnly = true;
             this.rtbExceptionDescription.Size = new System.Drawing.Size(550, 203);
             this.rtbExceptionDescription.TabIndex = 0;
             this.rtbExceptionDescription.Text = "";

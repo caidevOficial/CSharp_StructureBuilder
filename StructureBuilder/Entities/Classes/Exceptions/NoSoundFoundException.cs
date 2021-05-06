@@ -30,9 +30,18 @@ namespace SBExceptions {
 
         #region Builders
 
+        /// <summary>
+        /// Creates the entity with a message.
+        /// </summary>
+        /// <param name="message">Message to show when the entity is created.</param>
         public NoSoundFoundException(string message)
             : this(message, null) { }
 
+        /// <summary>
+        /// Creates the entity with a message and a innerException.
+        /// </summary>
+        /// <param name="message">Message to show when the entity is created.</param>
+        /// <param name="innerException">Inner Exception of this exception.</param>
         public NoSoundFoundException(string message, Exception innerException)
             : base(message, innerException) { }
 
