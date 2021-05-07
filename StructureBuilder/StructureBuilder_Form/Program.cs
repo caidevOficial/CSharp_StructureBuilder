@@ -8,7 +8,7 @@ namespace StructureBuilder_Form {
         /// </summary>
         [STAThread]
         static void Main() {
-            Application.EnableVisualStyles();
+            //Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StructureBuilder());
         }

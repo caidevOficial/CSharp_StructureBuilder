@@ -54,7 +54,7 @@ namespace StructureBuilder_Form {
         private short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private short packsDone = 0;
         private bool locked = false;
-        private string appVersion = "Version [2.5.1.4]";
+        private string appVersion = "Version [2.5.1.5]";
 
         #endregion
 
@@ -64,11 +64,22 @@ namespace StructureBuilder_Form {
         /// Basic constructor of the form.
         /// </summary>
         public StructureBuilder() {
+            
             InitializeComponent();
             myStructure = new Structure();
             myParameter = new Parameter();
             makerC = new CreatorDotC();
             makerH = new CreatorDotH();
+        }
+
+        #endregion
+       
+        #region LoadEvent
+
+        private void StructureBuilder_Load(object sender, EventArgs e) {
+            this.Hide();
+            FrmWelcome welcome = new FrmWelcome();
+            welcome.ShowDialog();
             grpSecondParam.Enabled = false;
             grpThirdParam.Enabled = false;
             grpFourthParam.Enabled = false;
@@ -415,5 +426,6 @@ namespace StructureBuilder_Form {
         }
 
         #endregion
+
     }
 }

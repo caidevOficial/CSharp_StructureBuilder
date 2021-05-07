@@ -127,16 +127,16 @@ namespace StructureBuilder_Form
             // 
             // txtSecondParamLenght
             // 
-            this.txtSecondParamLenght.BackColor = System.Drawing.Color.White;
+            this.txtSecondParamLenght.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.txtSecondParamLenght, "txtSecondParamLenght");
-            this.txtSecondParamLenght.ForeColor = System.Drawing.Color.Red;
+            this.txtSecondParamLenght.ForeColor = System.Drawing.Color.Cyan;
             this.txtSecondParamLenght.Name = "txtSecondParamLenght";
             // 
             // txtSecondParamName
             // 
-            this.txtSecondParamName.BackColor = System.Drawing.Color.White;
+            this.txtSecondParamName.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.txtSecondParamName, "txtSecondParamName");
-            this.txtSecondParamName.ForeColor = System.Drawing.Color.Red;
+            this.txtSecondParamName.ForeColor = System.Drawing.Color.Cyan;
             this.txtSecondParamName.Name = "txtSecondParamName";
             // 
             // grpSecondParam
@@ -179,16 +179,16 @@ namespace StructureBuilder_Form
             // 
             // txtFirstParamLenght
             // 
-            this.txtFirstParamLenght.BackColor = System.Drawing.Color.White;
+            this.txtFirstParamLenght.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.txtFirstParamLenght, "txtFirstParamLenght");
-            this.txtFirstParamLenght.ForeColor = System.Drawing.Color.Red;
+            this.txtFirstParamLenght.ForeColor = System.Drawing.Color.Cyan;
             this.txtFirstParamLenght.Name = "txtFirstParamLenght";
             // 
             // txtFirstParamName
             // 
-            this.txtFirstParamName.BackColor = System.Drawing.Color.White;
+            this.txtFirstParamName.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.txtFirstParamName, "txtFirstParamName");
-            this.txtFirstParamName.ForeColor = System.Drawing.Color.Red;
+            this.txtFirstParamName.ForeColor = System.Drawing.Color.Cyan;
             this.txtFirstParamName.Name = "txtFirstParamName";
             // 
             // grpThirdParam
@@ -220,16 +220,16 @@ namespace StructureBuilder_Form
             // 
             // txtThirdParamLenght
             // 
-            this.txtThirdParamLenght.BackColor = System.Drawing.Color.White;
+            this.txtThirdParamLenght.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.txtThirdParamLenght, "txtThirdParamLenght");
-            this.txtThirdParamLenght.ForeColor = System.Drawing.Color.Red;
+            this.txtThirdParamLenght.ForeColor = System.Drawing.Color.Cyan;
             this.txtThirdParamLenght.Name = "txtThirdParamLenght";
             // 
             // txtThirdParamName
             // 
-            this.txtThirdParamName.BackColor = System.Drawing.Color.White;
+            this.txtThirdParamName.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.txtThirdParamName, "txtThirdParamName");
-            this.txtThirdParamName.ForeColor = System.Drawing.Color.Red;
+            this.txtThirdParamName.ForeColor = System.Drawing.Color.Cyan;
             this.txtThirdParamName.Name = "txtThirdParamName";
             // 
             // grpFourthParam
@@ -261,16 +261,16 @@ namespace StructureBuilder_Form
             // 
             // txtFourthParamLenght
             // 
-            this.txtFourthParamLenght.BackColor = System.Drawing.Color.White;
+            this.txtFourthParamLenght.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.txtFourthParamLenght, "txtFourthParamLenght");
-            this.txtFourthParamLenght.ForeColor = System.Drawing.Color.Red;
+            this.txtFourthParamLenght.ForeColor = System.Drawing.Color.Cyan;
             this.txtFourthParamLenght.Name = "txtFourthParamLenght";
             // 
             // txtFourthParamName
             // 
-            this.txtFourthParamName.BackColor = System.Drawing.Color.White;
+            this.txtFourthParamName.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.txtFourthParamName, "txtFourthParamName");
-            this.txtFourthParamName.ForeColor = System.Drawing.Color.Red;
+            this.txtFourthParamName.ForeColor = System.Drawing.Color.Cyan;
             this.txtFourthParamName.Name = "txtFourthParamName";
             // 
             // chkThirdParam
@@ -293,16 +293,19 @@ namespace StructureBuilder_Form
             // 
             // txtStructureName
             // 
+            this.txtStructureName.BackColor = System.Drawing.Color.Black;
             resources.ApplyResources(this.txtStructureName, "txtStructureName");
+            this.txtStructureName.ForeColor = System.Drawing.SystemColors.MenuHighlight;
             this.txtStructureName.Name = "txtStructureName";
             // 
             // btnLock
             // 
+            this.btnLock.BackColor = System.Drawing.Color.RoyalBlue;
             resources.ApplyResources(this.btnLock, "btnLock");
             this.btnLock.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnLock.ImageList = this.LockIcons;
             this.btnLock.Name = "btnLock";
-            this.btnLock.UseVisualStyleBackColor = true;
+            this.btnLock.UseVisualStyleBackColor = false;
             this.btnLock.Click += new System.EventHandler(this.btnLock_Click);
             // 
             // LockIcons
@@ -314,10 +317,11 @@ namespace StructureBuilder_Form
             // 
             // btnCreate
             // 
+            this.btnCreate.BackColor = System.Drawing.Color.RoyalBlue;
             resources.ApplyResources(this.btnCreate, "btnCreate");
             this.btnCreate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnCreate.Name = "btnCreate";
-            this.btnCreate.UseVisualStyleBackColor = true;
+            this.btnCreate.UseVisualStyleBackColor = false;
             this.btnCreate.Click += new System.EventHandler(this.btnCreate_Click);
             // 
             // grpAllComponents
@@ -371,6 +375,7 @@ namespace StructureBuilder_Form
             this.MinimizeBox = false;
             this.Name = "StructureBuilder";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.StructureBuilder_FormClosing);
+            this.Load += new System.EventHandler(this.StructureBuilder_Load);
             this.grpSecondParam.ResumeLayout(false);
             this.grpSecondParam.PerformLayout();
             this.grpFirstParam.ResumeLayout(false);
