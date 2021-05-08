@@ -7,7 +7,7 @@
     <ProjectGuid>{DDEF134B-1C18-4CFC-B738-580B17869DDF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>StructureBuilder_Form</RootNamespace>
-    <AssemblyName>StructureBuilder_[V2.5.1.5]</AssemblyName>
+    <AssemblyName>StructureBuilder_[V2.5.1.6]</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>

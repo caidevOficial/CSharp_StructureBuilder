@@ -36,10 +36,12 @@ namespace StructureBuilder_Form {
         #region AudioPaths
 
         private static string pathToMusic = $"{Environment.CurrentDirectory}/Sounds";
-        private string lockOn = $"{pathToMusic}/Lock.wav";
-        private string lockOff = $"{pathToMusic}/Unlock.wav";
+        private string lockOnSound = $"{pathToMusic}/Lock.wav";
+        private string lockOffSound = $"{pathToMusic}/Unlock.wav";
+        private string checkBoxSound = $"{pathToMusic}/Check.wav";
         private string errorSound = $"{pathToMusic}/Exception.wav";
-        private string success = $"{pathToMusic}/Create.wav";
+        private string successSound = $"{pathToMusic}/Success.wav";
+        private string loginSound = $"{pathToMusic}/Login.wav";
 
         private readonly SoundPlayer myPlayer = new SoundPlayer();
 
@@ -54,7 +56,7 @@ namespace StructureBuilder_Form {
         private short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private short packsDone = 0;
         private bool locked = false;
-        private string appVersion = "Version [2.5.1.5]";
+        private string appVersion = "Version [2.5.1.6]";
 
         #endregion
 
@@ -92,7 +94,7 @@ namespace StructureBuilder_Form {
             cmbFourthParamType.SelectedIndex = 0;
             lblNewVersion.Text = appVersion;
             try {
-                MyPlayer(success);
+                MyPlayer(loginSound);
             } catch (NoSoundFoundException ns) {
                 frmException fe = new frmException(ns);
                 fe.Location = this.Location;
@@ -130,6 +132,7 @@ namespace StructureBuilder_Form {
             if (chkSecondParam.Checked is true) {
                 grpSecondParam.Enabled = true;
                 chkThirdParam.Enabled = true;
+                MyPlayer(checkBoxSound);
             } else {
                 grpSecondParam.Enabled = false;
                 grpThirdParam.Enabled = false;
@@ -149,6 +152,7 @@ namespace StructureBuilder_Form {
             if (chkThirdParam.Checked is true) {
                 grpThirdParam.Enabled = true;
                 chkFourthParam.Enabled = true;
+                MyPlayer(checkBoxSound);
             } else {
                 grpThirdParam.Enabled = false;
                 grpFourthParam.Enabled = false;
@@ -165,6 +169,7 @@ namespace StructureBuilder_Form {
         private void chkFourthParam_CheckedChanged(object sender, EventArgs e) {
             if (chkFourthParam.Checked is true) {
                 grpFourthParam.Enabled = true;
+                MyPlayer(checkBoxSound);
             } else {
                 grpFourthParam.Enabled = false;
             }
@@ -296,7 +301,7 @@ namespace StructureBuilder_Form {
                         }
 
                         CreateFiles(myStructure, packsDone, fullPackSize);
-                        MyPlayer(success);
+                        MyPlayer(successSound);
                         MessageBox.Show($"Structure {myStructure.FinalStructureName} Created Successfully, Congratulations!\n" +
                             $"Check the files created in the directory of this App.\n\n" +
                             $"Now you have to come with me, where? Back to the future!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
@@ -389,13 +394,13 @@ namespace StructureBuilder_Form {
         private void btnLock_Click(object sender, EventArgs e) {
             try {
                 if (!locked) {
-                    MyPlayer(lockOn);
+                    MyPlayer(lockOnSound);
                     locked = !locked;
                     btnLock.ImageIndex = 1;
                     grpAllComponents.Enabled = false;
                     btnCreate.Enabled = true;
                 } else {
-                    MyPlayer(lockOff);
+                    MyPlayer(lockOffSound);
                     locked = !locked;
                     btnLock.ImageIndex = 0;
                     grpAllComponents.Enabled = true;
