@@ -32,6 +32,50 @@ namespace FileBuilders {
     public sealed class CreatorDotH : Creator {
         public CreatorDotH() { }
 
+        #region CreateHeaders
+
+        /// <summary>
+        /// Writes in the file a license MIT-type
+        /// </summary>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        public static void CreateLicense(StringBuilder streamText) {
+            streamText.AppendLine("/*");
+            streamText.AppendLine(" * MIT License");
+            streamText.AppendLine(" *");
+            streamText.AppendLine(" * Copyright (c) 2021 [FacuFalcone]");
+            streamText.AppendLine(" *");
+            streamText.AppendLine(" * Permission is hereby granted, free of charge, to any person obtaining a copy");
+            streamText.AppendLine(" * of this software and associated documentation files (the \"Software\"), to deal");
+            streamText.AppendLine(" * in the Software without restriction, including without limitation the rights");
+            streamText.AppendLine(" * to use, copy, modify, merge, publish, distribute, sublicense, and/or sell");
+            streamText.AppendLine(" * copies of the Software, and to permit persons to whom the Software is ");
+            streamText.AppendLine(" * furnished to do so, subject to the following conditions: ");
+            streamText.AppendLine(" * ");
+            streamText.AppendLine(" * The above copyright notice and this permission notice shall be included in all");
+            streamText.AppendLine(" * copies or substantial portions of the Software.");
+            streamText.AppendLine(" * ");
+            streamText.AppendLine(" * THE SOFTWARE IS PROVIDED \"AS IS\", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR");
+            streamText.AppendLine(" * IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,");
+            streamText.AppendLine(" * FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE");
+            streamText.AppendLine(" * AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER");
+            streamText.AppendLine(" * LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,");
+            streamText.AppendLine(" * OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE");
+            streamText.AppendLine(" * SOFTWARE.");
+            streamText.AppendLine(" */\n");
+        }
+
+        /// <summary>
+        /// Creates the imports or 'Headers' of the file.
+        /// </summary>
+        /// <param name="myStructure">Structure for check the parameters.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        protected override void CreateImports(Structure myStructure, StringBuilder streamText) {
+            streamText.AppendLine($"#ifndef {myStructure.FinalStructureName.ToUpper()}_H_INCLUDED\n#define {myStructure.FinalStructureName.ToUpper()}_H_INCLUDED");
+            streamText.AppendLine("#include \"LinkedList.h\"");
+        }
+
+        #endregion
+
         #region CreateStructure
 
         /// <summary>
@@ -40,20 +84,17 @@ namespace FileBuilders {
         /// <param name="myStructure">Structure to extract the data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
         /// <returns>The stringBuilder with the basic data of the structure</returns>
-        private static StringBuilder CreateStructure(Structure myStructure, StringBuilder streamText) {
-            streamText.Append($"#ifndef {myStructure.FinalStructureName.ToUpper()}_H_INCLUDED\n#define {myStructure.FinalStructureName.ToUpper()}_H_INCLUDED\n");
-            streamText.Append("#include \"LinkedList.h\"\n");
-            streamText.Append("\ntypedef struct{\n");
+        private void CreateStructure(Structure myStructure, StringBuilder streamText) {
+            CreateImports(myStructure, streamText);
+            streamText.AppendLine("\ntypedef struct{");
             foreach (Parameter aParameter in myStructure.ListParamaters) {
                 if (aParameter.LengthParameter == 1) {
-                    streamText.Append($"    {aParameter.TypeParameter} {aParameter.NameParameter};\n");
+                    streamText.AppendLine($"\t{aParameter.TypeParameter} {aParameter.NameParameter};");
                 } else {
-                    streamText.Append($"    {aParameter.TypeParameter} {aParameter.NameParameter}[{aParameter.LengthParameter}];\n");
+                    streamText.AppendLine($"\t{aParameter.TypeParameter} {aParameter.NameParameter}[{aParameter.LengthParameter}];");
                 }
             }
-            streamText.Append($"}}{myStructure.FinalStructureName};\n\n");
-
-            return streamText;
+            streamText.AppendLine($"}}{myStructure.FinalStructureName};\n");
         }
 
         #endregion
@@ -69,9 +110,8 @@ namespace FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override short CreateBuilderEmpty(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
-            streamText.Append($"\n// ## {myStructure.FinalStructureName}: BASIC STRUCTURE FUNCTIONS.\n");
             // Empty builder
-            streamText.Append($"{myStructure.FinalStructureName}* {myStructure.AliasName}_newEmpty();\n"); // auxStrName* strShort_newEmpty();
+            streamText.AppendLine($"{myStructure.FinalStructureName}* {myStructure.AliasName}_newEmpty();"); // auxStrName* strShort_newEmpty();
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
@@ -99,7 +139,7 @@ namespace FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override short ShowOneEntity(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
-            streamText.Append($"void {myStructure.AliasName}_show({myStructure.FinalStructureName}* {myStructure.StructureName});\n"); // void usr_show(sUser* user)
+            streamText.AppendLine($"void {myStructure.AliasName}_show({myStructure.FinalStructureName}* {myStructure.StructureName});"); // void usr_show(sUser* user)
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
@@ -115,7 +155,7 @@ namespace FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override short ShowAllEntities(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
-            streamText.Append($"int {myStructure.AliasName}_showAll(LinkedList* this, char* errorMesage);\n\n");
+            streamText.AppendLine($"int {myStructure.AliasName}_showAll(LinkedList* this, char* errorMesage);\n");
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
@@ -132,12 +172,14 @@ namespace FileBuilders {
         /// <returns>The amount of steps done.</returns>
         protected override short CreateBasicStructFunctions(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
 
+            streamText.AppendLine($"// ## {myStructure.FinalStructureName}: CONSTRUCTORS.");
             // Empty builder
             packsDone = CreateBuilderEmpty(myStructure, streamText, packsDone, fullPackSize);
 
             // Builder with params.
             CreateBuilderWithParams(myStructure, streamText, packsDone, fullPackSize);
 
+            streamText.AppendLine($"// ## {myStructure.FinalStructureName}: SHOW & SHOW_ALL.");
             // Show one
             packsDone = ShowOneEntity(myStructure, streamText, packsDone, fullPackSize);
 
@@ -163,7 +205,7 @@ namespace FileBuilders {
             if (myStructure.ListParamaters.IndexOf(myParam) != myStructure.ListParamaters.Count - 1) {
                 streamText.Append($", ");
             } else {
-                streamText.Append($");\n\n"); // this should be EOF of dotH
+                streamText.AppendLine($");\n"); // this should be EOF of dotH
             }
         }
 
@@ -192,7 +234,7 @@ namespace FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override short CreateGetter(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize) {
-            streamText.Append($"int {myStructure.AliasName}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter});\n");
+            streamText.AppendLine($"int {myStructure.AliasName}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter});");
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
@@ -210,9 +252,9 @@ namespace FileBuilders {
         /// <returns>The amount of steps done.</returns>
         protected override short CreateSetter(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize) {
             if (paramA.LengthParameter == 1) {
-                streamText.Append($"int {myStructure.AliasName}_set{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter} {paramA.NameParameter});\n");
+                streamText.AppendLine($"int {myStructure.AliasName}_set{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter} {paramA.NameParameter});");
             } else {
-                streamText.Append($"int {myStructure.AliasName}_set{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter});\n");
+                streamText.AppendLine($"int {myStructure.AliasName}_set{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter});");
             }
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
@@ -230,7 +272,7 @@ namespace FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override short CreateComparer(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize) {
-            streamText.Append($"int {myStructure.AliasName}_compare{paramA.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2);\n");
+            streamText.AppendLine($"int {myStructure.AliasName}_compare{paramA.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2);");
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
@@ -246,27 +288,27 @@ namespace FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override short CreateGettersAndSetters(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
-            streamText.Append($"// ## {myStructure.FinalStructureName}: GETTERS\n");
+            streamText.AppendLine($"// ## {myStructure.FinalStructureName}: GETTERS");
 
             foreach (Parameter aParam in myStructure.ListParamaters) {
                 // Create Getters
                 packsDone = CreateGetter(myStructure, aParam, streamText, packsDone, fullPackSize);
             }
-            streamText.Append("\n");
+            streamText.AppendLine("");
 
-            streamText.Append($"// ## {myStructure.FinalStructureName}: SETTERS\n");
+            streamText.AppendLine($"// ## {myStructure.FinalStructureName}: SETTERS");
             foreach (Parameter aParam in myStructure.ListParamaters) {
                 // Create Setters
                 packsDone = CreateSetter(myStructure, aParam, streamText, packsDone, fullPackSize);
             }
-            streamText.Append("\n");
+            streamText.AppendLine("");
 
-            streamText.Append($"// ## {myStructure.FinalStructureName}: COMPARERS\n");
+            streamText.AppendLine($"// ## {myStructure.FinalStructureName}: COMPARERS");
             foreach (Parameter aParam in myStructure.ListParamaters) {
                 // Create Comparators
                 packsDone = CreateComparer(myStructure, aParam, streamText, packsDone, fullPackSize);
             }
-            streamText.Append("\n");
+            streamText.AppendLine("");
 
             return packsDone;
         }
@@ -281,7 +323,8 @@ namespace FileBuilders {
         /// <param name="myStructure">Structure to extract the data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
         protected override void CreateDeleteFunction(Structure myStructure, StringBuilder streamText) {
-            streamText.Append($"void {myStructure.AliasName}_delete({myStructure.FinalStructureName}* this);\n");
+            streamText.AppendLine($"// ## {myStructure.FinalStructureName}: DELETE");
+            streamText.AppendLine($"void {myStructure.AliasName}_delete({myStructure.FinalStructureName}* this);");
         }
 
         #endregion
@@ -305,13 +348,13 @@ namespace FileBuilders {
                     Console.WriteLine($"Final Structure Name: {myStructure.FinalStructureName}");
                     Console.WriteLine($"\nAmount of steps: {fullPackSize}\nActions completed: {packsDone}\n");
 
-                    dataMaker = CreateStructure(myStructure, dataMaker);
+                    CreateLicense(dataMaker);
+                    CreateStructure(myStructure, dataMaker);
 
-                    dataMaker.Append("#endif \n");
-                    dataMaker.Append("\n// # CREDITS TO:\n");
-                    dataMaker.Append("// ## Idea in C: Santiago Herrera.\n");
-                    dataMaker.Append("// ## Advanced Improvement And develop in C#: FacuFalcone - CaidevOficial.\n");
-                    dataMaker.Append("// ## Follow me on -> github.com/CaidevOficial\n");
+                    dataMaker.AppendLine("#endif\n");
+                    dataMaker.AppendLine("// # CREDITS TO:");
+                    dataMaker.AppendLine("// ## Advanced Improvement And develop in C#: FacuFalcone - CaidevOficial.");
+                    dataMaker.AppendLine("// ## Follow me on -> github.com/CaidevOficial\n");
                     packsDone++;
                     ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
@@ -320,7 +363,7 @@ namespace FileBuilders {
                     CreateDeleteFunction(myStructure, dataMaker);
 
                     if (File.Exists(curFile)) {
-                        // if not exist, creates the file.
+                        // if exist the file, writes.
                         pFileDotH.Write(dataMaker);
                     }
 
@@ -329,6 +372,7 @@ namespace FileBuilders {
 
                 } catch (Exception e) {
                     Console.WriteLine(e.StackTrace);
+                    throw new Exception("Something get wrong in CreatorDotH.cs", e);
                 } finally {
                     // Here we close the file if there is an error or not.
                     try {
@@ -337,6 +381,7 @@ namespace FileBuilders {
                         }
                     } catch (Exception e2) {
                         Console.WriteLine(e2.StackTrace);
+                        throw new Exception("Maybe the file is null in CreatorDotH.cs", e2);
                     }
                 }
             }
