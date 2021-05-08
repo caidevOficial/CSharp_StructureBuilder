@@ -29,6 +29,19 @@ namespace FileBuilders {
     public abstract class Creator {
         public Creator() { }
 
+        #region Headers
+
+        /// <summary>
+        /// Creates the imports or 'Headers' of the file.
+        /// </summary>
+        /// <param name="myStructure">Structure for check the parameters.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        protected abstract void CreateImports(Structure myStructure, StringBuilder streamText);
+
+        #endregion
+
+        #region Constructors
+
         /// <summary>
         /// Creates The Constructor of the structure without parameters.
         /// </summary>
@@ -47,6 +60,25 @@ namespace FileBuilders {
         /// <param name="packsDone">Amount of steps done.</param>
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         protected abstract void CreateBuilderWithParams(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize);
+
+        /// <summary>
+        /// Adds a parameter into the constructor's parameters.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="myParam">Parameter to extract the data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        protected virtual void AddParameterIntoConstructor(Structure myStructure, Parameter myParam, StringBuilder streamText) { }
+
+        /// <summary>
+        /// Adds parameters data to the 'parameters' of the constructor.
+        /// </summary>
+        /// <param name="myStructure">Structure to extract the data.</param>
+        /// <param name="streamText">A stringBuilder to write the data.</param>
+        protected virtual void AddParametersToConstructor(Structure myStructure, StringBuilder streamText) { }
+
+        #endregion
+
+        #region Show
 
         /// <summary>
         /// Creates the function that show an entity of the structures.
@@ -68,6 +100,10 @@ namespace FileBuilders {
         /// <returns>The amount of steps done.</returns>
         protected abstract short ShowAllEntities(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize);
 
+        #endregion
+
+        #region BasicFunctions
+
         /// <summary>
         /// Creates the basic functions such as Constructors, Show and ShowAll.
         /// </summary>
@@ -78,20 +114,9 @@ namespace FileBuilders {
         /// <returns>The amount of steps done.</returns>
         protected abstract short CreateBasicStructFunctions(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize);
 
-        /// <summary>
-        /// Adds a parameter into the constructor's parameters.
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="myParam">Parameter to extract the data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        protected virtual void AddParameterIntoConstructor(Structure myStructure, Parameter myParam, StringBuilder streamText) { }
+        #endregion
 
-        /// <summary>
-        /// Adds parameters data to the 'parameters' of the constructor.
-        /// </summary>
-        /// <param name="myStructure">Structure to extract the data.</param>
-        /// <param name="streamText">A stringBuilder to write the data.</param>
-        protected virtual void AddParametersToConstructor(Structure myStructure, StringBuilder streamText) { }
+        #region Getters
 
         /// <summary>
         /// Creates the Getter of the file.
@@ -104,6 +129,10 @@ namespace FileBuilders {
         /// <returns>The amount of steps done.</returns>
         protected abstract short CreateGetter(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize);
 
+        #endregion
+
+        #region Setters
+
         /// <summary>
         /// Creates the Setter of the file.
         /// </summary>
@@ -115,6 +144,10 @@ namespace FileBuilders {
         /// <returns>The amount of steps done.</returns>
         protected abstract short CreateSetter(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize);
 
+        #endregion
+
+        #region Comparers
+
         /// <summary>
         /// Creates the Comparer of the file.
         /// </summary>
@@ -125,6 +158,10 @@ namespace FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected abstract short CreateComparer(Structure myStructure, Parameter paramA, StringBuilder streamText, short packsDone, short fullPackSize);
+
+        #endregion
+
+        #region FileMaker
 
         /// <summary>
         /// Creates the Comparers, Getter and Setter of the file.
@@ -151,5 +188,8 @@ namespace FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         public abstract short FileMaker(Structure myStructure, short packsDone, short fullPackSize);
+
+        #endregion
+
     }
 }

@@ -21,7 +21,7 @@
   <th>App UI</th><th>Exception Form</th><th>Loading Screen</th><th>Success Screen</th>
   <tr>
     <td>
-      <img src="Media/sample_1.png"/>
+      <img src="Media/sample_1_1.png"/>
     </td>
     <td>
       <img src="Media/sample_2_1.png"/>

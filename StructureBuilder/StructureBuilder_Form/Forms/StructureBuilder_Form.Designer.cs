@@ -85,6 +85,7 @@ namespace StructureBuilder_Form
             this.grpAllComponents = new System.Windows.Forms.GroupBox();
             this.lblLockTheButton = new System.Windows.Forms.Label();
             this.lblNewVersion = new System.Windows.Forms.Label();
+            this.lblCreateStructure = new System.Windows.Forms.Label();
             this.grpSecondParam.SuspendLayout();
             this.grpFirstParam.SuspendLayout();
             this.grpThirdParam.SuspendLayout();
@@ -340,7 +341,7 @@ namespace StructureBuilder_Form
             // 
             // btnCreate
             // 
-            this.btnCreate.BackColor = System.Drawing.Color.RoyalBlue;
+            this.btnCreate.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             resources.ApplyResources(this.btnCreate, "btnCreate");
             this.btnCreate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnCreate.Name = "btnCreate";
@@ -381,11 +382,19 @@ namespace StructureBuilder_Form
             this.lblNewVersion.ForeColor = System.Drawing.Color.RoyalBlue;
             this.lblNewVersion.Name = "lblNewVersion";
             // 
+            // lblCreateStructure
+            // 
+            resources.ApplyResources(this.lblCreateStructure, "lblCreateStructure");
+            this.lblCreateStructure.BackColor = System.Drawing.Color.Transparent;
+            this.lblCreateStructure.ForeColor = System.Drawing.Color.Red;
+            this.lblCreateStructure.Name = "lblCreateStructure";
+            // 
             // StructureBuilder
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
+            this.Controls.Add(this.lblCreateStructure);
             this.Controls.Add(this.lblNewVersion);
             this.Controls.Add(this.lblLockTheButton);
             this.Controls.Add(this.grpAllComponents);
@@ -447,6 +456,7 @@ namespace StructureBuilder_Form
         private System.Windows.Forms.GroupBox grpAllComponents;
         private System.Windows.Forms.Label lblLockTheButton;
         private System.Windows.Forms.Label lblNewVersion;
+        private System.Windows.Forms.Label lblCreateStructure;
     }
 }
 
