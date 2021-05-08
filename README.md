@@ -18,16 +18,19 @@
 
 
 <table>
-  <th>App UI</th><th>Exception Form</th><th>Loading Screen</th>
+  <th>App UI</th><th>Exception Form</th><th>Loading Screen</th><th>Success Screen</th>
   <tr>
     <td>
       <img src="Media/sample_1.png"/>
     </td>
     <td>
-      <img src="Media/sample_2.png"/>
+      <img src="Media/sample_2_1.png"/>
     </td>
     <td>
       <img src="Media/sample_3.png"/>
+    </td>
+    <td>
+      <img src="Media/sample_4.png"/>
     </td>
   </tr>
 </table>
