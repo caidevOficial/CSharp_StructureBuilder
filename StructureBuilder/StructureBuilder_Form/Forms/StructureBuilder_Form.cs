@@ -35,16 +35,16 @@ namespace StructureBuilder_Form {
 
         #region AudioPaths
 
-        private static string pathToMusic = $"{Environment.CurrentDirectory}/Sounds";
-        private string checkBox2Sound = $"{pathToMusic}/Check2.wav";
-        private string checkBox3Sound = $"{pathToMusic}/Check3.wav";
-        private string checkBox4Sound = $"{pathToMusic}/Check4.wav";
-        private string errorSound = $"{pathToMusic}/Exception.wav";
-        private string lockOffSound = $"{pathToMusic}/Unlock.wav";
-        private string lockOnSound = $"{pathToMusic}/Lock.wav";
-        private string loginSound = $"{pathToMusic}/Login.wav";
-        private string successSound = $"{pathToMusic}/Success.wav";
-        private string unCheckBoxSound = $"{pathToMusic}/UnCheck.wav";
+        private static readonly string pathToMusic = $"{Environment.CurrentDirectory}/Sounds";
+        private readonly string checkBox2Sound = $"{pathToMusic}/Check2.wav";
+        private readonly string checkBox3Sound = $"{pathToMusic}/Check3.wav";
+        private readonly string checkBox4Sound = $"{pathToMusic}/Check4.wav";
+        private readonly string errorSound = $"{pathToMusic}/Exception.wav";
+        private readonly string lockOffSound = $"{pathToMusic}/Unlock.wav";
+        private readonly string lockOnSound = $"{pathToMusic}/Lock.wav";
+        private readonly string loginSound = $"{pathToMusic}/Login.wav";
+        private readonly string successSound = $"{pathToMusic}/Success.wav";
+        private readonly string unCheckBoxSound = $"{pathToMusic}/UnCheck.wav";
 
         private readonly SoundPlayer myPlayer = new SoundPlayer();
 
@@ -56,10 +56,10 @@ namespace StructureBuilder_Form {
         private Parameter myParameter;
         private CreatorDotH makerH = new CreatorDotH();
         private CreatorDotC makerC = new CreatorDotC();
-        private short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
+        private readonly short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private short packsDone = 0;
         private bool locked = false;
-        private string appVersion = "Version [2.5.1.7]";
+        private readonly string appVersion = "Version [2.5.1.75]";
 
         #endregion
 
@@ -99,8 +99,9 @@ namespace StructureBuilder_Form {
             try {
                 MyPlayer(loginSound);
             } catch (NoSoundFoundException ns) {
-                frmException fe = new frmException(ns);
-                fe.Location = this.Location;
+                frmException fe = new frmException(ns) {
+                    Location = this.Location
+                };
                 fe.ShowDialog();
             }
         }
@@ -308,23 +309,23 @@ namespace StructureBuilder_Form {
 
                         CreateFiles(myStructure, packsDone, fullPackSize);
                         MyPlayer(successSound);
-                        FrmSuccess fs = new FrmSuccess();
-                        fs.Location = this.Location;
+                        FrmSuccess fs = new FrmSuccess {
+                            Location = this.Location
+                        };
                         fs.ShowDialog();
                         myStructure.ListParamaters.Clear();
-                        //MessageBox.Show($"Structure {myStructure.FinalStructureName} Created Successfully, Congratulations!\n" +
-                        //    $"Check the files created in the directory of this App.\n\n" +
-                        //    $"Now you have to come with me, where? Back to the future!", "Success", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 } catch (Exception ex) {
                     try {
                         MyPlayer(errorSound);
-                        frmException fe = new frmException(ex);
-                        fe.Location = this.Location;
+                        frmException fe = new frmException(ex) {
+                            Location = this.Location
+                        };
                         fe.ShowDialog();
                     } catch (NoSoundFoundException ns) {
-                        frmException fe = new frmException(ns);
-                        fe.Location = this.Location;
+                        frmException fe = new frmException(ns) {
+                            Location = this.Location
+                        };
                         fe.ShowDialog();
                     }
                 }
@@ -416,8 +417,9 @@ namespace StructureBuilder_Form {
                     btnCreate.Enabled = false;
                 }
             } catch (NoSoundFoundException ns) {
-                frmException fe = new frmException(ns);
-                fe.Location = this.Location;
+                frmException fe = new frmException(ns) {
+                    Location = this.Location
+                };
                 fe.ShowDialog();
             }
         }
