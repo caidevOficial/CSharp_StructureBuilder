@@ -80,8 +80,8 @@ namespace FileBuilders {
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
         protected override short CreateBuilderEmpty(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
-            streamText.AppendLine($"{myStructure.FinalStructureName}* {myStructure.AliasName}_newEmpty(){{"); // sUser* usr_newEmpty()
-            streamText.AppendLine($"\treturn ({myStructure.FinalStructureName}*) calloc(sizeof({myStructure.FinalStructureName}),1);\n}}\n"); // return (sUser*) malloc(sizeof(sUser));
+            streamText.AppendLine($"{myStructure.FinalStructureName}* {myStructure.AliasName}_newEmpty(){{");
+            streamText.AppendLine($"\treturn ({myStructure.FinalStructureName}*) calloc(sizeof({myStructure.FinalStructureName}),1);\n}}\n");
             packsDone++;
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
 
@@ -98,7 +98,7 @@ namespace FileBuilders {
         /// <returns>The amount of steps done.</returns>
         protected override void CreateBuilderWithParams(Structure myStructure, StringBuilder streamText, short packsDone, short fullPackSize) {
 
-            streamText.Append($"{myStructure.FinalStructureName}* {myStructure.AliasName}_new("); // auxStrName* strShort_new(parametersLine);
+            streamText.Append($"{myStructure.FinalStructureName}* {myStructure.AliasName}_new(");
             foreach (Parameter aParam in myStructure.ListParamaters) {
                 if (aParam.LengthParameter == 1) {
                     streamText.Append($"{aParam.TypeParameter} {aParam.NameParameter}");
@@ -111,13 +111,13 @@ namespace FileBuilders {
                     streamText.AppendLine($"){{");
                 }
             }
-            streamText.AppendLine($"\t{myStructure.FinalStructureName}* {myStructure.StructureName} = {myStructure.AliasName}_newEmpty();");
-            streamText.AppendLine($"\tif({myStructure.StructureName}!=NULL){{");
+            streamText.AppendLine($"\t{myStructure.FinalStructureName}* this = {myStructure.AliasName}_newEmpty();");
+            streamText.AppendLine($"\tif(this != NULL){{");
 
             foreach (Parameter aParam in myStructure.ListParamaters) {
-                streamText.AppendLine($"\t\t{myStructure.AliasName}_set{aParam.AliasNameParameter}({myStructure.StructureName}, {aParam.NameParameter});"); // usr_setId(user,id);
+                streamText.AppendLine($"\t\t{myStructure.AliasName}_set{aParam.AliasNameParameter}(this, {aParam.NameParameter});");
             }
-            streamText.AppendLine($"\t}}\n\treturn {myStructure.StructureName};\n}}\n");
+            streamText.AppendLine($"\t}}\n\treturn this;\n}}\n");
         }
 
         #endregion
@@ -131,9 +131,9 @@ namespace FileBuilders {
         /// <param name="streamText">A stringBuilder to write the data.</param>
         public void CreateShowEntity(Structure myStructure, StringBuilder streamText) {
 
-            streamText.AppendLine($"void {myStructure.AliasName}_show({myStructure.FinalStructureName}* {myStructure.StructureName}){{"); // void usr_show(sUser* user)
+            streamText.AppendLine($"void {myStructure.AliasName}_show({myStructure.FinalStructureName}* this){{");
             foreach (Parameter aParam in myStructure.ListParamaters) {
-                // recorrer 1 vez para variables auxiliares.
+                // loop through one time for auxiliar variables..
                 streamText.Append($"\t{aParam.TypeParameter} {aParam.NameParameter}");
                 if (aParam.TypeParameter.Equals("char")) {
                     streamText.Append($"[{aParam.LengthParameter}]");
@@ -142,17 +142,17 @@ namespace FileBuilders {
             }
             streamText.AppendLine("");
 
-            // Recorrer por segunda vez para hacer los getters.
+            // loop through for the second time to make the getters.
             foreach (Parameter aParam in myStructure.ListParamaters) {
                 if (aParam.TypeParameter.Equals("char")) {
-                    streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}, {aParam.NameParameter});");
+                    streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}(this, {aParam.NameParameter});");
                 } else {
-                    streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}, &{aParam.NameParameter});");
+                    streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}(this, &{aParam.NameParameter});");
                 }
             }
             streamText.AppendLine("");
 
-            streamText.AppendLine($"\tif({myStructure.StructureName}!=NULL){{");
+            streamText.AppendLine($"\tif(this != NULL){{");
             streamText.Append($"\t\tprintf(\"");
             foreach (Parameter aParam in myStructure.ListParamaters) {
                 if (aParam.TypeParameter.Equals("char")) {
@@ -176,7 +176,7 @@ namespace FileBuilders {
                     streamText.AppendLine($");");
                 }
             }
-            streamText.AppendLine($"\t\tprintf(\"-\\n\");\n    }}\n}}\n");
+            streamText.AppendLine($"\t\tprintf(\"-\\n\");\n\t}}\n}}\n");
         }
 
         /// <summary>
@@ -225,10 +225,10 @@ namespace FileBuilders {
             streamText.AppendLine($"\t\tprintf(\"-\\n\");");
             streamText.AppendLine($"\t\tfor(int i=0; i<length; i++){{");
             streamText.AppendLine($"\t\t\t{myStructure.StructureName} = ({myStructure.FinalStructureName}*) ll_get(this,i);");
-            streamText.AppendLine($"\t\t\t{myStructure.AliasName}_show({myStructure.StructureName});\n        }}");
-            streamText.AppendLine($"\t\tisError = 0;\n    }}");
+            streamText.AppendLine($"\t\t\t{myStructure.AliasName}_show({myStructure.StructureName});\n\t\t}}");
+            streamText.AppendLine($"\t\tisError = 0;\n\t}}");
             streamText.AppendLine($"\telse{{");
-            streamText.AppendLine($"\t\tprintf(errorMesage);\n    }}");
+            streamText.AppendLine($"\t\tprintf(errorMesage);\n\t}}");
             streamText.AppendLine($"\treturn isError;\n}}\n");
 
             packsDone++;
@@ -299,16 +299,16 @@ namespace FileBuilders {
         /// <param name="streamText">A stringBuilder to write the data.</param>
         private void CreateCompareWithChar(Structure myStructure, Parameter aParam, StringBuilder streamText) {
             streamText.AppendLine($"// For use in a sort function - Compare {myStructure.StructureName}->{aParam.NameParameter}");
-            streamText.AppendLine($"int {myStructure.AliasName}_compare{aParam.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2){{");
+            streamText.AppendLine($"int {myStructure.AliasName}_compare{aParam.AliasNameParameter}(void* this1, void* this2){{");
             streamText.AppendLine($"\tint anw;");
             // First variable
             streamText.AppendLine($"\t{aParam.TypeParameter} {aParam.NameParameter}1_1[{aParam.LengthParameter}];");
             // Second variable
             streamText.AppendLine($"\t{aParam.TypeParameter} {aParam.NameParameter}2_2[{aParam.LengthParameter}];\n");
             // First getter
-            streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}1, {aParam.NameParameter}1_1);");
+            streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}(this1, {aParam.NameParameter}1_1);");
             // Second getter
-            streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}2, {aParam.NameParameter}2_2);\n");
+            streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}(this2, {aParam.NameParameter}2_2);\n");
             streamText.AppendLine($"\tanw = strcmp({aParam.NameParameter}1_1,{aParam.NameParameter}2_2);");
             streamText.AppendLine($"\treturn anw;\n}}\n");
         }
@@ -321,21 +321,21 @@ namespace FileBuilders {
         /// <param name="streamText">A stringBuilder to write the data.</param>
         private void CreateCompareWithoutChar(Structure myStructure, Parameter aParam, StringBuilder streamText) {
             streamText.AppendLine($"// For use in a sort function - Compare {myStructure.StructureName}->{aParam.NameParameter}");
-            streamText.AppendLine($"int {myStructure.AliasName}_compare{aParam.AliasNameParameter}(void* {myStructure.StructureName}1, void* {myStructure.StructureName}2){{");
+            streamText.AppendLine($"int {myStructure.AliasName}_compare{aParam.AliasNameParameter}(void* this1, void* this2){{");
             streamText.AppendLine($"\tint anw = 0;");
             // First variable
             streamText.AppendLine($"\t{aParam.TypeParameter} {aParam.NameParameter}1_1;");
             // Second variable
             streamText.AppendLine($"\t{aParam.TypeParameter} {aParam.NameParameter}2_2;\n");
             // First getter
-            streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}1, &{aParam.NameParameter}1_1);");
+            streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}(this1, &{aParam.NameParameter}1_1);");
             // Second getter
-            streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}({myStructure.StructureName}2, &{aParam.NameParameter}2_2);");
+            streamText.AppendLine($"\t{myStructure.AliasName}_get{aParam.AliasNameParameter}(this2, &{aParam.NameParameter}2_2);");
             // Comparator Area
             streamText.AppendLine($"\tif({aParam.NameParameter}1_1>{aParam.NameParameter}2_2){{");
-            streamText.AppendLine($"\t\tanw=1;\n    }}");
+            streamText.AppendLine($"\t\tanw=1;\n\t}}");
             streamText.AppendLine($"\telse if({aParam.NameParameter}1_1<{aParam.NameParameter}2_2){{");
-            streamText.AppendLine($"\t\tanw=-1;\n    }}");
+            streamText.AppendLine($"\t\tanw=-1;\n\t}}");
             streamText.AppendLine($"\treturn anw;\n}}\n");
         }
 
@@ -387,11 +387,11 @@ namespace FileBuilders {
         /// <param name="paramA">A parameter to extract its data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
         private void CreateGettersNoCharInFile(Structure myStructure, Parameter paramA, StringBuilder streamText) {
-            streamText.AppendLine($"int {myStructure.AliasName}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter}){{");
+            streamText.AppendLine($"int {myStructure.AliasName}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* this, {paramA.TypeParameter}* {paramA.NameParameter}){{");
             streamText.AppendLine($"\tint isError = 1;\n");
-            streamText.AppendLine($"\tif({myStructure.StructureName}!=NULL){{");
-            streamText.AppendLine($"\t\t*{paramA.NameParameter} = {myStructure.StructureName}->{paramA.NameParameter};");
-            streamText.AppendLine($"\t\tisError = 0;\n    }}");
+            streamText.AppendLine($"\tif(this != NULL){{");
+            streamText.AppendLine($"\t\t*{paramA.NameParameter} = this->{paramA.NameParameter};");
+            streamText.AppendLine($"\t\tisError = 0;\n\t}}");
             streamText.AppendLine($"\treturn isError;\n}}\n");
         }
 
@@ -402,11 +402,11 @@ namespace FileBuilders {
         /// <param name="aParam">A parameter to extract its data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
         private void CreateGettersWithCharInFile(Structure myStructure, Parameter paramA, StringBuilder streamText) {
-            streamText.AppendLine($"int {myStructure.AliasName}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter}){{");
+            streamText.AppendLine($"int {myStructure.AliasName}_get{paramA.AliasNameParameter}({myStructure.FinalStructureName}* this, {paramA.TypeParameter}* {paramA.NameParameter}){{");
             streamText.AppendLine($"\tint isError = 1;");
-            streamText.AppendLine($"\tif({myStructure.StructureName}!=NULL){{");
-            streamText.AppendLine($"\t\tstrcpy({paramA.NameParameter},{myStructure.StructureName}->{paramA.NameParameter});");
-            streamText.AppendLine($"\t\tisError = 0;\n    }}");
+            streamText.AppendLine($"\tif(this != NULL){{");
+            streamText.AppendLine($"\t\tstrcpy({paramA.NameParameter}, this->{paramA.NameParameter});");
+            streamText.AppendLine($"\t\tisError = 0;\n\t}}");
             streamText.AppendLine($"\treturn isError;\n}}\n");
         }
 
@@ -458,11 +458,11 @@ namespace FileBuilders {
         /// <param name="aParam">A parameter to extract its data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
         private void CreateSettersNoCharInFile(Structure myStructure, Parameter aParam, StringBuilder streamText) {
-            streamText.AppendLine($"int {myStructure.AliasName}_set{aParam.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {aParam.TypeParameter} {aParam.NameParameter}){{");
+            streamText.AppendLine($"int {myStructure.AliasName}_set{aParam.AliasNameParameter}({myStructure.FinalStructureName}* this, {aParam.TypeParameter} {aParam.NameParameter}){{");
             streamText.AppendLine($"\tint isError = 1;");
-            streamText.AppendLine($"\tif({myStructure.StructureName}!=NULL){{");
-            streamText.AppendLine($"\t\t{myStructure.StructureName}->{aParam.NameParameter} = {aParam.NameParameter};");
-            streamText.AppendLine($"\t\tisError = 0;\n    }}");
+            streamText.AppendLine($"\tif(this != NULL){{");
+            streamText.AppendLine($"\t\tthis->{aParam.NameParameter} = {aParam.NameParameter};");
+            streamText.AppendLine($"\t\tisError = 0;\n\t}}");
             streamText.AppendLine($"\treturn isError;\n}}\n");
         }
 
@@ -473,11 +473,11 @@ namespace FileBuilders {
         /// <param name="paramA">A parameter to extract its data.</param>
         /// <param name="streamText">A stringBuilder to write the data.</param>
         private void CreateSettersWithCharInFile(Structure myStructure, Parameter paramA, StringBuilder streamText) {
-            streamText.AppendLine($"int {myStructure.AliasName}_set{paramA.AliasNameParameter}({myStructure.FinalStructureName}* {myStructure.StructureName}, {paramA.TypeParameter}* {paramA.NameParameter}){{");
+            streamText.AppendLine($"int {myStructure.AliasName}_set{paramA.AliasNameParameter}({myStructure.FinalStructureName}* this, {paramA.TypeParameter}* {paramA.NameParameter}){{");
             streamText.AppendLine($"\tint isError = 1;");
-            streamText.AppendLine($"\tif({myStructure.StructureName}!=NULL){{");
-            streamText.AppendLine($"\t\tstrcpy({myStructure.StructureName}->{paramA.NameParameter},{paramA.NameParameter});");
-            streamText.AppendLine($"\t\tisError = 0;\n    }}");
+            streamText.AppendLine($"\tif(this != NULL){{");
+            streamText.AppendLine($"\t\tstrcpy(this->{paramA.NameParameter}, {paramA.NameParameter});");
+            streamText.AppendLine($"\t\tisError = 0;\n\t}}");
             streamText.AppendLine($"\treturn isError;\n}}\n");
         }
 
@@ -555,9 +555,9 @@ namespace FileBuilders {
         /// <param name="streamText">A stringBuilder to write the data.</param>
         protected override void CreateDeleteFunction(Structure myStructure, StringBuilder streamText) {
             streamText.AppendLine($"// ## {myStructure.FinalStructureName}: DELETE");
-            streamText.AppendLine($"void {myStructure.AliasName}_delete({myStructure.FinalStructureName}* this){{"); // void usr_delete(sUser* this)
-            streamText.AppendLine($"\tif(this!=NULL){{");
-            streamText.AppendLine($"\t\tfree(this);\n    }}");
+            streamText.AppendLine($"void {myStructure.AliasName}_delete({myStructure.FinalStructureName}* this){{");
+            streamText.AppendLine($"\tif(this != NULL){{");
+            streamText.AppendLine($"\t\tfree(this);\n\t}}");
             streamText.AppendLine($"}}");
         }
 
@@ -584,7 +584,7 @@ namespace FileBuilders {
                     CreateDeleteFunction(myStructure, dataMaker);
 
                     if (File.Exists(curFile)) {
-                        // if not exist, creates the file.
+                        // if exist, writes the file.
                         pFileDotC.Write(dataMaker);
                     }
 
