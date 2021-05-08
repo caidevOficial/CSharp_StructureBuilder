@@ -56,7 +56,6 @@ namespace SBExceptions {
         public override string ToString() {
             StringBuilder data = new StringBuilder();
             data.AppendLine($"Excepcion: {this.Message}");
-            data.AppendLine($"Class afected: {this.Source}");
             data.AppendLine($"Method afected: {this.TargetSite}");
             if (!(this.InnerException is null))
                 data.AppendLine($"Details: {this.InnerException}");

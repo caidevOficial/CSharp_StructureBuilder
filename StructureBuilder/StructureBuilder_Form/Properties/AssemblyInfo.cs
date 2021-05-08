@@ -4,7 +4,7 @@ using System.Runtime.InteropServices;
 // La información general de un ensamblado se controla mediante el siguiente 
 // conjunto de atributos. Cambie estos valores de atributo para modificar la información
 // asociada con un ensamblado.
-[assembly: AssemblyTitle("StructureBuilder_Form")]
+[assembly: AssemblyTitle("StructureBuilder V2.5.1.7")]
 [assembly: AssemblyDescription("A little file maker for C Languaje.")]
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("Facundo Falcone")]
@@ -16,7 +16,7 @@ using System.Runtime.InteropServices;
 // Si establece ComVisible en false, los tipos de este ensamblado no estarán visibles 
 // para los componentes COM.  Si es necesario obtener acceso a un tipo en este ensamblado desde 
 // COM, establezca el atributo ComVisible en true en este tipo.
-[assembly: ComVisible(false)]
+[assembly: ComVisible(true)]
 
 // El siguiente GUID sirve como id. de typelib si este proyecto se expone a COM.
 [assembly: Guid("ddef134b-1c18-4cfc-b738-580b17869ddf")]
@@ -31,5 +31,5 @@ using System.Runtime.InteropServices;
 // Puede especificar todos los valores o usar los valores predeterminados de número de compilación y de revisión
 // utilizando el carácter "*", como se muestra a continuación:
 // [assembly: AssemblyVersion("1.0.*")]
-[assembly: AssemblyVersion("2.5.0.2")]
-[assembly: AssemblyFileVersion("2.5.0.2")]
+[assembly: AssemblyVersion("2.5.1.7")]
+[assembly: AssemblyFileVersion("2.5.1.7")]
