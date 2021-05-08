@@ -14,10 +14,6 @@ C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureB
 C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\en-CA\StructureBuilder_Form.resources.dll
 C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\StructureBuilder_Form.StructureBuilder.en-CA.resources
 C:\Users\Facu\Desktop\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\en-CA\StructureBuilder_Form.resources.dll
-E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\StructureBuilder_[V2.5.1.5].exe.config
-E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\StructureBuilder_[V2.5.1.5].exe
-E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\StructureBuilder_[V2.5.1.5].pdb
-E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\en-CA\StructureBuilder_[V2.5.1.5].resources.dll
 E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\CircularProgressBar.dll
 E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\Entities.dll
 E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\WinFormAnimation.dll
@@ -31,7 +27,12 @@ E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form
 E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\StructureBuilder_Form.StructureBuilder.en-CA.resources
 E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\StructureBuilder_Form.csproj.GenerateResource.cache
 E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\StructureBuilder_Form.csproj.CoreCompileInputs.cache
-E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\en-CA\StructureBuilder_[V2.5.1.5].resources.dll
 E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\StructureBuilder_Form.csproj.CopyComplete
-E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\StructureBuilder_[V2.5.1.5].exe
-E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\StructureBuilder_[V2.5.1.5].pdb
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\StructureBuilder_Form.FrmSuccess.resources
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\StructureBuilder_[V2.5.1.7].exe.config
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\StructureBuilder_[V2.5.1.7].exe
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\StructureBuilder_[V2.5.1.7].pdb
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\bin\Debug\en-CA\StructureBuilder_[V2.5.1.7].resources.dll
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\en-CA\StructureBuilder_[V2.5.1.7].resources.dll
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\StructureBuilder_[V2.5.1.7].exe
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\StructureBuilder_Form\obj\Debug\StructureBuilder_[V2.5.1.7].pdb

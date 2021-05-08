@@ -9,3 +9,4 @@ E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\bin\Debug\En
 E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Debug\Entities.csproj.CoreCompileInputs.cache
 E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Debug\Entities.dll
 E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Debug\Entities.pdb
+E:\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Debug\Entities.csprojAssemblyReference.cache

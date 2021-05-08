@@ -7,7 +7,7 @@
     <ProjectGuid>{DDEF134B-1C18-4CFC-B738-580B17869DDF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>StructureBuilder_Form</RootNamespace>
-    <AssemblyName>StructureBuilder_[V2.5.1.6]</AssemblyName>
+    <AssemblyName>StructureBuilder_[V2.5.1.7]</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -33,7 +33,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ApplicationIcon>fort.ico</ApplicationIcon>
+    <ApplicationIcon>emmet2.ico</ApplicationIcon>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="CircularProgressBar, Version=2.8.0.16, Culture=neutral, PublicKeyToken=310fd07b25df79b3, processorArchitecture=MSIL">
@@ -55,11 +55,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Forms\frmException.cs">
+    <Compile Include="Forms\FrmException.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Forms\frmException.designer.cs">
-      <DependentUpon>frmException.cs</DependentUpon>
+    <Compile Include="Forms\FrmException.designer.cs">
+      <DependentUpon>FrmException.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\FrmSuccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\FrmSuccess.Designer.cs">
+      <DependentUpon>FrmSuccess.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\FrmWelcome.cs">
       <SubType>Form</SubType>
@@ -75,8 +81,11 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="Forms\frmException.resx">
-      <DependentUpon>frmException.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\FrmException.resx">
+      <DependentUpon>FrmException.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\FrmSuccess.resx">
+      <DependentUpon>FrmSuccess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\FrmWelcome.resx">
       <DependentUpon>FrmWelcome.cs</DependentUpon>
@@ -118,7 +127,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fort.ico" />
+    <Content Include="emmet2.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
