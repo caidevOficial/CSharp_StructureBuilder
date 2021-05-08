@@ -23,6 +23,7 @@
  */
 
 using System;
+using System.Text;
 
 namespace AuxiliarClass {
     public sealed class ConsolePrinter {
@@ -101,6 +102,6 @@ namespace AuxiliarClass {
         }
 
         #endregion
-
+        
     }
 }
