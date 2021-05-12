@@ -59,7 +59,7 @@ namespace StructureBuilder_Form {
         private readonly short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private short packsDone = 0;
         private bool locked = false;
-        private readonly string appVersion = "Version [2.5.1.75]";
+        private readonly string appVersion = "Version [2.5.1.76]";
 
         #endregion
 
