@@ -36,15 +36,15 @@ namespace StructureBuilder_Form {
         #region AudioPaths
 
         private static readonly string pathToMusic = $"{Environment.CurrentDirectory}/Sounds";
-        private readonly string checkBox2Sound = $"{pathToMusic}/Check2.wav";
-        private readonly string checkBox3Sound = $"{pathToMusic}/Check3.wav";
-        private readonly string checkBox4Sound = $"{pathToMusic}/Check4.wav";
-        private readonly string errorSound = $"{pathToMusic}/Exception.wav";
-        private readonly string lockOffSound = $"{pathToMusic}/Unlock.wav";
-        private readonly string lockOnSound = $"{pathToMusic}/Lock.wav";
-        private readonly string loginSound = $"{pathToMusic}/Login.wav";
-        private readonly string successSound = $"{pathToMusic}/Success.wav";
-        private readonly string unCheckBoxSound = $"{pathToMusic}/UnCheck.wav";
+        private readonly string checkBox2Sound = $"{pathToMusic}/soundCheck2.wav";
+        private readonly string checkBox3Sound = $"{pathToMusic}/soundCheck3.wav";
+        private readonly string checkBox4Sound = $"{pathToMusic}/soundCheck4.wav";
+        private readonly string errorSound = $"{pathToMusic}/soundException.wav";
+        private readonly string lockOffSound = $"{pathToMusic}/soundUnlock.wav";
+        private readonly string lockOnSound = $"{pathToMusic}/soundLock.wav";
+        private readonly string loginSound = $"{pathToMusic}/soundLogin.wav";
+        private readonly string successSound = $"{pathToMusic}/soundSuccess.wav";
+        private readonly string unCheckBoxSound = $"{pathToMusic}/soundUnCheck.wav";
 
         private readonly SoundPlayer myPlayer = new SoundPlayer();
 
@@ -59,7 +59,7 @@ namespace StructureBuilder_Form {
         private readonly short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private short packsDone = 0;
         private bool locked = false;
-        private readonly string appVersion = "Version [2.5.1.75]";
+        private readonly string appVersion = "Version [2.5.1.76]";
 
         #endregion
 
