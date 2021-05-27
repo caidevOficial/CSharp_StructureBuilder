@@ -52,8 +52,7 @@ namespace StructureBuilder_Form {
             if (this.cpbProgress.Value < 100) {
                 this.cpbProgress.Value += 1;
                 this.cpbProgress.Text = this.cpbProgress.Value.ToString();
-            }
-            else {
+            } else {
                 tmFadeIn.Stop();
                 tmFadeOut.Start();
             }
@@ -71,7 +70,7 @@ namespace StructureBuilder_Form {
                 this.cpbProgress.Value += 1;
                 this.cpbProgress.Text = this.cpbProgress.Value.ToString();
             }
-                
+
             if (this.Opacity == 0) {
                 this.Close();
             }

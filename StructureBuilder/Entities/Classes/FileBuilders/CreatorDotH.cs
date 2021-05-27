@@ -338,9 +338,9 @@ namespace FileBuilders {
         /// <param name="packsDone">Amount of steps done.</param>
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
-        public override short FileMaker(Structure myStructure, short packsDone, short fullPackSize) {
+        public override short FileMaker(string path, Structure myStructure, short packsDone, short fullPackSize) {
             if (!(myStructure is null)) {
-                TextWriter pFileDotH = new StreamWriter($"{myStructure.FinalStructureName}.h");
+                
                 try {
                     StringBuilder dataMaker = new StringBuilder();
                     string curFile = $"{myStructure.FinalStructureName}.h";
@@ -359,28 +359,19 @@ namespace FileBuilders {
                     CreateDeleteFunction(myStructure, dataMaker);
                     dataMaker.AppendLine($"\n#endif /* {myStructure.FinalStructureName.ToUpper()}_H_INCLUDED */");
 
-                    if (File.Exists(curFile)) {
-                        // if exist the file, writes.
-                        pFileDotH.Write(dataMaker);
-                    }
-
-                    packsDone++;
-                    ConsolePrinter.ShowProgress(fullPackSize, packsDone);
-
-                } catch (Exception e) {
-                    Console.WriteLine(e.StackTrace);
-                    throw new Exception("Something has gone wrong in CreatorDotH.cs", e);
-                } finally {
-                    // Here we close the file if there is an error or not.
                     try {
-                        if (!(pFileDotH is null)) {
-                            pFileDotH.Close();
+                        using (StreamWriter pFileDotH = new StreamWriter($"{path}\\{curFile}")) {
+                            pFileDotH.Write(dataMaker);
                         }
                     } catch (Exception e2) {
                         Console.WriteLine(e2.StackTrace);
                         throw new Exception("Maybe the file is null in CreatorDotH.cs", e2);
                     }
-                }
+
+                } catch (Exception e) {
+                    Console.WriteLine(e.StackTrace);
+                    throw new Exception("Something has gone wrong in CreatorDotH.cs", e);
+                } 
             }
 
             return packsDone;
