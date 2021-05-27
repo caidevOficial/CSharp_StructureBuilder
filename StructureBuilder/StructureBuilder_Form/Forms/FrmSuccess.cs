@@ -23,22 +23,21 @@
  */
 
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace StructureBuilder_Form {
     public partial class FrmSuccess : Form {
 
+        private string path;
+
         #region Builder
 
         public FrmSuccess() {
             InitializeComponent();
+        }
+
+        public FrmSuccess(string path) : this() {
+            this.path = path;
         }
 
         #endregion
@@ -57,7 +56,6 @@ namespace StructureBuilder_Form {
                 tmrFadeOut.Start();
 
             }
-            
         }
 
         private void tmrFadeOut_Tick(object sender, EventArgs e) {
@@ -78,6 +76,7 @@ namespace StructureBuilder_Form {
         #region LoadEvent
 
         private void FrmSuccess_Load(object sender, EventArgs e) {
+            lblSuccess.Text = $"Files Created, check in {this.path}";
             this.Opacity = 0.0;
             this.pbProgress.Value = 0;
             this.pbProgress.Minimum = 0;

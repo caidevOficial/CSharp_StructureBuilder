@@ -572,9 +572,9 @@ namespace FileBuilders {
         /// <param name="packsDone">Amount of steps done.</param>
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
-        public override short FileMaker(Structure myStructure, short packsDone, short fullPackSize) {
+        public override short FileMaker(string path, Structure myStructure, short packsDone, short fullPackSize) {
             if (!(myStructure is null)) {
-                TextWriter pFileDotC = new StreamWriter($"{myStructure.FinalStructureName}.c");
+                
                 try {
                     StringBuilder dataMaker = new StringBuilder();
                     string curFile = $"{myStructure.FinalStructureName}.c";
@@ -582,22 +582,18 @@ namespace FileBuilders {
                     packsDone = CreateBasicStructFunctions(myStructure, dataMaker, packsDone, fullPackSize);
                     packsDone = CreateGettersAndSetters(myStructure, dataMaker, packsDone, fullPackSize);
                     CreateDeleteFunction(myStructure, dataMaker);
-
-                    if (File.Exists(curFile)) {
-                        // if exist, writes the file.
-                        pFileDotC.Write(dataMaker);
+                    
+                    try {
+                        using(StreamWriter pFileDotC = new StreamWriter($"{path}\\{curFile}")) {
+                            pFileDotC.Write(dataMaker);
+                        }
+                    } catch (Exception e2) {
+                        Console.WriteLine(e2.StackTrace);
+                        throw new Exception("Maybe the file is null in CreatorDotC.cs", e2);
                     }
 
                 } catch (Exception e) {
                     Console.WriteLine(e.StackTrace);
-                }
-                // Here we close the file if there is an error or not.
-                try {
-                    if (!(pFileDotC is null)) {
-                        pFileDotC.Close();
-                    }
-                } catch (Exception e2) {
-                    Console.WriteLine(e2.StackTrace);
                 }
             }
 
