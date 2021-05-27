@@ -54,8 +54,8 @@ namespace StructureBuilder_Form
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(StructureBuilder));
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblStructureName = new System.Windows.Forms.Label();
+            this.lblParameters = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
@@ -93,17 +93,18 @@ namespace StructureBuilder_Form
             this.grpAllComponents.SuspendLayout();
             this.SuspendLayout();
             // 
-            // label1
+            // lblStructureName
             // 
-            resources.ApplyResources(this.label1, "label1");
-            this.label1.ForeColor = System.Drawing.Color.Red;
-            this.label1.Name = "label1";
+            resources.ApplyResources(this.lblStructureName, "lblStructureName");
+            this.lblStructureName.ForeColor = System.Drawing.Color.Red;
+            this.lblStructureName.Name = "lblStructureName";
             // 
-            // label2
+            // lblParameters
             // 
-            resources.ApplyResources(this.label2, "label2");
-            this.label2.ForeColor = System.Drawing.Color.RoyalBlue;
-            this.label2.Name = "label2";
+            resources.ApplyResources(this.lblParameters, "lblParameters");
+            this.lblParameters.BackColor = System.Drawing.Color.Transparent;
+            this.lblParameters.ForeColor = System.Drawing.Color.RoyalBlue;
+            this.lblParameters.Name = "lblParameters";
             // 
             // label3
             // 
@@ -127,8 +128,8 @@ namespace StructureBuilder_Form
             // chkSecondParam
             // 
             resources.ApplyResources(this.chkSecondParam, "chkSecondParam");
-            this.chkSecondParam.BackColor = System.Drawing.Color.Transparent;
-            this.chkSecondParam.ForeColor = System.Drawing.Color.Red;
+            this.chkSecondParam.BackColor = System.Drawing.Color.Black;
+            this.chkSecondParam.ForeColor = System.Drawing.Color.RoyalBlue;
             this.chkSecondParam.Name = "chkSecondParam";
             this.chkSecondParam.UseVisualStyleBackColor = false;
             this.chkSecondParam.CheckedChanged += new System.EventHandler(this.chkSecondParam_CheckedChanged);
@@ -300,8 +301,8 @@ namespace StructureBuilder_Form
             // chkThirdParam
             // 
             resources.ApplyResources(this.chkThirdParam, "chkThirdParam");
-            this.chkThirdParam.BackColor = System.Drawing.Color.Transparent;
-            this.chkThirdParam.ForeColor = System.Drawing.Color.Red;
+            this.chkThirdParam.BackColor = System.Drawing.Color.Black;
+            this.chkThirdParam.ForeColor = System.Drawing.Color.RoyalBlue;
             this.chkThirdParam.Name = "chkThirdParam";
             this.chkThirdParam.UseVisualStyleBackColor = false;
             this.chkThirdParam.CheckedChanged += new System.EventHandler(this.chkThirdParam_CheckedChanged);
@@ -310,7 +311,7 @@ namespace StructureBuilder_Form
             // 
             resources.ApplyResources(this.chkFourthParam, "chkFourthParam");
             this.chkFourthParam.BackColor = System.Drawing.Color.Transparent;
-            this.chkFourthParam.ForeColor = System.Drawing.Color.Red;
+            this.chkFourthParam.ForeColor = System.Drawing.Color.RoyalBlue;
             this.chkFourthParam.Name = "chkFourthParam";
             this.chkFourthParam.UseVisualStyleBackColor = false;
             this.chkFourthParam.CheckedChanged += new System.EventHandler(this.chkFourthParam_CheckedChanged);
@@ -341,7 +342,7 @@ namespace StructureBuilder_Form
             // 
             // btnCreate
             // 
-            this.btnCreate.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
+            this.btnCreate.BackColor = System.Drawing.Color.RoyalBlue;
             resources.ApplyResources(this.btnCreate, "btnCreate");
             this.btnCreate.ForeColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.btnCreate.Name = "btnCreate";
@@ -362,8 +363,8 @@ namespace StructureBuilder_Form
             this.grpAllComponents.Controls.Add(this.label5);
             this.grpAllComponents.Controls.Add(this.label4);
             this.grpAllComponents.Controls.Add(this.label3);
-            this.grpAllComponents.Controls.Add(this.label2);
-            this.grpAllComponents.Controls.Add(this.label1);
+            this.grpAllComponents.Controls.Add(this.lblParameters);
+            this.grpAllComponents.Controls.Add(this.lblStructureName);
             this.grpAllComponents.ForeColor = System.Drawing.Color.RoyalBlue;
             resources.ApplyResources(this.grpAllComponents, "grpAllComponents");
             this.grpAllComponents.Name = "grpAllComponents";
@@ -425,8 +426,8 @@ namespace StructureBuilder_Form
 
         #endregion
 
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblStructureName;
+        private System.Windows.Forms.Label lblParameters;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;

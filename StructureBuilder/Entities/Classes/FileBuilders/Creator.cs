@@ -187,7 +187,7 @@ namespace FileBuilders {
         /// <param name="packsDone">Amount of steps done.</param>
         /// <param name="fullPackSize">Amount of total steps to do.</param>
         /// <returns>The amount of steps done.</returns>
-        public abstract short FileMaker(Structure myStructure, short packsDone, short fullPackSize);
+        public abstract short FileMaker(string path, Structure myStructure, short packsDone, short fullPackSize);
 
         #endregion
 

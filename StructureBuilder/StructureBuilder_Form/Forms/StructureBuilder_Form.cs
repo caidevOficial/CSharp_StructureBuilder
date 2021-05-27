@@ -27,6 +27,7 @@ using Entities;
 using FileBuilders;
 using SBExceptions;
 using System;
+using System.IO;
 using System.Media;
 using System.Windows.Forms;
 
@@ -35,16 +36,18 @@ namespace StructureBuilder_Form {
 
         #region AudioPaths
 
-        private static readonly string pathToMusic = $"{Environment.CurrentDirectory}/Sounds";
-        private readonly string checkBox2Sound = $"{pathToMusic}/soundCheck2.wav";
-        private readonly string checkBox3Sound = $"{pathToMusic}/soundCheck3.wav";
-        private readonly string checkBox4Sound = $"{pathToMusic}/soundCheck4.wav";
-        private readonly string errorSound = $"{pathToMusic}/soundException.wav";
-        private readonly string lockOffSound = $"{pathToMusic}/soundUnlock.wav";
-        private readonly string lockOnSound = $"{pathToMusic}/soundLock.wav";
-        private readonly string loginSound = $"{pathToMusic}/soundLogin.wav";
-        private readonly string successSound = $"{pathToMusic}/soundSuccess.wav";
-        private readonly string unCheckBoxSound = $"{pathToMusic}/soundUnCheck.wav";
+        private static readonly string systemPath = $"{Environment.CurrentDirectory}";
+        private static readonly string pathToMusic = $"{systemPath}\\Sounds";
+        private static readonly string PathOfFiles = $"{systemPath}\\C_Files";
+        private readonly string checkBox2Sound = $"{pathToMusic}\\soundCheck2.wav";
+        private readonly string checkBox3Sound = $"{pathToMusic}\\soundCheck3.wav";
+        private readonly string checkBox4Sound = $"{pathToMusic}\\soundCheck4.wav";
+        private readonly string errorSound = $"{pathToMusic}\\soundException.wav";
+        private readonly string lockOffSound = $"{pathToMusic}\\soundUnlock.wav";
+        private readonly string lockOnSound = $"{pathToMusic}\\soundLock.wav";
+        private readonly string loginSound = $"{pathToMusic}\\soundLogin.wav";
+        private readonly string successSound = $"{pathToMusic}\\soundSuccess.wav";
+        private readonly string unCheckBoxSound = $"{pathToMusic}\\soundUnCheck.wav";
 
         private readonly SoundPlayer myPlayer = new SoundPlayer();
 
@@ -59,7 +62,7 @@ namespace StructureBuilder_Form {
         private readonly short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private short packsDone = 0;
         private bool locked = false;
-        private readonly string appVersion = "Version [2.5.1.76]";
+        private readonly string appVersion = "Version [2.5.1.77]";
 
         #endregion
 
@@ -69,7 +72,7 @@ namespace StructureBuilder_Form {
         /// Basic constructor of the form.
         /// </summary>
         public StructureBuilder() {
-            
+
             InitializeComponent();
             myStructure = new Structure();
             myParameter = new Parameter();
@@ -78,18 +81,17 @@ namespace StructureBuilder_Form {
         }
 
         #endregion
-       
+
         #region LoadEvent
 
         private void StructureBuilder_Load(object sender, EventArgs e) {
             this.Hide();
             FrmWelcome welcome = new FrmWelcome();
             welcome.ShowDialog();
-            grpSecondParam.Enabled = false;
-            grpThirdParam.Enabled = false;
-            grpFourthParam.Enabled = false;
-            chkThirdParam.Enabled = false;
-            chkFourthParam.Enabled = false;
+            LockOrUnlockComponents(grpSecondParam, false);
+            LockOrUnlockComponents(chkThirdParam, grpThirdParam, false);
+            LockOrUnlockComponents(chkFourthParam, grpFourthParam, false);
+
             btnCreate.Enabled = false;
             cmbFirstParamType.SelectedIndex = 0;
             cmbSecondParamType.SelectedIndex = 0;
@@ -128,23 +130,53 @@ namespace StructureBuilder_Form {
         #region CheckButtons
 
         /// <summary>
+        /// Lock or unlock (bassed on the boolean variable) the GroupBox passed by parameter.
+        /// </summary>
+        /// <param name="box">GroupBox to lock/unlock.</param>
+        /// <param name="unlocked">Boolean state that indicates if is locked or not.</param>
+        private void LockOrUnlockComponents(GroupBox box, bool unlocked) {
+            box.Enabled = unlocked;
+            box.Visible = unlocked;
+        }
+
+        /// <summary>
+        /// Lock or unlock (bassed on the boolean variable) the CheckBox passed by parameter.
+        /// </summary>
+        /// <param name="checkbox">Checkbox to lock/unlock.</param>
+        /// <param name="unlocked">Boolean state that indicates if is locked or not.</param>
+        private void LockOrUnlockComponents(CheckBox checkbox, bool unlocked) {
+            checkbox.Enabled = unlocked;
+            checkbox.Visible = unlocked;
+            checkbox.Checked = false;
+        }
+
+        /// <summary>
+        /// Lock or unlock (bassed on the boolean variable) the CheckBox and GroupBox
+        /// passed by parameter.
+        /// </summary>
+        /// <param name="checkbox">Checkbox to lock/unlock.</param>
+        /// <param name="box">GroupBox to lock/unlock.</param>
+        /// <param name="unlocked">Boolean state that indicates if is locked or not.</param>
+        private void LockOrUnlockComponents(CheckBox checkbox, GroupBox box, bool unlocked) {
+            LockOrUnlockComponents(checkbox, unlocked);
+            LockOrUnlockComponents(box, unlocked);
+        }
+
+
+        /// <summary>
         /// Event manager of the second checkBox
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void chkSecondParam_CheckedChanged(object sender, EventArgs e) {
             if (chkSecondParam.Checked is true) {
-                grpSecondParam.Enabled = true;
-                chkThirdParam.Enabled = true;
+                LockOrUnlockComponents(chkThirdParam, grpSecondParam, true);
                 MyPlayer(checkBox2Sound);
             } else {
                 MyPlayer(unCheckBoxSound);
-                grpSecondParam.Enabled = false;
-                grpThirdParam.Enabled = false;
-                grpFourthParam.Enabled = false;
-
-                chkThirdParam.Enabled = false;
-                chkFourthParam.Enabled = false;
+                LockOrUnlockComponents(chkThirdParam, grpSecondParam, false);
+                LockOrUnlockComponents(chkFourthParam, grpThirdParam, false);
+                LockOrUnlockComponents(grpFourthParam, false);
             }
         }
 
@@ -155,15 +187,12 @@ namespace StructureBuilder_Form {
         /// <param name="e"></param>
         private void chkThirdParam_CheckedChanged(object sender, EventArgs e) {
             if (chkThirdParam.Checked is true) {
-                grpThirdParam.Enabled = true;
-                chkFourthParam.Enabled = true;
+                LockOrUnlockComponents(chkFourthParam, grpThirdParam, true);
                 MyPlayer(checkBox3Sound);
             } else {
                 MyPlayer(unCheckBoxSound);
-                grpThirdParam.Enabled = false;
-                grpFourthParam.Enabled = false;
-
-                chkFourthParam.Enabled = false;
+                LockOrUnlockComponents(chkFourthParam, grpThirdParam, false);
+                LockOrUnlockComponents(grpFourthParam, false);
             }
         }
 
@@ -174,11 +203,11 @@ namespace StructureBuilder_Form {
         /// <param name="e"></param>
         private void chkFourthParam_CheckedChanged(object sender, EventArgs e) {
             if (chkFourthParam.Checked is true) {
-                grpFourthParam.Enabled = true;
+                LockOrUnlockComponents(grpFourthParam, true);
                 MyPlayer(checkBox4Sound);
             } else {
                 MyPlayer(unCheckBoxSound);
-                grpFourthParam.Enabled = false;
+                LockOrUnlockComponents(grpFourthParam, false);
             }
         }
 
@@ -250,9 +279,9 @@ namespace StructureBuilder_Form {
         /// <param name="myStructure">Structure instance</param>
         /// <param name="packsDone">Amount of completed steps.</param>
         /// <param name="fullPackSize">Total amount of steps.</param>
-        private void CreateFiles(Structure myStructure, short packsDone, short fullPackSize) {
-            packsDone = makerH.FileMaker(myStructure, packsDone, fullPackSize);
-            packsDone = makerC.FileMaker(myStructure, packsDone, fullPackSize);
+        private void CreateFiles(string path, Structure myStructure, short packsDone, short fullPackSize) {
+            packsDone = makerH.FileMaker(path, myStructure, packsDone, fullPackSize);
+            packsDone = makerC.FileMaker(path, myStructure, packsDone, fullPackSize);
             ConsolePrinter.ShowProgress(fullPackSize, packsDone);
         }
 
@@ -307,9 +336,13 @@ namespace StructureBuilder_Form {
                             }
                         }
 
-                        CreateFiles(myStructure, packsDone, fullPackSize);
+                        if (!Directory.Exists(PathOfFiles)) {
+                            Directory.CreateDirectory(PathOfFiles);
+                        }
+
+                        CreateFiles(PathOfFiles, myStructure, packsDone, fullPackSize);
                         MyPlayer(successSound);
-                        FrmSuccess fs = new FrmSuccess {
+                        FrmSuccess fs = new FrmSuccess("'C_Files' directory") {
                             Location = this.Location
                         };
                         fs.ShowDialog();
@@ -442,6 +475,6 @@ namespace StructureBuilder_Form {
         }
 
         #endregion
-        
+
     }
 }

@@ -51,7 +51,7 @@ namespace StructureBuilder_Form {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSuccess));
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.label2 = new System.Windows.Forms.Label();
+            this.lblSuccess = new System.Windows.Forms.Label();
             this.tmrFadeIn = new System.Windows.Forms.Timer(this.components);
             this.tmrFadeOut = new System.Windows.Forms.Timer(this.components);
             this.pbProgress = new System.Windows.Forms.ProgressBar();
@@ -80,17 +80,17 @@ namespace StructureBuilder_Form {
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             // 
-            // label2
+            // lblSuccess
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.Black;
-            this.label2.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.ForeColor = System.Drawing.Color.OrangeRed;
-            this.label2.Location = new System.Drawing.Point(12, 9);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(288, 35);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "Files Created, check the app\'s directory!";
+            this.lblSuccess.AutoSize = true;
+            this.lblSuccess.BackColor = System.Drawing.Color.Black;
+            this.lblSuccess.Font = new System.Drawing.Font("Gabriola", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblSuccess.ForeColor = System.Drawing.Color.OrangeRed;
+            this.lblSuccess.Location = new System.Drawing.Point(12, 9);
+            this.lblSuccess.Name = "lblSuccess";
+            this.lblSuccess.Size = new System.Drawing.Size(288, 35);
+            this.lblSuccess.TabIndex = 2;
+            this.lblSuccess.Text = "Files Created, check the app\'s directory!";
             // 
             // tmrFadeIn
             // 
@@ -104,22 +104,25 @@ namespace StructureBuilder_Form {
             // 
             // pbProgress
             // 
+            this.pbProgress.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pbProgress.BackColor = System.Drawing.SystemColors.ActiveCaptionText;
             this.pbProgress.ForeColor = System.Drawing.Color.RoyalBlue;
             this.pbProgress.Location = new System.Drawing.Point(7, 239);
             this.pbProgress.Name = "pbProgress";
-            this.pbProgress.Size = new System.Drawing.Size(453, 24);
+            this.pbProgress.Size = new System.Drawing.Size(452, 24);
             this.pbProgress.TabIndex = 3;
             // 
             // FrmSuccess
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.Color.Black;
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.ClientSize = new System.Drawing.Size(472, 264);
+            this.ClientSize = new System.Drawing.Size(471, 264);
             this.Controls.Add(this.pbProgress);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblSuccess);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.label1);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
@@ -139,7 +142,7 @@ namespace StructureBuilder_Form {
 
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label lblSuccess;
         private System.Windows.Forms.Timer tmrFadeIn;
         private System.Windows.Forms.Timer tmrFadeOut;
         private System.Windows.Forms.ProgressBar pbProgress;
