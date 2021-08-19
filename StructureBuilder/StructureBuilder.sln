@@ -3,9 +3,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 16
 VisualStudioVersion = 16.0.31129.286
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Entities", "Entities\Entities.csproj", "{D3F8E021-3053-46EC-9B67-C77BDB077FC1}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SB.Models", "Entities\SB.Models.csproj", "{D3F8E021-3053-46EC-9B67-C77BDB077FC1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StructureBuilder_Form", "StructureBuilder_Form\StructureBuilder_Form.csproj", "{DDEF134B-1C18-4CFC-B738-580B17869DDF}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SB.GUI", "StructureBuilder_Form\SB.GUI.csproj", "{DDEF134B-1C18-4CFC-B738-580B17869DDF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
