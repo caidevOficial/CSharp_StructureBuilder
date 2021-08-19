@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1" MembersFormat="FullSignature">
+  <Class Name="AuxiliarClass.ConsolePrinter">
+    <Position X="0.5" Y="4.75" Width="7.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEACAAAAAAAAQAAAAAAAIAAAAAAgAAAAAA=</HashCode>
+      <FileName>SB.Models.Classes\SB.Models.ClassesAuxiliarClass\ConsolePrinter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AuxiliarClass.DataCollector">
+    <Position X="5.25" Y="7" Width="4" />
+    <TypeIdentifier>
+      <HashCode>IAQAEAAABAAgCAAAEAAAABAAAGAAAAAAAAAAAAAIAAA=</HashCode>
+      <FileName>SB.Models.Classes\SB.Models.ClassesAuxiliarClass\DataCollector.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AuxiliarClass.DataValidator">
+    <Position X="5.5" Y="10.25" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>SB.Models.Classes\SB.Models.ClassesAuxiliarClass\DataValidator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Parameter">
+    <Position X="15.25" Y="7" Width="7.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAIEAAAABAAAAAAAAAAAAAAAEAhAAhiI=</HashCode>
+      <FileName>SB.Models.Classes\SB.Models.ClassesEntities\Parameter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.Structure">
+    <Position X="9.5" Y="7" Width="5.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAQAAAAAAAAQAAAAAACAEAAABBgAAAAAAAAwiA=</HashCode>
+      <FileName>SB.Models.Classes\SB.Models.ClassesEntities\Structure.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SBExceptions.EmptyFieldException">
+    <Position X="0.5" Y="7" Width="4.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SB.Models.Classes\SB.Models.ClassesExceptions\EmptyFieldException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileBuilders.Creator">
+    <Position X="0.5" Y="0.5" Width="7.25" />
+    <TypeIdentifier>
+      <HashCode>QIIAAAAAEABAACgAAoAAQAAAAIAIAAgAAAAAAAAAACA=</HashCode>
+      <FileName>SB.Models.Classes\SB.Models.ClassesFileBuilders\Creator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileBuilders.CreatorDotC">
+    <Position X="8.25" Y="0.5" Width="8.25" />
+    <TypeIdentifier>
+      <HashCode>YIIIAAAAUABAAAgAAoAAQAAEAIAIAAgAAEBAAACQACA=</HashCode>
+      <FileName>SB.Models.Classes\SB.Models.ClassesFileBuilders\CreatorDotC.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FileBuilders.CreatorDotH">
+    <Position X="17" Y="0.5" Width="8.25" />
+    <TypeIdentifier>
+      <HashCode>QIIAAAAAEABAACgAAoAAwAAAAIAIAAgAAAAEAAAAACA=</HashCode>
+      <FileName>SB.Models.Classes\SB.Models.ClassesFileBuilders\CreatorDotH.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SBExceptions.NoSoundFoundException">
+    <Position X="0.5" Y="9" Width="4.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SB.Models.Classes\SB.Models.ClassesExceptions\NoSoundFoundException.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Models.MyPlayer">
+    <Position X="0.5" Y="11" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAgAAAAAAACAAAAAAQAAACFoAAAIAAAACA=</HashCode>
+      <FileName>SB.Models.Classes\MyPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Entities.StringExtension">
+    <Position X="5.5" Y="11.5" Width="3.25" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SB.Models.Classes\SB.Models.ClassesAuxiliarClass\StringExtension.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Delegate Name="Models.SoundPlayerHandler">
+    <Position X="0.5" Y="15" Width="2.75" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>SB.Models.Classes\MyPlayer.cs</FileName>
+    </TypeIdentifier>
+  </Delegate>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
