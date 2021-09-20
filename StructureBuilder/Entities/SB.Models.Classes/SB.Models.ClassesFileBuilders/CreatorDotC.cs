@@ -158,11 +158,13 @@ namespace FileBuilders {
                 if (aParam.TypeParameter.Equals("char")) {
                     streamText.Append($"%s");
                     //CASE INT
-                } else if (aParam.TypeParameter.Equals("int")) {
+                } else if (aParam.TypeParameter.Equals("int") || aParam.TypeParameter.Equals("short")) {
                     streamText.Append($"%d");
                     //CASE SHORT SHORT INT
                 } else if (aParam.TypeParameter.Equals("float")) {
                     streamText.Append($"%f");
+                } else if (aParam.TypeParameter.Equals("long int")) {
+                    streamText.Append($"%ld");
                 }
 
                 if (myStructure.ListParamaters.IndexOf(aParam) != (myStructure.ListParamaters.Count - 1)) {
