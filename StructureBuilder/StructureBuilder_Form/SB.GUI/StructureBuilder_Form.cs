@@ -26,6 +26,7 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
 using FileBuilders;
@@ -53,6 +54,8 @@ namespace StructureBuilder_Form {
 
         #region Attributes
 
+        private List<TextBox> textBoxes;
+        private List<TextBox> textChars;
         private readonly List<Thread> threads;
         private readonly MyPlayer myDelPlayer;
         private Parameter myParameter;
@@ -62,7 +65,7 @@ namespace StructureBuilder_Form {
         private readonly short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private readonly short packsDone = 0;
         private bool locked = false;
-        private readonly string appVersion = "Version [2.6.1.0]";
+        private readonly string appVersion = "Version [2.6.1.5]";
 
         #endregion
 
@@ -74,6 +77,8 @@ namespace StructureBuilder_Form {
         public StructureBuilder() {
 
             InitializeComponent();
+            this.textBoxes = new List<TextBox>();
+            this.textChars = new List<TextBox>();
             this.threads = new List<Thread>();
             this.myDelPlayer = new MyPlayer();
             this.myDelPlayer.ESoundPlayer += this.MyPlayerMainMusic;
@@ -95,13 +100,13 @@ namespace StructureBuilder_Form {
         private void StructureBuilder_Load(object sender, EventArgs e) {
             this.Hide();
             try {
-
+                this.FormInitialState();
+                this.lblNewVersion.Text = this.appVersion;
                 FrmWelcome welcome = new FrmWelcome();
                 if (welcome.ShowDialog() == DialogResult.OK) {
                     this.PlayMusic(this.loginSound);
                 }
-                this.FormInitialState();
-                this.lblNewVersion.Text = this.appVersion;
+                
             } catch (NoSoundFoundException ns) {
                 frmException fe = new frmException(ns) {
                     Location = this.Location
@@ -136,9 +141,9 @@ namespace StructureBuilder_Form {
         /// Plays a sound in another thread.
         /// </summary>
         /// <param name="musicName">Name of the sound.</param>
-        private void PlayMusic(string musicName) {
+        private void PlayMusic(object musicName) {
             Thread playerThread = new Thread(new ParameterizedThreadStart(this.MyPlayerMainMusic));
-            playerThread.Start(musicName);
+            playerThread.Start((object)musicName);
             this.threads.Add(playerThread);
         }
 
@@ -148,8 +153,11 @@ namespace StructureBuilder_Form {
         /// <param name="soundName">Name of the sound to play.</param>
         private void MyPlayerMainMusic(object soundName) {
             if (this.InvokeRequired) {
-                SoundPlayerHandler sp = new SoundPlayerHandler(this.MyPlayerMainMusic);
-                this.BeginInvoke(sp, new object[] { (string)soundName });
+                this.BeginInvoke(
+                    (MethodInvoker)delegate {
+                        MyPlayer player = new MyPlayer();
+                        player.Play((string)soundName);
+                    });
             } else {
                 MyPlayer player = new MyPlayer();
                 player.Play((string)soundName);
@@ -325,8 +333,16 @@ namespace StructureBuilder_Form {
                 // Set parameter
                 this.myParameter = CreateParameter(myStructure, this.myParameter, this.txtFirstParamName.Text.RemoveSpaces(), this.cmbFirstParamType.SelectedItem.ToString(), this.txtFirstParamLength.Text.RemoveSpaces());
                 // add to list
-                if (!(myStructure + this.myParameter))
+                if (!(myStructure + this.myParameter)) {
                     MessageBox.Show($"An Error has occurred adding the 1st parameter: {this.myParameter.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                } else {
+                    if (this.cmbFirstParamType.SelectedItem.ToString().Equals("char")) {
+                        this.textChars.Add(this.txtFirstParamLength);
+                    }
+                    this.textBoxes.Add(this.txtFirstParamName);
+                    this.textBoxes.Add(this.txtStructureName);
+                }
+
 
                 return true;
             }
@@ -368,6 +384,11 @@ namespace StructureBuilder_Form {
                     aParameter = CreateParameter(aStructure, aParameter, txtName.Text, cmbType.SelectedItem.ToString(), txtLength.Text);
                     if (!(aStructure + aParameter)) {
                         MessageBox.Show($"An Error has occurred adding the {paramNumber} parameter: {aParameter.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    } else {
+                        this.textBoxes.Add(txtName);
+                        if (cmbType.SelectedItem.ToString().Equals("char")) {
+                            this.textChars.Add(txtLength);
+                        }
                     }
                 } else {
                     throw new EmptyFieldException("You have at least one field Empty.");
@@ -403,6 +424,7 @@ namespace StructureBuilder_Form {
                         };
                         fs.ShowDialog();
                         this.LockForm(this.locked);
+                        this.ClearTextBoxes();
                         myStructure.ListParamaters.Clear();
                     }
                 } catch (Exception ex) {
@@ -528,6 +550,35 @@ namespace StructureBuilder_Form {
                 this.LockForm(this.locked);
             } catch (NoSoundFoundException ns) {
                 frmException fe = new frmException(ns) {
+                    Location = this.Location
+                };
+                fe.ShowDialog();
+            }
+        }
+
+        #endregion
+
+        #region Clear
+
+        /// <summary>
+        /// Clear all the unlocked textBox and set its length to 1.
+        /// </summary>
+        private void ClearTextBoxes() {
+            try {
+                if (this.textBoxes.Count > 0) {
+                    foreach (TextBox item in this.textBoxes) {
+                        item.Text = "";
+                    }
+                    this.textBoxes.Clear();
+                }
+                if (this.textChars.Count > 0) {
+                    foreach (TextBox item in this.textChars) {
+                        item.Text = "1";
+                    }
+                    this.textChars.Clear();
+                }
+            } catch (Exception e) {
+                frmException fe = new frmException(e) {
                     Location = this.Location
                 };
                 fe.ShowDialog();

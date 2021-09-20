@@ -36,8 +36,6 @@ namespace Models {
 
         public event SoundPlayerHandler ESoundPlayer;
         private readonly WindowsMediaPlayer player;
-        private bool isPlaying;
-        private bool isLooping;
         private const string FORMAT = ".mp3";
 
         #endregion
@@ -67,30 +65,6 @@ namespace Models {
             }
         }
 
-        /// <summary>
-        /// Gets/Sets: the boolean state of it's playing or not.
-        /// </summary>
-        public bool IsPlaying {
-            get => this.isPlaying;
-            set {
-                if (value.GetType() == typeof(bool)) {
-                    this.isPlaying = value;
-                }
-            }
-        }
-
-        /// <summary>
-        /// Gets/Sets: the boolean state of it's Looping or not.
-        /// </summary>
-        public bool IsLooping {
-            get => this.isLooping;
-            set {
-                if (value.GetType() == typeof(bool)) {
-                    this.isLooping = value;
-                }
-            }
-        }
-
         #endregion
 
         #region Methods
@@ -101,22 +75,9 @@ namespace Models {
         public void Play(string soundName) {
             this.SoundLocation = $"{Environment.CurrentDirectory}\\Sounds\\{soundName}{FORMAT}";
             try {
-                this.IsLooping = false;
                 this.player.controls.play();
-                this.IsPlaying = true;
             } catch (Exception e) {
                 throw new NoSoundFoundException($"The '{soundName}{FORMAT}' is missing in the Sound's Directory.", e);
-            }
-        }
-
-        /// <summary>
-        /// If the SoundPlayer instance isPlaying, stops it.
-        /// </summary>
-        public void Stop() {
-            if (this.IsPlaying) {
-                this.IsPlaying = false;
-                this.IsLooping = false;
-                this.player.controls.stop();
             }
         }
 
