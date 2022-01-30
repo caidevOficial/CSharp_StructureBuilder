@@ -39,8 +39,8 @@ namespace StructureBuilder_Form {
         }
 
         private void btnExceptionOK_Click(object sender, EventArgs e) {
-            this.DialogResult = DialogResult.OK;
-            this.Dispose();
+            DialogResult = DialogResult.OK;
+            Dispose();
         }
     }
 }

@@ -47,14 +47,21 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tmFadeIn_Tick(object sender, EventArgs e) {
-            if (this.Opacity < 1)
-                this.Opacity += 0.05;
-            if (this.cpbProgress.Value < 100) {
-                this.cpbProgress.Value += 1;
-                this.cpbProgress.Text = this.cpbProgress.Value.ToString();
-            } else {
-                tmFadeIn.Stop();
-                tmFadeOut.Start();
+            try {
+                if (Opacity < 1)
+                    Opacity += 0.05;
+                if (cpbProgress.Value < 100) {
+                    cpbProgress.Value += 1;
+                    cpbProgress.Text = cpbProgress.Value.ToString();
+                } else {
+                    tmFadeIn.Stop();
+                    tmFadeOut.Start();
+                }
+            } catch (Exception ns) {
+                frmException fe = new frmException(ns) {
+                    Location = Location
+                };
+                fe.ShowDialog();
             }
         }
 
@@ -64,19 +71,31 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tmFadeOut_Tick(object sender, EventArgs e) {
-            if (this.Opacity > 0)
-                this.Opacity -= 0.1;
-            if (this.cpbProgress.Value < 100) {
-                this.cpbProgress.Value += 1;
-                this.cpbProgress.Text = this.cpbProgress.Value.ToString();
+            if (Opacity > 0)
+                Opacity -= 0.1;
+            if (cpbProgress.Value < 100) {
+                cpbProgress.Value += 1;
+                cpbProgress.Text = cpbProgress.Value.ToString();
             }
 
-            if (this.Opacity == 0) {
-                this.Close();
+            if (Opacity == 0) {
+                Close();
+                DialogResult = DialogResult.OK;
             }
         }
 
         #endregion
+
+        private void UpdateDialogResult() {
+            if (InvokeRequired) {
+                BeginInvoke(
+                    (MethodInvoker)delegate {
+                        DialogResult = DialogResult.OK;
+                    });
+            } else {
+                DialogResult = DialogResult.OK;
+            }
+        }
 
         #region LoadEvent
 
@@ -86,10 +105,11 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void FrmWelcome_Load(object sender, EventArgs e) {
-            this.Opacity = 0.0;
-            this.cpbProgress.Value = 0;
-            this.cpbProgress.Minimum = 0;
-            this.cpbProgress.Maximum = 100;
+            Opacity = 0.0;
+            cpbProgress.Value = 0;
+            cpbProgress.Minimum = 0;
+            cpbProgress.Maximum = 100;
+            //this.DialogResult = DialogResult.OK;
             tmFadeIn.Start();
         }
 

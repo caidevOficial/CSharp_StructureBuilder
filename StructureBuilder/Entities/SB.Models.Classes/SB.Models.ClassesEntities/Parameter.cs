@@ -59,7 +59,7 @@ namespace Entities {
         /// /// <param name="nameParameter">Name of the parameter.</param>
         public Parameter(short idParameter, string nameParameter)
             : this(idParameter) {
-            this.NameParameter = nameParameter;
+            NameParameter = nameParameter;
         }
 
         /// <summary>
@@ -70,7 +70,7 @@ namespace Entities {
         /// <param name="typeParameter">Type of the parameter.</param>
         public Parameter(short idParameter, string nameParameter, string typeParameter)
             : this(idParameter, nameParameter) {
-            this.TypeParameter = typeParameter;
+            TypeParameter = typeParameter;
         }
 
         /// <summary>
@@ -82,7 +82,7 @@ namespace Entities {
         /// <param name="lengthParameter">Length of the parameter.</param>
         public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter)
             : this(idParameter, nameParameter, typeParameter) {
-            this.LengthParameter = lengthParameter;
+            LengthParameter = lengthParameter;
         }
 
         /// <summary>
@@ -95,7 +95,7 @@ namespace Entities {
         /// <param name="aliasNameParameter">Alias - Short name of the parameter.</param>
         public Parameter(short idParameter, string nameParameter, string typeParameter, int lengthParameter, string aliasNameParameter)
             : this(idParameter, nameParameter, typeParameter, lengthParameter) {
-            this.AliasNameParameter = aliasNameParameter;
+            AliasNameParameter = aliasNameParameter;
         }
 
         #endregion
@@ -107,7 +107,7 @@ namespace Entities {
         /// Set: Sets the type of the parameter.
         /// </summary>
         public string TypeParameter {
-            get => this.typeParameter;
+            get => typeParameter;
             set {
                 if (!(value is null)) {
                     typeParameter = value;
@@ -123,7 +123,7 @@ namespace Entities {
             get => nameParameter;
             set {
                 if (!(value is null)) {
-                    nameParameter = value;
+                    nameParameter = value.Decapitalize();
                 }
             }
         }

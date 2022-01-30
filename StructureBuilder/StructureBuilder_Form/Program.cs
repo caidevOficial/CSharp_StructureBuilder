@@ -35,6 +35,7 @@ namespace StructureBuilder_Form {
             //Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             Application.Run(new StructureBuilder());
+            //Application.Run(new FrmMain());
         }
     }
 }

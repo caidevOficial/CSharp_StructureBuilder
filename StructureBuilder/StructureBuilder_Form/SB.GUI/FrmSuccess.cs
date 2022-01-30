@@ -50,15 +50,15 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tmrFadeIn_Tick(object sender, EventArgs e) {
-            if (this.Opacity < 1) {
-                this.Opacity += 0.05;
+            if (Opacity < 1) {
+                Opacity += 0.05;
             }
-            if (this.pbProgress.Value < 100) {
-                this.pbProgress.Value += 1;
-                this.pbProgress.Text = this.pbProgress.Value.ToString();
+            if (pbProgress.Value < 100) {
+                pbProgress.Value += 1;
+                pbProgress.Text = pbProgress.Value.ToString();
             } else {
-                this.tmrFadeIn.Stop();
-                this.tmrFadeOut.Start();
+                tmrFadeIn.Stop();
+                tmrFadeOut.Start();
 
             }
         }
@@ -69,15 +69,15 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void tmrFadeOut_Tick(object sender, EventArgs e) {
-            if (this.Opacity > 0) {
-                this.Opacity -= 0.1;
+            if (Opacity > 0) {
+                Opacity -= 0.1;
             }
-            if (this.pbProgress.Value < 100) {
-                this.pbProgress.Value += 1;
-                this.pbProgress.Text = this.pbProgress.Value.ToString();
+            if (pbProgress.Value < 100) {
+                pbProgress.Value += 1;
+                pbProgress.Text = pbProgress.Value.ToString();
             }
-            if (this.Opacity == 0) {
-                this.Close();
+            if (Opacity == 0) {
+                Close();
             }
         }
 
@@ -91,12 +91,12 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void FrmSuccess_Load(object sender, EventArgs e) {
-            lblSuccess.Text = $"Files Created, check in {this.path}";
-            this.Opacity = 0.0;
-            this.pbProgress.Value = 0;
-            this.pbProgress.Minimum = 0;
-            this.pbProgress.Maximum = 100;
-            this.tmrFadeIn.Start();
+            lblSuccess.Text = $"Files Created, check in {path}";
+            Opacity = 0.0;
+            pbProgress.Value = 0;
+            pbProgress.Minimum = 0;
+            pbProgress.Maximum = 100;
+            tmrFadeIn.Start();
         }
 
         #endregion

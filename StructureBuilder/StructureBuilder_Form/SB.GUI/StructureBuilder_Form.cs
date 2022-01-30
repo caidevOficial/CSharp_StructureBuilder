@@ -26,7 +26,6 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Entities;
 using FileBuilders;
@@ -49,13 +48,14 @@ namespace StructureBuilder_Form {
         private readonly string loginSound = "soundLogin";
         private readonly string successSound = "soundSuccess";
         private readonly string unCheckBoxSound = "soundUnCheck";
+        private SoundPlayerHandler musicHandler;
 
         #endregion
 
         #region Attributes
 
-        private List<TextBox> textBoxes;
-        private List<TextBox> textChars;
+        private readonly List<TextBox> textBoxes;
+        private readonly List<TextBox> textChars;
         private readonly List<Thread> threads;
         private readonly MyPlayer myDelPlayer;
         private Parameter myParameter;
@@ -65,7 +65,7 @@ namespace StructureBuilder_Form {
         private readonly short fullPackSize = 8; // Basic functions struct newEmpty + new + show + showall
         private readonly short packsDone = 0;
         private bool locked = false;
-        private readonly string appVersion = "Version [2.6.1.5]";
+        private readonly string appVersion = "Version [2.7.0.0]";
 
         #endregion
 
@@ -77,15 +77,15 @@ namespace StructureBuilder_Form {
         public StructureBuilder() {
 
             InitializeComponent();
-            this.textBoxes = new List<TextBox>();
-            this.textChars = new List<TextBox>();
-            this.threads = new List<Thread>();
-            this.myDelPlayer = new MyPlayer();
-            this.myDelPlayer.ESoundPlayer += this.MyPlayerMainMusic;
+            textBoxes = new List<TextBox>();
+            textChars = new List<TextBox>();
+            threads = new List<Thread>();
+            myDelPlayer = new MyPlayer();
+            musicHandler += MyPlayerMainMusic;
             myStructure = new Structure();
-            this.myParameter = new Parameter();
-            this.makerC = new CreatorDotC();
-            this.makerH = new CreatorDotH();
+            myParameter = new Parameter();
+            makerC = new CreatorDotC();
+            makerH = new CreatorDotH();
         }
 
         #endregion
@@ -98,18 +98,19 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void StructureBuilder_Load(object sender, EventArgs e) {
-            this.Hide();
+            Hide();
             try {
-                this.FormInitialState();
-                this.lblNewVersion.Text = this.appVersion;
+                FormInitialState();
+                lblNewVersion.Text = appVersion;
+                //this.PlayMusic(this.loginSound);
                 FrmWelcome welcome = new FrmWelcome();
                 if (welcome.ShowDialog() == DialogResult.OK) {
-                    this.PlayMusic(this.loginSound);
+                    PlayMusic(loginSound);
                 }
-                
+
             } catch (NoSoundFoundException ns) {
                 frmException fe = new frmException(ns) {
-                    Location = this.Location
+                    Location = Location
                 };
                 fe.ShowDialog();
             }
@@ -119,18 +120,18 @@ namespace StructureBuilder_Form {
         /// Sets the form in the initial state.
         /// </summary>
         private void FormInitialState() {
-            this.btnCreate.Enabled = false;
-            this.cmbFirstParamType.SelectedIndex = 0;
-            this.cmbSecondParamType.SelectedIndex = 0;
-            this.cmbThirdParamType.SelectedIndex = 0;
-            this.cmbFourthParamType.SelectedIndex = 0;
-            this.cmbFifthParamType.SelectedIndex = 0;
-            this.cmbSixthParamType.SelectedIndex = 0;
-            this.LockOrUnlockComponents(this.grpSecondParam, false);
-            this.LockOrUnlockComponents(this.chkThirdParam, this.grpThirdParam, false);
-            this.LockOrUnlockComponents(this.chkFourthParam, this.grpFourthParam, false);
-            this.LockOrUnlockComponents(this.chkFifthParam, this.grpFifthParam, false);
-            this.LockOrUnlockComponents(this.chkSixthParam, this.grpSixthParam, false);
+            btnCreate.Enabled = false;
+            cmbFirstParamType.SelectedIndex = 0;
+            cmbSecondParamType.SelectedIndex = 0;
+            cmbThirdParamType.SelectedIndex = 0;
+            cmbFourthParamType.SelectedIndex = 0;
+            cmbFifthParamType.SelectedIndex = 0;
+            cmbSixthParamType.SelectedIndex = 0;
+            LockOrUnlockComponents(grpSecondParam, false);
+            LockOrUnlockComponents(chkThirdParam, grpThirdParam, false);
+            LockOrUnlockComponents(chkFourthParam, grpFourthParam, false);
+            LockOrUnlockComponents(chkFifthParam, grpFifthParam, false);
+            LockOrUnlockComponents(chkSixthParam, grpSixthParam, false);
         }
 
         #endregion
@@ -142,9 +143,9 @@ namespace StructureBuilder_Form {
         /// </summary>
         /// <param name="musicName">Name of the sound.</param>
         private void PlayMusic(object musicName) {
-            Thread playerThread = new Thread(new ParameterizedThreadStart(this.MyPlayerMainMusic));
+            Thread playerThread = new Thread(new ParameterizedThreadStart(MyPlayerMainMusic));
             playerThread.Start((object)musicName);
-            this.threads.Add(playerThread);
+            threads.Add(playerThread);
         }
 
         /// <summary>
@@ -152,8 +153,8 @@ namespace StructureBuilder_Form {
         /// </summary>
         /// <param name="soundName">Name of the sound to play.</param>
         private void MyPlayerMainMusic(object soundName) {
-            if (this.InvokeRequired) {
-                this.BeginInvoke(
+            if (InvokeRequired) {
+                BeginInvoke(
                     (MethodInvoker)delegate {
                         MyPlayer player = new MyPlayer();
                         player.Play((string)soundName);
@@ -197,8 +198,8 @@ namespace StructureBuilder_Form {
         /// <param name="box">GroupBox to lock/unlock.</param>
         /// <param name="unlocked">Boolean state that indicates if is locked or not.</param>
         private void LockOrUnlockComponents(CheckBox checkbox, GroupBox box, bool unlocked) {
-            this.LockOrUnlockComponents(checkbox, unlocked);
-            this.LockOrUnlockComponents(box, unlocked);
+            LockOrUnlockComponents(checkbox, unlocked);
+            LockOrUnlockComponents(box, unlocked);
         }
 
 
@@ -208,14 +209,14 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void chkSecondParam_CheckedChanged(object sender, EventArgs e) {
-            if (this.chkSecondParam.Checked is true) {
-                this.LockOrUnlockComponents(this.chkThirdParam, this.grpSecondParam, true);
-                this.PlayMusic(this.checkBox2Sound);
+            if (chkSecondParam.Checked is true) {
+                LockOrUnlockComponents(chkThirdParam, grpSecondParam, true);
+                PlayMusic(checkBox2Sound);
             } else {
-                this.PlayMusic(this.unCheckBoxSound);
-                this.LockOrUnlockComponents(this.chkThirdParam, this.grpSecondParam, false);
-                this.LockOrUnlockComponents(this.chkFourthParam, this.grpThirdParam, false);
-                this.LockOrUnlockComponents(this.grpFourthParam, false);
+                PlayMusic(unCheckBoxSound);
+                LockOrUnlockComponents(chkThirdParam, grpSecondParam, false);
+                LockOrUnlockComponents(chkFourthParam, grpThirdParam, false);
+                LockOrUnlockComponents(grpFourthParam, false);
             }
         }
 
@@ -225,14 +226,14 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void chkThirdParam_CheckedChanged(object sender, EventArgs e) {
-            if (this.chkThirdParam.Checked is true) {
-                this.LockOrUnlockComponents(this.chkFourthParam, this.grpThirdParam, true);
-                this.PlayMusic(this.checkBox3Sound);
+            if (chkThirdParam.Checked is true) {
+                LockOrUnlockComponents(chkFourthParam, grpThirdParam, true);
+                PlayMusic(checkBox3Sound);
             } else {
-                this.PlayMusic(this.unCheckBoxSound);
-                this.LockOrUnlockComponents(this.chkFourthParam, this.grpThirdParam, false);
-                this.LockOrUnlockComponents(this.chkFifthParam, this.grpFourthParam, false);
-                this.LockOrUnlockComponents(this.grpSixthParam, false);
+                PlayMusic(unCheckBoxSound);
+                LockOrUnlockComponents(chkFourthParam, grpThirdParam, false);
+                LockOrUnlockComponents(chkFifthParam, grpFourthParam, false);
+                LockOrUnlockComponents(grpSixthParam, false);
             }
         }
 
@@ -242,13 +243,13 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void chkFourthParam_CheckedChanged(object sender, EventArgs e) {
-            if (this.chkFourthParam.Checked is true) {
-                this.LockOrUnlockComponents(this.chkFifthParam, this.grpFourthParam, true);
-                this.PlayMusic(this.checkBox4Sound);
+            if (chkFourthParam.Checked is true) {
+                LockOrUnlockComponents(chkFifthParam, grpFourthParam, true);
+                PlayMusic(checkBox4Sound);
             } else {
-                this.PlayMusic(this.unCheckBoxSound);
-                this.LockOrUnlockComponents(this.chkFifthParam, this.grpFourthParam, false);
-                this.LockOrUnlockComponents(this.grpSixthParam, false);
+                PlayMusic(unCheckBoxSound);
+                LockOrUnlockComponents(chkFifthParam, grpFourthParam, false);
+                LockOrUnlockComponents(grpSixthParam, false);
             }
         }
 
@@ -258,12 +259,12 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void chkFifthParam_CheckedChanged(object sender, EventArgs e) {
-            if (this.chkFifthParam.Checked is true) {
-                this.LockOrUnlockComponents(this.chkSixthParam, this.grpFifthParam, true);
-                this.PlayMusic(this.checkBox2Sound);
+            if (chkFifthParam.Checked is true) {
+                LockOrUnlockComponents(chkSixthParam, grpFifthParam, true);
+                PlayMusic(checkBox2Sound);
             } else {
-                this.PlayMusic(this.unCheckBoxSound);
-                this.LockOrUnlockComponents(this.chkSixthParam, this.grpFifthParam, false);
+                PlayMusic(unCheckBoxSound);
+                LockOrUnlockComponents(chkSixthParam, grpFifthParam, false);
             }
         }
 
@@ -273,12 +274,12 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void chkSixthParam_CheckedChanged(object sender, EventArgs e) {
-            if (this.chkSixthParam.Checked is true) {
-                this.LockOrUnlockComponents(this.grpSixthParam, true);
-                this.PlayMusic(this.checkBox3Sound);
+            if (chkSixthParam.Checked is true) {
+                LockOrUnlockComponents(grpSixthParam, true);
+                PlayMusic(checkBox3Sound);
             } else {
-                this.PlayMusic(this.unCheckBoxSound);
-                this.LockOrUnlockComponents(this.grpSixthParam, false);
+                PlayMusic(unCheckBoxSound);
+                LockOrUnlockComponents(grpSixthParam, false);
             }
         }
 
@@ -321,26 +322,26 @@ namespace StructureBuilder_Form {
         /// </summary>
         /// <returns>True if can create the entity, otherwise returns false.</returns>
         private bool CreateStructure() {
-            if (String.IsNullOrWhiteSpace(this.txtFirstParamName.Text) || String.IsNullOrWhiteSpace(this.txtFirstParamLength.Text)) {
+            if (String.IsNullOrWhiteSpace(txtFirstParamName.Text) || String.IsNullOrWhiteSpace(txtFirstParamLength.Text)) {
                 //MessageBox.Show("There are at least one field empty, fix that!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 throw new EmptyFieldException("You have at least one field Empty.");
             } else {
                 //Set structure
-                myStructure.StructureName = this.txtStructureName.Text.RemoveSpaces();
+                myStructure.StructureName = txtStructureName.Text.RemoveSpaces();
                 myStructure.AliasName = myStructure.StructureName;
                 myStructure.FinalStructureName = myStructure.AliasName;
 
                 // Set parameter
-                this.myParameter = CreateParameter(myStructure, this.myParameter, this.txtFirstParamName.Text.RemoveSpaces(), this.cmbFirstParamType.SelectedItem.ToString(), this.txtFirstParamLength.Text.RemoveSpaces());
+                myParameter = CreateParameter(myStructure, myParameter, txtFirstParamName.Text.RemoveSpaces(), cmbFirstParamType.SelectedItem.ToString(), txtFirstParamLength.Text.RemoveSpaces());
                 // add to list
-                if (!(myStructure + this.myParameter)) {
-                    MessageBox.Show($"An Error has occurred adding the 1st parameter: {this.myParameter.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                if (!(myStructure + myParameter)) {
+                    MessageBox.Show($"An Error has occurred adding the 1st parameter: {myParameter.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 } else {
-                    if (this.cmbFirstParamType.SelectedItem.ToString().Equals("char")) {
-                        this.textChars.Add(this.txtFirstParamLength);
+                    if (cmbFirstParamType.SelectedItem.ToString().Equals("char")) {
+                        textChars.Add(txtFirstParamLength);
                     }
-                    this.textBoxes.Add(this.txtFirstParamName);
-                    this.textBoxes.Add(this.txtStructureName);
+                    textBoxes.Add(txtFirstParamName);
+                    textBoxes.Add(txtStructureName);
                 }
 
 
@@ -385,9 +386,9 @@ namespace StructureBuilder_Form {
                     if (!(aStructure + aParameter)) {
                         MessageBox.Show($"An Error has occurred adding the {paramNumber} parameter: {aParameter.NameParameter}!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     } else {
-                        this.textBoxes.Add(txtName);
+                        textBoxes.Add(txtName);
                         if (cmbType.SelectedItem.ToString().Equals("char")) {
-                            this.textChars.Add(txtLength);
+                            textChars.Add(txtLength);
                         }
                     }
                 } else {
@@ -402,41 +403,41 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void btnCreate_Click(object sender, EventArgs e) {
-            if (String.IsNullOrWhiteSpace(this.txtStructureName.Text)) {
+            if (String.IsNullOrWhiteSpace(txtStructureName.Text)) {
                 MessageBox.Show("The structure name is empty, fix that!", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             } else {
                 try {
-                    if (this.CreateStructure()) {
-                        this.CreateParameterFromForm("2nd", myStructure, this.chkSecondParam, this.cmbSecondParamType, this.txtSecondParamName, this.txtSecondParamLength);
-                        this.CreateParameterFromForm("3rd", myStructure, this.chkThirdParam, this.cmbThirdParamType, this.txtThirdParamName, this.txtThirdParamLength);
-                        this.CreateParameterFromForm("4th", myStructure, this.chkFourthParam, this.cmbFourthParamType, this.txtFourthParamName, this.txtFourthParamLength);
-                        this.CreateParameterFromForm("5th", myStructure, this.chkFifthParam, this.cmbFifthParamType, this.txtFifthParamName, this.txtFifthParamLength);
-                        this.CreateParameterFromForm("6th", myStructure, this.chkSixthParam, this.cmbSixthParamType, this.txtSixthParamName, this.txtSixthParamLength);
+                    if (CreateStructure()) {
+                        CreateParameterFromForm("2nd", myStructure, chkSecondParam, cmbSecondParamType, txtSecondParamName, txtSecondParamLength);
+                        CreateParameterFromForm("3rd", myStructure, chkThirdParam, cmbThirdParamType, txtThirdParamName, txtThirdParamLength);
+                        CreateParameterFromForm("4th", myStructure, chkFourthParam, cmbFourthParamType, txtFourthParamName, txtFourthParamLength);
+                        CreateParameterFromForm("5th", myStructure, chkFifthParam, cmbFifthParamType, txtFifthParamName, txtFifthParamLength);
+                        CreateParameterFromForm("6th", myStructure, chkSixthParam, cmbSixthParamType, txtSixthParamName, txtSixthParamLength);
 
                         if (!Directory.Exists(PathOfFiles)) {
                             Directory.CreateDirectory(PathOfFiles);
                         }
 
-                        this.CreateFiles(PathOfFiles, myStructure, this.packsDone, this.fullPackSize);
-                        this.PlayMusic(this.successSound);
+                        CreateFiles(PathOfFiles, myStructure, packsDone, fullPackSize);
+                        PlayMusic(successSound);
                         FrmSuccess fs = new FrmSuccess("your desktop 'C_Files' directory") {
-                            Location = this.Location
+                            Location = Location
                         };
                         fs.ShowDialog();
-                        this.LockForm(this.locked);
-                        this.ClearTextBoxes();
+                        LockForm(locked);
+                        ClearTextBoxes();
                         myStructure.ListParamaters.Clear();
                     }
                 } catch (Exception ex) {
                     try {
-                        this.PlayMusic(this.errorSound);
+                        PlayMusic(errorSound);
                         frmException fe = new frmException(ex) {
-                            Location = this.Location
+                            Location = Location
                         };
                         fe.ShowDialog();
                     } catch (NoSoundFoundException ns) {
                         frmException fe = new frmException(ns) {
-                            Location = this.Location
+                            Location = Location
                         };
                         fe.ShowDialog();
                     }
@@ -454,7 +455,7 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void cmbFirstParamType_SelectedIndexChanged(object sender, EventArgs e) {
-            this.SetTextBoxByComboBox(this.cmbFirstParamType, this.txtFirstParamLength);
+            SetTextBoxByComboBox(cmbFirstParamType, txtFirstParamLength);
         }
 
         /// <summary>
@@ -463,7 +464,7 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void cmbSecondParamType_SelectedIndexChanged(object sender, EventArgs e) {
-            this.SetTextBoxByComboBox(this.cmbSecondParamType, this.txtSecondParamLength);
+            SetTextBoxByComboBox(cmbSecondParamType, txtSecondParamLength);
         }
 
         /// <summary>
@@ -472,7 +473,7 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void cmbThirdParamType_SelectedIndexChanged(object sender, EventArgs e) {
-            this.SetTextBoxByComboBox(this.cmbThirdParamType, this.txtThirdParamLength);
+            SetTextBoxByComboBox(cmbThirdParamType, txtThirdParamLength);
         }
 
         /// <summary>
@@ -481,7 +482,7 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void cmbFourthParamType_SelectedIndexChanged(object sender, EventArgs e) {
-            this.SetTextBoxByComboBox(this.cmbFourthParamType, this.txtFourthParamLength);
+            SetTextBoxByComboBox(cmbFourthParamType, txtFourthParamLength);
         }
 
         /// <summary>
@@ -490,7 +491,7 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void cmbFifthParamType_SelectedIndexChanged(object sender, EventArgs e) {
-            this.SetTextBoxByComboBox(this.cmbFifthParamType, this.txtFifthParamLength);
+            SetTextBoxByComboBox(cmbFifthParamType, txtFifthParamLength);
         }
 
         /// <summary>
@@ -499,7 +500,7 @@ namespace StructureBuilder_Form {
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void cmbSixthParamType_SelectedIndexChanged(object sender, EventArgs e) {
-            this.SetTextBoxByComboBox(this.cmbSixthParamType, this.txtSixthParamLength);
+            SetTextBoxByComboBox(cmbSixthParamType, txtSixthParamLength);
         }
 
         /// <summary>
@@ -526,17 +527,17 @@ namespace StructureBuilder_Form {
         /// <param name="lockedForm"></param>
         private void LockForm(bool lockedForm) {
             if (!lockedForm) {
-                this.PlayMusic(lockOnSound);
-                this.locked = !this.locked;
-                this.btnLock.ImageIndex = 1;
-                this.grpAllComponents.Enabled = false;
-                this.btnCreate.Enabled = true;
+                PlayMusic(lockOnSound);
+                locked = !locked;
+                btnLock.ImageIndex = 1;
+                grpAllComponents.Enabled = false;
+                btnCreate.Enabled = true;
             } else {
-                this.PlayMusic(lockOffSound);
-                this.locked = !this.locked;
-                this.btnLock.ImageIndex = 0;
-                this.grpAllComponents.Enabled = true;
-                this.btnCreate.Enabled = false;
+                PlayMusic(lockOffSound);
+                locked = !locked;
+                btnLock.ImageIndex = 0;
+                grpAllComponents.Enabled = true;
+                btnCreate.Enabled = false;
             }
         }
 
@@ -547,10 +548,10 @@ namespace StructureBuilder_Form {
         /// <param name="e"></param>
         private void btnLock_Click(object sender, EventArgs e) {
             try {
-                this.LockForm(this.locked);
+                LockForm(locked);
             } catch (NoSoundFoundException ns) {
                 frmException fe = new frmException(ns) {
-                    Location = this.Location
+                    Location = Location
                 };
                 fe.ShowDialog();
             }
@@ -565,21 +566,21 @@ namespace StructureBuilder_Form {
         /// </summary>
         private void ClearTextBoxes() {
             try {
-                if (this.textBoxes.Count > 0) {
-                    foreach (TextBox item in this.textBoxes) {
+                if (textBoxes.Count > 0) {
+                    foreach (TextBox item in textBoxes) {
                         item.Text = "";
                     }
-                    this.textBoxes.Clear();
+                    textBoxes.Clear();
                 }
-                if (this.textChars.Count > 0) {
-                    foreach (TextBox item in this.textChars) {
+                if (textChars.Count > 0) {
+                    foreach (TextBox item in textChars) {
                         item.Text = "1";
                     }
-                    this.textChars.Clear();
+                    textChars.Clear();
                 }
             } catch (Exception e) {
                 frmException fe = new frmException(e) {
-                    Location = this.Location
+                    Location = Location
                 };
                 fe.ShowDialog();
             }
@@ -593,7 +594,7 @@ namespace StructureBuilder_Form {
         /// Stops All the possible alive threads.
         /// </summary>
         private void StopThreads() {
-            foreach (Thread item in this.threads) {
+            foreach (Thread item in threads) {
                 if (!(item is null) && item.IsAlive) {
                     item.Abort();
                 }
@@ -607,9 +608,9 @@ namespace StructureBuilder_Form {
         /// <param name="e"></param>
         private void StructureBuilder_FormClosing(object sender, FormClosingEventArgs e) {
             if (MessageBox.Show("Do you want to quit?", "Choose Wisely", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes) {
-                this.StopThreads();
-                this.myDelPlayer.ESoundPlayer -= this.MyPlayerMainMusic;
-                this.Dispose();
+                StopThreads();
+                musicHandler -= MyPlayerMainMusic;
+                Dispose();
             } else {
                 e.Cancel = true;
             }

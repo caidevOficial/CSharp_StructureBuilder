@@ -7,7 +7,7 @@
     <ProjectGuid>{DDEF134B-1C18-4CFC-B738-580B17869DDF}</ProjectGuid>
     <OutputType>WinExe</OutputType>
     <RootNamespace>StructureBuilder_Form</RootNamespace>
-    <AssemblyName>StructureBuilder_[V2.5.1.76]</AssemblyName>
+    <AssemblyName>StructureBuilder_[V2.7.0.0]</AssemblyName>
     <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -85,6 +85,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="SB.GUI\FrmMain.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="SB.GUI\FrmMain.Designer.cs">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </Compile>
     <Compile Include="SB.GUI\FrmException.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -111,6 +117,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="SB.GUI\FrmMain.resx">
+      <DependentUpon>FrmMain.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="SB.GUI\FrmException.resx">
       <DependentUpon>FrmException.cs</DependentUpon>
     </EmbeddedResource>
@@ -135,6 +144,7 @@
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
+      <DesignTime>True</DesignTime>
     </Compile>
     <None Include="SB.GUI\DiagramForm.cd" />
     <None Include="packages.config" />
@@ -158,6 +168,15 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
+    <None Include="bin\Debug\Sounds\soundCheck2.mp3" />
+    <None Include="bin\Debug\Sounds\soundCheck3.mp3" />
+    <None Include="bin\Debug\Sounds\soundCheck4.mp3" />
+    <None Include="bin\Debug\Sounds\soundException.mp3" />
+    <None Include="bin\Debug\Sounds\soundLock.mp3" />
+    <None Include="bin\Debug\Sounds\soundLogin.mp3" />
+    <None Include="bin\Debug\Sounds\soundSuccess.mp3" />
+    <None Include="bin\Debug\Sounds\soundUnCheck.mp3" />
+    <None Include="bin\Debug\Sounds\soundUnlock.mp3" />
     <Content Include="emmet2.ico" />
   </ItemGroup>
   <ItemGroup>

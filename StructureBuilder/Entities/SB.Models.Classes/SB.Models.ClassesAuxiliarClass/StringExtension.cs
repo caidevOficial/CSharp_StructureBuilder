@@ -33,5 +33,14 @@ namespace Entities {
         public static string RemoveSpaces(this string myString) {
             return myString.Trim().Replace(" ", "");
         }
+
+        /// <summary>
+        /// Changes only the first letter of the string to lower.
+        /// </summary>
+        /// <param name="myString">String to apply lower in the first letter.</param>
+        /// <returns>The string 'Decapitalized'.</returns>
+        public static string Decapitalize(this string myString) {
+            return $"{myString.Substring(0, 1).ToLower()}{myString.Substring(1)}";
+        }
     }
 }

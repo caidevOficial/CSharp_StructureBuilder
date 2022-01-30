@@ -34,7 +34,7 @@ namespace Models {
 
         #region Attributes
 
-        public event SoundPlayerHandler ESoundPlayer;
+        //public event SoundPlayerHandler ESoundPlayer;
         private readonly WindowsMediaPlayer player;
         private const string FORMAT = ".mp3";
 
@@ -46,7 +46,7 @@ namespace Models {
         /// Creates the entity with default constructor.
         /// </summary>
         public MyPlayer() {
-            this.player = new WindowsMediaPlayer();
+            player = new WindowsMediaPlayer();
         }
 
         #endregion
@@ -57,10 +57,10 @@ namespace Models {
         /// Gets/Sets: The location of the sound.
         /// </summary>
         public string SoundLocation {
-            get => this.player.URL;
+            get => player.URL;
             set {
                 if (value.GetType() == typeof(string)) {
-                    this.player.URL = value;
+                    player.URL = value;
                 }
             }
         }
@@ -73,9 +73,10 @@ namespace Models {
         /// Plays the sound passed by parameter.
         /// </summary>
         public void Play(string soundName) {
-            this.SoundLocation = $"{Environment.CurrentDirectory}\\Sounds\\{soundName}{FORMAT}";
+            SoundLocation = $"{Environment.CurrentDirectory}\\Sounds\\{soundName}{FORMAT}";
+            //this.SoundLocation = $"{Entities.Properties.Resources.ResourceManager.GetObject($"{soundName}.{FORMAT}")}";
             try {
-                this.player.controls.play();
+                player.controls.play();
             } catch (Exception e) {
                 throw new NoSoundFoundException($"The '{soundName}{FORMAT}' is missing in the Sound's Directory.", e);
             }

@@ -1,8 +1,0 @@
-F:\Datos\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\bin\Debug\Entities.dll
-F:\Datos\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\bin\Debug\Entities.pdb
-F:\Datos\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\bin\Debug\AxInterop.WMPLib.dll
-F:\Datos\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Debug\SB.Models.csproj.AssemblyReference.cache
-F:\Datos\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Debug\SB.Models.csproj.CoreCompileInputs.cache
-F:\Datos\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Debug\SB.Models.csproj.CopyComplete
-F:\Datos\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Debug\Entities.dll
-F:\Datos\Git_UTN\GitHub\CSharp_StructureBuilder\StructureBuilder\Entities\obj\Debug\Entities.pdb
