@@ -12,7 +12,7 @@
     <br>
     <h3>📌 Programming Student & Assistant Professor at the <br>
     <strong>National Technological University [UTN]</strong> 👨‍💻</h3>
-    <h3>📌 Backend programmer at <strong>Accenture</strong> 👨‍💻</h3>
+    <h3>📌 Data Engineer at <strong>Accenture</strong> 👨‍💻</h3>
 </div>
 
 ![](https://hit.yhype.me/github/profile?user_id=12877139)
