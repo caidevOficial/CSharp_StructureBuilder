@@ -1,19 +1,62 @@
-<table>
+<table align='center'>
   <tr>
+    <td>
+            <img alt="Facu Falcone" src="https://github.com/caidevOficial/Logos/raw/master/Personales/Personal_Logo_Gif.gif?raw=true" height="150px" />
+        </td>
   <td><img align="center" alt="C#" src="https://github.com/devicons/devicon/raw/master/icons/csharp/csharp-original.svg" width="150px" height="150px" /></td>
   </tr>
 </table></br>
 
+<div align="center">
+    <h3>Pisces♓ | Developer👨‍💻 | Python<img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" alt="python" width="40" height="28"/> | GCP <img src="https://www.vectorlogo.zone/logos/google_cloud/google_cloud-icon.svg?raw=true" alt="GCP" width="30" height="30"> | Java <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg" alt="java" width="30" height="30"/> | C# <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/csharp/csharp-original.svg" alt="csharp" width="25" height="25"/> | Dreamer 💖 | Teacher👨‍🏫| A bit nerd🤓</h3>
+    <br>
+    <h3>📌 Programming Student & Assistant Professor at the <br>
+    <strong>National Technological University [UTN]</strong> 👨‍💻</h3>
+    <h3>📌 Backend programmer at <strong>Accenture</strong> 👨‍💻</h3>
+</div>
+
+![](https://hit.yhype.me/github/profile?user_id=12877139)
+
+<p align="center">
+    <img src="https://komarev.com/ghpvc/?username=caidevoficial&label=Profile%20views&color=0e75b6&style=plastic" alt="caidevoficial" />
+</p>
+
+<p align="center">
+    <a href="https://github.com/CaidevOficial">
+        <img src="https://github-profile-trophy.vercel.app/?username=caidevoficial&theme=nord&column=7" alt="caidevoficial" />
+    </a>
+</p>
+<br><br><br>
 
 ---
 
-<p align="left"> <img src="https://komarev.com/ghpvc/?username=caidevoficial&label=Profile%20views&color=0e75b6&style=flat" alt="caidevoficial" /> </p>
+<br>
 
-<p align="left"> <a href="https://github.com/CaidevOficial"><img src="https://github-profile-trophy.vercel.app/?username=caidevoficial&theme=nord&column=7" alt="caidevoficial" /></a> </p>
 
----
+
+
+<table align='center'>
+    <theader>
+        <th><h2><center>Watch this little video Demo on 🎥</center></h2></th>
+    </theader>
+    <tbody>
+        <tr>
+        <td>
+            <a href="https://www.youtube.com/watch?v=TJgePq9AsAo" target="_blank">
+                <center>
+                    <img alt='Youtube Logo' src='https://github.com/caidevOficial/Python_StructureBuilder/blob/Py_SB_Prod/Media/YT_Logo.png?raw=true' width=350/>
+                </center>
+            </a>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<br><br><br>
 
 # C# Structure Builder for C Language (Dynamic Memory). 👨‍💻
+
+This program allows you to create basic files necessary for structures in the 'C' language [for dynamic memory]. By writing the names of the structure and parameters, as well as their types and length (in the case of a parameter of type 'char'), it will create a file with extension '.h' for the libraries and a file with extension ' .c' with the code in question in a folder in Desktop.
 ---
 
 
@@ -57,9 +100,51 @@ public static void ShowNewSkill(){
 ```
 ---
 
-## Technologies used. 📌
-|<a href="https://docs.microsoft.com/es-es/dotnet/csharp/"><img align="center" alt="C#" src="https://github.com/devicons/devicon/raw/master/icons/csharp/csharp-original.svg" width="50px" height="50px" />|<h3>C#</h3>|
-|--------|----------|
+
+# More Links 📌
+
+You can also try others versions of this software coded in other languages, such as:
+
+<table align='center'>
+    <tbody>
+        <tr>
+            <td>
+                <img alt="Python Logo" src="https://github.com/caidevOficial/Logos/blob/master/Lenguajes/py_logo1_1.png?raw=true" width="50px" height="50px" />
+            </td>
+            <td>
+                <a href="https://github.com/caidevOficial/Python_StructureBuilder/">Python</a>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img alt="Java Logo" src="https://raw.githubusercontent.com/devicons/devicon/master/icons/java/java-original.svg?raw=true" width="50px" height="50px" />
+            </td>
+            <td>
+                <a href="https://github.com/CaidevOficial/Java_StructureBuilder_forC/">Java</a>
+            </td>
+        </tr>
+    </tbody>
+</table>
+
+---
+
+</br>
+<table align='center'>
+    <tr align='center'>
+        <h2 align='center'>Technologies used. 📌</h2>
+        <td>
+            <a href="https://docs.microsoft.com/es-es/dotnet/csharp/"><img alt="C# Logo" src="https://github.com/devicons/devicon/raw/master/icons/csharp/csharp-original.svg?raw=true" width="50px" height="50px" /></a>
+        </td>
+        <td><center>Python</center></td>
+    </tr>
+    <tr align='center'>
+        <td>
+            <a href="https://visualstudio.microsoft.com/es/"><img alt="VS_2019 Logo" src="https://github.com/devicons/devicon/raw/master/icons/visualstudio/visualstudio-plain.svg?raw=true" height="50px" /></a>
+        </td>
+        <td><center>VSCode</center></td>
+    </tr>
+</table>
+</br>
 
 ---
 
@@ -68,10 +153,10 @@ This project is under license \[MIT License\] - read the file [LICENSE.md](LICEN
 
 ---
 
-## Where to find me: 🌎
-
-<table>
+<br><br><br>
+<table align='center'>
   <theader>
+  <th><h2 align='center'>Where to find me: 🌎</h2></th>
     <tr align='center'>
       <td>
         <img class="circular" alt="Facu" src="https://avatars1.githubusercontent.com/u/12877139?s=400&u=d369ee24466653d9bbeeb9654930e3ff1c67b76a&v=4" width="80px" height="80px" />
